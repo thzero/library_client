@@ -1,6 +1,6 @@
 {
   "name": "@thzero/library_client",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "vue-i18n": "^8.18.2",
     "vue-router": "^3.3.4",
     "vue-scrollto": "^2.18.1",
-    "vuex": "^3.4.0",
+    "vuex": "^3.5.1",
     "vuex-persist": "^2.2.0"
   }
 }
