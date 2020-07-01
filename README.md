@@ -1,4 +1,4 @@
-# library_server
+# library_cllient
 
 An opinionated library of common functionality to bootstrap a VueJs based SPA application.
 
