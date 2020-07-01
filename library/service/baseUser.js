@@ -31,7 +31,7 @@ class BaseUserService extends ExternalService {
 				return response
 		}
 		catch(err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 		}
 
 		return this._error()
@@ -49,7 +49,7 @@ class BaseUserService extends ExternalService {
 				return response
 		}
 		catch(err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 		}
 
 		return this._error()

@@ -15,7 +15,7 @@ class ApiService extends RestExternalService {
 				version.server = response.results
 		}
 		catch (err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 		}
 
 		return version

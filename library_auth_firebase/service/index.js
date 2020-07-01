@@ -30,7 +30,7 @@ class FirebaseAuthService extends Service {
 			await this._serviceStore.dispatcher.user.resetUser()
 		}
 		catch (err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 			throw err
 		}
 	}
@@ -59,7 +59,7 @@ class FirebaseAuthService extends Service {
 			this._serviceEvent.emit('auth-refresh', user)
 		}
 		catch (err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 		}
 
 		// try {
@@ -75,7 +75,7 @@ class FirebaseAuthService extends Service {
 		// 	}, 60 * 1000)
 		// }
 		// catch (err) {
-		// 	this._logger.error(err)
+		// 	this._logger.exception(err)
 		// }
 	}
 
@@ -95,7 +95,7 @@ class FirebaseAuthService extends Service {
 			this.updateExternalUser(null)
 		}
 		catch (err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 			this.updateExternalUser(null)
 		}
 
@@ -154,7 +154,7 @@ class FirebaseAuthService extends Service {
 			window.location.href = '/'
 		}
 		catch (e) {
-			this._logger.error(e)
+			this._logger.exception(e)
 		}
 	}
 
@@ -218,7 +218,7 @@ class FirebaseAuthService extends Service {
 			}
 		}
 		catch (err) {
-			this._logger.error(err)
+			this._logger.exception(err)
 			throw err
 		}
 	}
