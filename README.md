@@ -16,7 +16,12 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
   * Go to Project Overview->Settings->General
   * Click **Add App** and select **Web**
     * Click *Firebase SDK snippet*, select **Config*
-    * Select the JSON object and store it for later use.
+    * Select the JSON object and store it
+    * The contents of the JSON object will be stored as key/value pairs in the external/firebase confib object (below)
+* Supports Firebase Analytics.
+  * Go to Project Overview->Settings->Integrations
+    * Enable the Google Analytics.
+    * Copy the 'measurementId' key//value pair into the external/firebase config object (below)
 
 #### Configuration
 
