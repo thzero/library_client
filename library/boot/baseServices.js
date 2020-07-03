@@ -1,5 +1,7 @@
 import LibraryConstants from '../constants'
 
+import Utility from '@thzero/library_client/library/utility'
+
 import injector from '../utility/injector'
 
 import NotImplementedError from '../errors/notImplemented'
@@ -49,8 +51,9 @@ class BaseServices {
 		this._initialize()
 
 		for (const [key, value] of this._services) {
-			// eslint-disable-next-line
-			console.log(`services.init - ${key} = ${value}`)
+			if (Utility.isDev)
+				// eslint-disable-next-line
+				console.log(`services.init - ${key} = ${value}`)
 			await value.init(injector)
 		}
 		store.$logger = logger
@@ -135,8 +138,9 @@ class BaseServices {
 	}
 
 	_inject(key, service) {
-		// eslint-disable-next-line
-		console.log(`services.inject - ${key}`)
+		if (Utility.isDev)
+			// eslint-disable-next-line
+			console.log(`services.inject - ${key}`)
 		this._services.set(key, service)
 		injector.addSingleton(key, service)
 	}
