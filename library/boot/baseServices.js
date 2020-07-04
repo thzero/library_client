@@ -58,7 +58,7 @@ class BaseServices {
 		}
 		store.$logger = logger
 
-		this._initializInjector(framework)
+		this._initializInjector(framework, injector)
 	}
 
 	_initialize() {
