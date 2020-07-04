@@ -1,9 +1,9 @@
 import NotImplementedError from '@thzero/library_client/library/errors/notImplemented'
 
-class Basei8ln {
+class Basei18n {
 	async execute(framework, app, router, store) {
 		throw new NotImplementedError()
 	}
 }
 
-export default Basei8ln
+export default Basei18n

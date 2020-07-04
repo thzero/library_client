@@ -28,11 +28,21 @@ module.exports = {
 			entry: './src/main.js',
 			template: 'public/index.html',
 			title: 'Home',
-			chunks: ['chunk-vendors', 'chunk-common', 'index']
+			chunks: [ 'chunk-vendors', 'chunk-common', 'index' ]
 		}
 	},
 	configureWebpack: {
 		devtool: 'source-map',
+		module: {
+			rules: [
+				{
+					test: /locales/,
+					loader: '@alienfast/i18next-loader',
+					// options here
+					//query: { overrides: [ '../node_modules/lib/locales' ] }
+				}
+			]
+		},
 		plugins: [
 			// new BundleAnalyzerPlugin(),
 			new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
