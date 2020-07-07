@@ -13,10 +13,12 @@
 // 	}
 // }
 
+const encoder = new TextEncoder()
+
 class CryptoUtility {
 	static async checksum(input, algorithm) {
 		// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#HMAC
-		const msgUint8 = new TextEncoder().encode(input) // encode as (utf-8) Uint8Array
+		const msgUint8 = encoder.encode(input) // encode as (utf-8) Uint8Array
 		const hashBuffer = await crypto.subtle.digest(algorithm || 'SHA-256', msgUint8) // hash the message
 		return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('') // convert bytes to hex string
 	}

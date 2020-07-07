@@ -32,8 +32,16 @@ class Service {
 		return this._success();
 	}
 
-	_error(message, err) {
-		return Response.error(message, err)
+	_error(message, err, code, errors) {
+		if (message)
+			this._logger.error(message);
+		if (err)
+			this._logger.error(err.message);
+		if (code)
+			this._logger.error(code);
+		if (errors)
+			this._logger.error(errors);
+		return Response.error(message, err, code, errors);
 	}
 
 	_errorResponse(response) {
