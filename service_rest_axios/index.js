@@ -2,11 +2,11 @@ import axios from 'axios'
 
 // import crc32 from 'crc/crc32'
 
-import LibraryConstants from '../library/constants'
+import LibraryConstants from '../constants'
 
-import Utility from '../library/utility'
+import Utility from '../utility'
 
-import RestCommunicationService from '../library/service/restCommunication'
+import RestCommunicationService from '../service/restCommunication'
 
 const separator = ': '
 const contentType = 'Content-Type'

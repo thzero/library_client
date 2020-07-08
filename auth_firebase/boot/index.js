@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/analytics'
 
-import LibraryConstants from '../../library/constants'
+import LibraryConstants from '../../constants'
 
 import config from 'local-config'
 
