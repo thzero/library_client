@@ -1,11 +1,11 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-import LibraryConstants from '../../library/constants'
+import LibraryConstants from '../../constants'
 
-import Utility from '../../library/utility'
+import Utility from '../../utility'
 
-import Service from '../../library/service/index'
+import Service from '../../service/index'
 
 class FirebaseAuthService extends Service {
 	constructor() {

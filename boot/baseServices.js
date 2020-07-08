@@ -1,6 +1,6 @@
 import LibraryConstants from '../constants'
 
-import Utility from '@thzero/library_client/library/utility'
+import Utility from '../utility'
 
 import injector from '../utility/injector'
 
@@ -8,14 +8,14 @@ import NotImplementedError from '../errors/notImplemented'
 
 import adminNewsService from '../service/admin/news'
 import adminUsersService from '../service/admin/users'
-import authService from '../../library_auth_firebase/service'
+import authService from '../../auth_firebase/service'
 import configService from '../service/config'
 import featureService from '../service/features'
 import loggerService from '../service/logger'
 import markupParserService from '../service/markupParser'
 import newsService from '../service/news'
 import plansService from '../service/plans'
-import restCommunicationService from '../../library_service_rest_axios'
+import restCommunicationService from '../../service_rest_axios'
 import securityService from '../service/security'
 import settingsService from '@/service/settings'
 

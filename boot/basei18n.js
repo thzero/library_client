@@ -1,4 +1,4 @@
-import NotImplementedError from '@thzero/library_client/library/errors/notImplemented'
+import NotImplementedError from '../errors/notImplemented'
 
 class Basei18n {
 	async execute(framework, app, router, store) {
