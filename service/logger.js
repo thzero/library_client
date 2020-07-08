@@ -18,6 +18,11 @@ class LoggerService extends Service {
 		console.log('ERROR', message, data)
 	}
 
+	exception(ex) {
+		ex = (ex === undefined ? null : ex);
+		this._log.error(ex);
+	}
+
 	fatal(message, data) {
 		// eslint-disable-next-line
 		console.log('FATAL', message, data)
