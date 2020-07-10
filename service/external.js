@@ -11,8 +11,8 @@ class ExternalService extends Service {
 		this._serviceStore = null
 	}
 
-	init(injector) {
-		super.init(injector)
+	async init(injector) {
+		await super.init(injector)
 
 		this._serviceCommunicationRest = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST)
 		this._serviceRouter = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_ROUTER)

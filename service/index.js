@@ -11,7 +11,7 @@ class Service {
 		this._translateS = null
 	}
 
-	init(injector) {
+	async init(injector) {
 		this._injector = injector
 
 		this._config = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_CONFIG)
@@ -61,6 +61,12 @@ class Service {
 
 	_success() {
 		return Response.success()
+	}
+
+	_successResponse(value) {
+		let response = Response.success();
+		response.results = value;
+		return response;
 	}
 
 	_translate(id, opts) {

@@ -10,8 +10,8 @@ class BaseUserService extends ExternalService {
 		this._serviceStore = null
 	}
 
-	init(injector) {
-		super.init(injector)
+	async init(injector) {
+		await super.init(injector)
 
 		this._serviceCommunicationRest = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST)
 		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE)

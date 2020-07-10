@@ -39,8 +39,8 @@ class AxiosRestCommunicationService extends RestCommunicationService {
 		return this._validate(await executor.get(Utility.formatUrlParams(url, id)))
 	}
 
-	init(injector) {
-		super.init(injector)
+	async init(injector) {
+		await super.init(injector)
 
 		this._serviceAuth = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH)
 	}
