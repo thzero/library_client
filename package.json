@@ -1,6 +1,6 @@
 {
   "name": "@thzero/library_client",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "easy-rbac": "^3.1.1",
     "firebase": "^7.15.5",
     "highlight.js": "^10.1.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "markdown-it": "^11.0.0",
     "marked": "^1.1.0",
     "remarkable": "^2.0.1",

@@ -35,8 +35,8 @@ class FirebaseAuthService extends Service {
 		}
 	}
 
-	init(injector) {
-		super.init(injector)
+	async init(injector) {
+		await super.init(injector)
 
 		this._serviceEvent = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_EVENT)
 		this._serviceRouter = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_ROUTER)

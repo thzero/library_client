@@ -9,8 +9,8 @@ class RestCommunicationService extends CommunicationService {
 		this._serviceStore = null
 	}
 
-	init(injector) {
-		super.init(injector)
+	async init(injector) {
+		await super.init(injector)
 
 		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE)
 	}
