@@ -1,6 +1,6 @@
-import Service from './index'
+import Service from './index';
 
 class CommunicationService extends Service {
 }
 
-export default CommunicationService
+export default CommunicationService;

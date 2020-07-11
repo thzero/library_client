@@ -1,24 +1,24 @@
-import LibraryConstants from '../constants'
+import LibraryConstants from '../constants';
 
 import NotImplementedError from '../errors/notImplemented';
 
-import RestExternalService from './externalRest'
+import RestExternalService from './externalRest';
 
 class ApiService extends RestExternalService {
 	async version() {
-		let version = {}
+		let version = {};
 		try {
-			version.client = _version()
-			const response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'version')
-			this._logger.debug('response', response)
+			version.client = _version();
+			const response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'version');
+			this._logger.debug('response', response);
 			if (response && response.success)
-				version.server = response.results
+				version.server = response.results;
 		}
 		catch (err) {
-			this._logger.exception(err)
+			this._logger.exception(err);
 		}
 
-		return version
+		return version;
 	}
 
 	async _version() {
@@ -26,4 +26,4 @@ class ApiService extends RestExternalService {
 	}
 }
 
-export default ApiService
+export default ApiService;

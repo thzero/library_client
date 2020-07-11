@@ -1,9 +1,9 @@
-import Service from './index'
+import Service from './index';
 
 class FeatureService extends Service {
 	features() {
-		return {}
+		return {};
 	}
 }
 
-export default FeatureService
+export default FeatureService;

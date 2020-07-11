@@ -2,72 +2,72 @@ import axios from 'axios'
 
 // import crc32 from 'crc/crc32'
 
-import LibraryConstants from '../constants'
+import LibraryConstants from '../constants';
 
-import Utility from '../utility'
+import Utility from '../utility';
 
-import RestCommunicationService from '../service/restCommunication'
+import RestCommunicationService from '../service/restCommunication';
 
-const separator = ': '
-const contentType = 'Content-Type'
-const contentTypeJson = 'application/json'
+const separator = ': ';
+const contentType = 'Content-Type';
+const contentTypeJson = 'application/json';
 
 class AxiosRestCommunicationService extends RestCommunicationService {
 	constructor() {
-		super()
+		super();
 
-		this._serviceAuth = null
+		this._serviceAuth = null;
 	}
 
 	async delete(key, url, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.delete(Utility.formatUrl(url)))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.delete(Utility.formatUrl(url)));
 	}
 
 	async deleteById(key, url, id, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.delete(Utility.formatUrlParams(url, id)))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.delete(Utility.formatUrlParams(url, id)));
 	}
 
 	async get(key, url, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.get(Utility.formatUrl(url)))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.get(Utility.formatUrl(url)));
 	}
 
 	async getById(key, url, id, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.get(Utility.formatUrlParams(url, id)))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.get(Utility.formatUrlParams(url, id)));
 	}
 
 	async init(injector) {
-		await super.init(injector)
+		await super.init(injector);
 
-		this._serviceAuth = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH)
+		this._serviceAuth = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
 	}
 
 	async post(key, url, body, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.post(Utility.formatUrl(url), body))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.post(Utility.formatUrl(url), body));
 	}
 
 	async postById(key, url, id, body, options) {
-		const executor = await this._create(key, options)
-		return this._validate(await executor.post(Utility.formatUrlParams(url, id), body))
+		const executor = await this._create(key, options);
+		return this._validate(await executor.post(Utility.formatUrlParams(url, id), body));
 	}
 
 	async _create(key, opts) {
-		const config = this._config.getBackend(key)
-		let baseUrl = config.baseUrl
+		const config = this._config.getBackend(key);
+		let baseUrl = config.baseUrl;
 		if (!baseUrl.endsWith('/'))
-			baseUrl += '/'
+			baseUrl += '/';
 
-		const token = await this._addTokenHeader()
-		const headers = {}
-		headers[LibraryConstants.Headers.AuthKeys.API] = config.apiKey
-		headers[LibraryConstants.Headers.CorrelationId] = Utility.generateId()
+		const token = await this._addTokenHeader();
+		const headers = {};
+		headers[LibraryConstants.Headers.AuthKeys.API] = config.apiKey;
+		headers[LibraryConstants.Headers.CorrelationId] = Utility.generateId();
 		if (token)
-			headers[LibraryConstants.Headers.AuthKeys.AUTH] = LibraryConstants.Headers.AuthKeys.AUTH_BEARER + separator + token
-		headers[contentType] = contentTypeJson
+			headers[LibraryConstants.Headers.AuthKeys.AUTH] = LibraryConstants.Headers.AuthKeys.AUTH_BEARER + separator + token;
+		headers[contentType] = contentTypeJson;
 
 		let options = {
 			baseURL: baseUrl,
@@ -75,13 +75,13 @@ class AxiosRestCommunicationService extends RestCommunicationService {
 			validateStatus: function (status) {
 				return status >= 200 && status <= 503
 			}
-		}
+		};
 
 		if (config.timeout)
-			options.timeout = config.timeout
-		options = { ...options, ...opts }
+			options.timeout = config.timeout;
+		options = { ...options, ...opts };
 
-		const instance = axios.create(options)
+		const instance = axios.create(options);
 
 		// const unreliablePromise = (resolveOn, onReject) => () => {
 		// 	if (--resolveOn > 0) {
@@ -112,9 +112,9 @@ class AxiosRestCommunicationService extends RestCommunicationService {
 			}
 
 			return Promise.reject(error)
-		})
+		});
 
-		return instance
+		return instance;
 	}
 
 	_validate(response) {
@@ -125,14 +125,14 @@ class AxiosRestCommunicationService extends RestCommunicationService {
 			// 	if (!response.data.check != dataCheck)
 			// 		return this._error()
 			// }
-			return response.data
+			return response.data;
 		}
 
 		if (response.status === 401)
-			this._serviceAuth.tokenUser(null, true)
+			this._serviceAuth.tokenUser(null, true);
 
-		return this._error()
+		return this._error();
 	}
 }
 
-export default AxiosRestCommunicationService
+export default AxiosRestCommunicationService;

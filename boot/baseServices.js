@@ -1,149 +1,149 @@
-import LibraryConstants from '../constants'
+import LibraryConstants from '../constants';
 
-import Utility from '../utility'
+import Utility from '../utility';
 
-import injector from '../utility/injector'
+import injector from '../utility/injector';
 
-import NotImplementedError from '../errors/notImplemented'
+import NotImplementedError from '../errors/notImplemented';
 
-import adminNewsService from '../service/admin/news'
-import adminUsersService from '../service/admin/users'
-import authService from '../auth_firebase/service'
-import configService from '../service/config'
-import featureService from '../service/features'
-import loggerService from '../service/logger'
-import markupParserService from '../service/markupParser'
-import newsService from '../service/news'
-import plansService from '../service/plans'
-import restCommunicationService from '../service_rest_axios'
-import securityService from '../service/security'
-import settingsService from '@/service/settings'
+import adminNewsService from '../service/admin/news';
+import adminUsersService from '../service/admin/users';
+import authService from '../auth_firebase/service';
+import configService from '../service/config';
+import featureService from '../service/features';
+import loggerService from '../service/logger';
+import markupParserService from '../service/markupParser';
+import newsService from '../service/news';
+import plansService from '../service/plans';
+import restCommunicationService from '../service_rest_axios';
+import securityService from '../service/security';
+import settingsService from '@/service/settings';
 
 class BaseServices {
 	constructor() {
-		this._services = new Map()
+		this._services = new Map();
 	}
 
 	async execute(framework, app, router, store) {
-		const logger = this._initializeLogger()
+		const logger = this._initializeLogger();
 		if (!logger)
-			throw Error('No logger defined after initialization of services.')
+			throw Error('No logger defined after initialization of services.');
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers())
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, this._initializeAuth())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, this._initializeCommunicationRest())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_LOGGER, logger)
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, this._initializeSettings())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, this._initializeTranslate())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, this._initializeUser())
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion())
-		this._initialize()
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, this._initializeAuth());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, this._initializeCommunicationRest());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_LOGGER, logger);
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, this._initializeSettings());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, this._initializeTranslate());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, this._initializeUser());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
+		this._initialize();
 
 		for (const [key, value] of this._services) {
 			if (Utility.isDev)
 				// eslint-disable-next-line
-				console.log(`services.init - ${key} = ${value}`)
-			await value.init(injector)
+				console.log(`services.init - ${key} = ${value}`);
+			await value.init(injector);
 		}
-		store.$logger = logger
+		store.$logger = logger;
 
-		this._initializInjector(framework, injector)
+		this._initializInjector(framework, injector);
 	}
 
 	_initialize() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeAdminNews() {
-		return new adminNewsService()
+		return new adminNewsService();
 	}
 
 	_initializeAdminUsers() {
-		return new adminUsersService()
+		return new adminUsersService();
 	}
 
 	_initializeAuth() {
-		return new authService()
+		return new authService();
 	}
 
 	_initializeCommunicationRest() {
-		return new restCommunicationService()
+		return new restCommunicationService();
 	}
 
 	_initializeConfig() {
-		return new configService()
+		return new configService();
 	}
 
 	_initializeEvent() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeFeatures() {
-		return new featureService()
+		return new featureService();
 	}
 
 	_initializeLogger() {
-		return new loggerService()
+		return new loggerService();
 	}
 
 	_initializeMarkupParser() {
-		return new markupParserService()
+		return new markupParserService();
 	}
 
 	_initializeNews() {
-		return new newsService()
+		return new newsService();
 	}
 
 	_initializePlans() {
-		return new plansService()
+		return new plansService();
 	}
 
 	_initializeRouter() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeSecurity() {
-		return new securityService()
+		return new securityService();
 	}
 
 	_initializeSettings() {
-		return new settingsService()
+		return new settingsService();
 	}
 
 	_initializeStore() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeTranslate() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeUser() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_initializeVersion() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 
 	_inject(key, service) {
 		if (Utility.isDev)
 			// eslint-disable-next-line
-			console.log(`services.inject - ${key}`)
-		this._services.set(key, service)
-		injector.addSingleton(key, service)
+			console.log(`services.inject - ${key}`);
+		this._services.set(key, service);
+		injector.addSingleton(key, service);
 	}
 }
 
-export default BaseServices
+export default BaseServices;

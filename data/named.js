@@ -1,20 +1,20 @@
-import Data from '../data/index'
+import Data from '../data/index';
 
 class NamedData extends Data {
 	constructor() {
-		super()
+		super();
 
-		this.name = ''
+		this.name = '';
 	}
 
 	map(requested) {
-		super.map(requested)
+		super.map(requested);
 
 		if (!requested)
-			return
+			return;
 
-		this.name = requested.name
+		this.name = requested.name;
 	}
 }
 
-export default NamedData
+export default NamedData;

@@ -1,6 +1,6 @@
-import ExternalService from './external'
+import ExternalService from './external';
 
 class RestExternalService extends ExternalService {
 }
 
-export default RestExternalService
+export default RestExternalService;

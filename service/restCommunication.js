@@ -1,18 +1,18 @@
-import LibraryConstants from '../constants'
+import LibraryConstants from '../constants';
 
-import CommunicationService from './communication'
+import CommunicationService from './communication';
 
 class RestCommunicationService extends CommunicationService {
 	constructor() {
-		super()
+		super();
 
-		this._serviceStore = null
+		this._serviceStore = null;
 	}
 
 	async init(injector) {
-		await super.init(injector)
+		await super.init(injector);
 
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE)
+		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	}
 
 	// eslint-disable-next-line
@@ -32,8 +32,8 @@ class RestCommunicationService extends CommunicationService {
 	}
 
 	async _addTokenHeader() {
-		return this._serviceStore.state.user.token
+		return this._serviceStore.state.user.token;
 	}
 }
 
-export default RestCommunicationService
+export default RestCommunicationService;

@@ -1,10 +1,10 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/analytics'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/analytics';
 
-import LibraryConstants from '../../constants'
+import LibraryConstants from '../../constants';
 
-import config from 'local-config'
+import config from 'local-config';
 
 //export default async ({
 export default ({
@@ -13,21 +13,21 @@ export default ({
 	// eslint-disable-next-line
 	vueApp
 }) => {
-	const configExternal = config['external']
+	const configExternal = config['external'];
 	if (!configExternal)
-		throw Error('Invalid external config.')
-	const configFirebase = configExternal['firebase']
+		throw Error('Invalid external config.');
+	const configFirebase = configExternal['firebase'];
 	if (!configFirebase)
-		throw Error('Invalid firebase config.')
-	firebase.initializeApp(configFirebase)
+		throw Error('Invalid firebase config.');
+	firebase.initializeApp(configFirebase);
 	if (configFirebase.measurementId)
-		firebase.analytics()
+		firebase.analytics();
 
-	let outsideResolve
-	let outsideReject
+	let outsideResolve;
+	let outsideReject;
 	const promiseAuth = new Promise(function(resolve, reject) {
-		outsideResolve = resolve
-		outsideReject = reject
+		outsideResolve = resolve;
+		outsideReject = reject;
 	})
 
 	// if (firebase.auth().currentUser) {
@@ -38,29 +38,29 @@ export default ({
 	// 		}, 50)
 	// }
 	// eslint-disable-next-line
-	let init = false
+	let init = false;
 	firebase.auth().onAuthStateChanged(async function(user) {
 		// if (user == null) {
 		//	 // Vue.prototype.$navRouter.push('/auth')
 		//	 return
 		// }
 
-		const auth = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH)
+		const auth = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
 		// await auth.onAuthStateChanged(user)
 		// const timer = setInterval(async () => {
 		//		 clearInterval(timer)
 		//		 await auth.onAuthStateChanged(user)
 		// 	}, 50)
-		await auth.onAuthStateChanged(user)
+		await auth.onAuthStateChanged(user);
 		// if (test)
 		if (!init) {
 			// init = new Vue(vueApp)
 			// init.$mount('#app')
-			init = true
-			outsideResolve(true)
+			init = true;
+			outsideResolve(true);
 		}
 
-		outsideReject()
+		outsideReject();
 	})
 
 	// setInterval(async () => {
@@ -92,11 +92,11 @@ export default ({
 	// })
 
 	router.beforeResolve((to, from, next) => {
-		const auth = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH)
-		const logger = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER)
-		logger.debug('router.beforeResolve', to)
+		const auth = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
+		const logger = Vue.prototype.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER);
+		logger.debug('router.beforeResolve', to);
 		if (to.matched.some(record => record.meta.requiresAuth)) {
-			const isLoggedIn = auth.isAuthenticated
+			const isLoggedIn = auth.isAuthenticated;
 			if (!isLoggedIn) {
 				// Vue.prototype.$EventBus.$on('auth-refresh', (user) => {
 				//	 logger.debug('auth-refresh', user)
@@ -107,7 +107,7 @@ export default ({
 					// Vue.prototype.$navRouter.push('/')
 					//window.location.href = '/'
 				})
-				return
+				return;
 			}
 
 			next()
@@ -148,10 +148,10 @@ export default ({
 			//		 next({ path: '/auth' })
 			//	 })
 
-			return
+			return;
 		}
-		next()
+		next();
 	})
 
-	return promiseAuth
+	return promiseAuth;
 }

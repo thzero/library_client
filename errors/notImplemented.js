@@ -1,7 +1,7 @@
 class NotImplementedError extends Error {
 	constructor() {
-		super('Not Implemented.')
+		super('Not Implemented.');
 	}
 }
 
-export default NotImplementedError
+export default NotImplementedError;

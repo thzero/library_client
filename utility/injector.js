@@ -1,51 +1,51 @@
 class Injector {
 	constructor() {
-		this._di = {}
+		this._di = {};
 	}
 
 	addService(key, dependency) {
 		if (String.isNullOrEmpty(key))
-			throw Error(`Invalid injector key '${key}'.`)
+			throw Error(`Invalid injector key '${key}'.`);
 		if (!dependency)
-			throw Error('Invalid injector dependency.')
+			throw Error('Invalid injector dependency.');
 
 		if (this._di[key])
-			return
+			return;
 
-		this._di[key] = { dependency: dependency }
+		this._di[key] = { dependency: dependency };
 	}
 
 	addSingleton(key, dependency) {
 		if (String.isNullOrEmpty(key))
-		throw Error(`Invalid injector key '${key}'.`)
+			throw Error(`Invalid injector key '${key}'.`);
 		if (!dependency)
-			throw Error('Invalid injector dependency.')
+			throw Error('Invalid injector dependency.');
 
 		if (this._di[key])
-			return
+			return;
 
-		this._di[key] = { singleton: true, dependency: dependency }
+		this._di[key] = { singleton: true, dependency: dependency };
 	}
 
 	getInjector() {
-		return this._di
+		return this._di;
 	}
 
 	getService(key, args) {
 		if (String.isNullOrEmpty(key))
-			throw Error(`Invalid injector key '${key}'.`)
+			throw Error(`Invalid injector key '${key}'.`);
 
-		const result = this._di[key]
+		const result = this._di[key];
 		if (!result)
-			return null
+			return null;
 
 		if (result.singleton)
-			return result.dependency
+			return result.dependency;
 
-		return new result.dependency.prototype.constructor(args)
+		return new result.dependency.prototype.constructor(args);
 	}
 }
 
-const singletonInstance = new Injector()
-Object.freeze(singletonInstance)
-export default singletonInstance
+const singletonInstance = new Injector();
+Object.freeze(singletonInstance);
+export default singletonInstance;
