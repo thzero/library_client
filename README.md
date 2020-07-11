@@ -2,6 +2,10 @@
 
 An opinionated library of common functionality to bootstrap a VueJs based SPA application.
 
+### Installation
+
+[![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
+
 ### Requirements
 
 #### Firebase
