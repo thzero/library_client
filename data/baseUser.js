@@ -1,28 +1,28 @@
-import Data from '../data/index'
+import Data from '../data/index';
 
-import NotImplementedError from '../errors/notImplemented'
+import NotImplementedError from '../errors/notImplemented';
 
 class BaseUserData extends Data {
 	constructor() {
-		super()
+		super();
 
-		this.planId = null
-		this.roles = []
-		this.settings = this._initUserSettings()
-		this.user = null
+		this.planId = null;
+		this.roles = [];
+		this.settings = this._initUserSettings();
+		this.user = null;
 	}
 
 	map(requested) {
 		if (!requested)
-			return
+			return;
 
-		this.planId = requested.planId
-		this.roles = requested.roles
+		this.planId = requested.planId;
+		this.roles = requested.roles;
 	}
 
 	_initUserSettings() {
-		throw new NotImplementedError()
+		throw new NotImplementedError();
 	}
 }
 
-export default BaseUserData
+export default BaseUserData;

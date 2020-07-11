@@ -6,9 +6,9 @@
 // hljs.registerLanguage('javascript', hljsJavascript)
 
 // import { Remarkable } from 'remarkable'
-import marked from 'marked'
+import marked from 'marked';
 
-import Service from './index'
+import Service from './index';
 
 // ['javascript'].forEach((langName) => {
 // 	// Using require() here because import() support hasn't landed in Webpack yet
@@ -16,12 +16,12 @@ import Service from './index'
 // 	hljs.registerLanguage(langName, langModule);
 // });
 
-const regExpPrefix = new RegExp(/^<p>/g)
-const regExpSuffix = new RegExp(/<\/p>$/g)
+const regExpPrefix = new RegExp(/^<p>/g);
+const regExpSuffix = new RegExp(/<\/p>$/g);
 
 class MarkupParserService extends Service {
 	constructor() {
-		super()
+		super();
 
 		// this._parser = new MarkdownIt({
 		// 	html: false,
@@ -62,7 +62,7 @@ class MarkupParserService extends Service {
 
 		const markedOptions = {
 			breaks: false
-		}
+		};
 
 		// if (hljs) {
 		// 	markedOptions.highlight = function (code) {
@@ -75,17 +75,17 @@ class MarkupParserService extends Service {
 
 	render(value) {
 		//return this._parser.render(value)
-		return marked(value)
+		return marked(value);
 	}
 
 	trimResults(value) {
-		const result1 = value.replace(regExpPrefix, '')
+		const result1 = value.replace(regExpPrefix, '');
 		if (!result1)
-			return result1
+			return result1;
 
-		const result2 = result1.replace(regExpSuffix, '')
-		return result2
+		const result2 = result1.replace(regExpSuffix, '');
+		return result2;
 	}
 }
 
-export default MarkupParserService
+export default MarkupParserService;

@@ -70,6 +70,7 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
         "error",
         "tab"
       ]
+      "semi": [ "error", "always" ]
     }
   },
   "postcss": {

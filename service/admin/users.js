@@ -1,13 +1,13 @@
-import AdminService from '../../service/admin'
+import AdminService from '../../service/admin';
 
 class AdminUsersService extends AdminService {
 	get _allowsCreate() {
-		return false
+		return false;
 	}
 
 	_urlFragment() {
-		return 'users'
+		return 'users';
 	}
 }
 
-export default AdminUsersService
+export default AdminUsersService;

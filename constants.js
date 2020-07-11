@@ -43,6 +43,6 @@ const LibraryConstants = {
 		},
 		CorrelationId: 'CorrelationId'
 	}
-}
+};
 
-export default LibraryConstants
+export default LibraryConstants;

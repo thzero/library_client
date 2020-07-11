@@ -1,10 +1,10 @@
-import Service from './index'
+import Service from './index';
 
 class TranslateService extends Service {
 	// eslint-disable-next-line
 	translate(id, opts) {
-		return null
+		return null;
 	}
 }
 
-export default TranslateService
+export default TranslateService;

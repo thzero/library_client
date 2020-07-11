@@ -1,4 +1,4 @@
-import Service from './index'
+import Service from './index';
 
 class RouterService extends Service {
 	// eslint-disable-next-line
@@ -6,4 +6,4 @@ class RouterService extends Service {
 	}
 }
 
-export default RouterService
+export default RouterService;

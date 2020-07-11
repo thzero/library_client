@@ -1,4 +1,4 @@
-import AdminService from '../../service/admin'
+import AdminService from '../../service/admin';
 
 class NewsAdminService extends AdminService {
 	_urlFragment() {
@@ -6,4 +6,4 @@ class NewsAdminService extends AdminService {
 	}
 }
 
-export default NewsAdminService
+export default NewsAdminService;

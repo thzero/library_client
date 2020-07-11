@@ -1,36 +1,36 @@
-import Constants from '@/constants'
+import Constants from '@/constants';
 
-import Utility from '../utility'
+import Utility from '../utility';
 
-import Service from './index'
+import Service from './index';
 
 class LoggerService extends Service {
 	debug(message, data) {
 		if (!Utility.isDev)
-			return
+			return;
 
 		// eslint-disable-next-line
-		console.log('DEBUG', message, data)
+		console.log('DEBUG', message, data);
 	}
 
 	error(message, data) {
 		// eslint-disable-next-line
-		console.error('ERROR', message, data)
+		console.error('ERROR', message, data);
 	}
 
 	exception(ex) {
-		ex = (ex === undefined ? null : ex)
-		console.error('ERROR', ex)
+		ex = (ex === undefined ? null : ex);
+		console.error('ERROR', ex);
 	}
 
 	fatal(message, data) {
 		// eslint-disable-next-line
-		console.error('FATAL', message, data)
+		console.error('FATAL', message, data);
 	}
 
 	info(message, data) {
 		// eslint-disable-next-line
-		console.log('INFO', message, data)
+		console.log('INFO', message, data);
 	}
 
 	trace(message, data) {
@@ -38,17 +38,17 @@ class LoggerService extends Service {
 			return
 
 		// eslint-disable-next-line
-		console.log('TRACE', message, data)
+		console.log('TRACE', message, data);
 	}
 
 	warn(message, data) {
 		// eslint-disable-next-line
-		console.log('WARN', message, data)
+		console.log('WARN', message, data);
 	}
 
 	get _repositoryUser() {
-		return this._injector.getService(Constants.InjectorKeys.REPOSITORY_USER)
+		return this._injector.getService(Constants.InjectorKeys.REPOSITORY_USER);
 	}
 }
 
-export default LoggerService
+export default LoggerService;
