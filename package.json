@@ -1,6 +1,10 @@
 {
   "name": "@thzero/library_client",
-  "version": "0.6.6",
+  "version": "0.6.7",
+  "version_major": 0,
+  "version_minor": 6,
+  "version_patch": 7,
+  "version_date": "07/15/2020",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
   "license": "MIT",
@@ -16,6 +20,7 @@
     "node": ">=13.0.1"
   },
   "scripts": {
+    "cli-update": "node -r esm ./cli.js --updateversion --pi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -61,7 +66,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
+    "esm": "^3.2.25",
     "material-design-icons-iconfont": "^5.0.1",
+    "minimist": "^1.2.5",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
     "vue-cli-plugin-vuetify": "^2.0.6",
