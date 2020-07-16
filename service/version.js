@@ -4,13 +4,14 @@ import NotImplementedError from '../errors/notImplemented';
 
 import RestExternalService from './externalRest';
 
-class ApiService extends RestExternalService {
+class ApiVersionService extends RestExternalService {
 	async version() {
 		let version = {};
 		try {
-			version.client = _version();
-			const response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'version');
-			this._logger.debug('response', response);
+			let response = _version();
+			if (response && response.success)
+				version.client = response.results;
+			response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'version');
 			if (response && response.success)
 				version.server = response.results;
 		}
@@ -37,4 +38,4 @@ class ApiService extends RestExternalService {
 	}
 }
 
-export default ApiService;
+export default ApiVersionService;
