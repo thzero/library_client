@@ -8,7 +8,7 @@ class ApiVersionService extends RestExternalService {
 	async version() {
 		let version = {};
 		try {
-			let response = _version();
+			let response = await this._version();
 			if (response && response.success)
 				version.client = response.results;
 			response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'version');

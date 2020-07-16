@@ -60,7 +60,11 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 * Include the following in the package.json for the application.
 
 ```
-,
+  "version_major": #,
+  "version_minor": #,
+  "version_patch": #,
+  "version_date": "MM/DD/YYYY",
+
   "eslintConfig": {
     "root": true,
     "env": {
