@@ -60,7 +60,11 @@ Google Firebase (https://firebase.google.com) provides the social based authenti
 * Include the following in the package.json for the application.
 
 ```
-,
+  "version_major": #,
+  "version_minor": #,
+  "version_patch": #,
+  "version_date": "MM/DD/YYYY",
+
   "eslintConfig": {
     "root": true,
     "env": {
@@ -119,26 +123,16 @@ cli <options>
 
 ```
 node -r esm cli.js --help
+// from within an application
+node -r esm ./node_modules/@thzero/library/cli.js --help
 ```
 
 ### Version
 
 ```
 node -r esm cli.js --version
-```
-
-### Generate UUID examples
-
-#### Single UUID
-
-```
-node -r esm cli.js
-```
-
-#### Multiple UUIDs
-
-```
-node -r esm cli.js --n 5
+// from within an application
+node -r esm ./node_modules/@thzero/library/cli.js --version
 ```
 
 ### Update Version examples
@@ -147,10 +141,14 @@ node -r esm cli.js --n 5
 
 ```
 node -r esm cli.js --updateversion --pi
+// from within an application
+node -r esm ./node_modules/@thzero/library/cli.js --updateversion --pi --package \"../../../package.json\"
 ```
 
 #### Update date
 
 ```
 node -r esm cli.js --updateversion --d '7/15/2020'
+// from within an application
+node -r esm ./node_modules/@thzero/library/cli.js --updateversion --d '7/15/2020' --package \"../../../package.json\"
 ```
