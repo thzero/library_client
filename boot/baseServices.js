@@ -17,7 +17,7 @@ import newsService from '../service/news';
 import plansService from '../service/plans';
 import restCommunicationService from '../service_rest_axios';
 import securityService from '../service/security';
-import settingsService from '@/service/settings';
+import utilityService from '../service/utility';
 
 class BaseServices {
 	constructor() {
@@ -47,6 +47,7 @@ class BaseServices {
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, this._initializeTranslate());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, this._initializeUser());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 		this._initialize();
 
@@ -118,7 +119,7 @@ class BaseServices {
 	}
 
 	_initializeSettings() {
-		return new settingsService();
+		throw new NotImplementedError();
 	}
 
 	_initializeStore() {
@@ -131,6 +132,10 @@ class BaseServices {
 
 	_initializeUser() {
 		throw new NotImplementedError();
+	}
+
+	_initializeUtility() {
+		return new utilityService();
 	}
 
 	_initializeVersion() {
