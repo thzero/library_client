@@ -3,19 +3,19 @@
   "version": "0.6.11",
   "version_major": 0,
   "version_minor": 6,
-  "version_patch": 11,
-  "version_date": "07/17/2020",
+  "version_patch": 12,
+  "version_date": "07/18/2020",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thzero/library_server.git"
+    "url": "git+https://github.com/thzero/library_client.git"
   },
   "bugs": {
-    "url": "https://github.com/thzero/library_server/issues"
+    "url": "https://github.com/thzero/library_client/issues"
   },
-  "homepage": "https://github.com/thzero/library_server#readme",
+  "homepage": "https://github.com/thzero/library_client#readme",
   "engines": {
     "node": ">=13.0.1"
   },
@@ -24,14 +24,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "crc": "^3.8.0",
     "dayjs": "^1.8.29",
     "dayjs-plugin-utc": "^0.1.2",
     "decimal.js-light": "^2.5.0",
     "easy-rbac": "^3.1.1",
-    "firebase": "^7.16.0",
     "highlight.js": "^10.1.1",
     "lodash": "^4.17.19",
     "markdown-it": "^11.0.0",

@@ -8,14 +8,12 @@ import NotImplementedError from '../errors/notImplemented';
 
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
-import authService from '../auth_firebase/service';
 import configService from '../service/config';
 import featureService from '../service/features';
 import loggerService from '../service/logger';
 import markupParserService from '../service/markupParser';
 import newsService from '../service/news';
 import plansService from '../service/plans';
-import restCommunicationService from '../service_rest_axios';
 import securityService from '../service/security';
 import utilityService from '../service/utility';
 
@@ -75,11 +73,11 @@ class BaseServices {
 	}
 
 	_initializeAuth() {
-		return new authService();
+		throw new NotImplementedError();
 	}
 
 	_initializeCommunicationRest() {
-		return new restCommunicationService();
+		throw new NotImplementedError();
 	}
 
 	_initializeConfig() {
