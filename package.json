@@ -1,9 +1,9 @@
 {
   "name": "@thzero/library_client",
-  "version": "0.6.14",
+  "version": "0.6.16",
   "version_major": 0,
   "version_minor": 6,
-  "version_patch": 14,
+  "version_patch": 16,
   "version_date": "07/18/2020",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
@@ -20,7 +20,7 @@
     "node": ">=12.18"
   },
   "scripts": {
-    "cli-update": "node -r esm ./cli.js --updateversion --pi",
+    "cli-update": "./node_modules/.bin/library-cli --updateversion --pi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -47,8 +47,7 @@
     "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
-    "esm": "^3.2.25",
-    "minimist": "^1.2.5"
+    "@thzero/library_cli": "^0.6.16"
   },
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1.1.4",
@@ -62,7 +61,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "cross-env": "^7.0.2",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
