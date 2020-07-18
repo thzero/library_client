@@ -101,8 +101,12 @@ class Utility {
 	}
 
 	static generateId() {
-		//return uuidv4()
+		// return uuidv4();
 		return Utility.generateShortId();
+	}
+
+	static generateLongId() {
+		return uuidv4();
 	}
 
 	static generateShortId() {
