@@ -1,4 +1,4 @@
-import Data from '../data/index';
+import Data from './index';
 
 class NamedData extends Data {
 	constructor() {
