@@ -1,5 +1,7 @@
 // import cryptoJS from 'crypto-js'
 
+import Service from './index';
+
 //crypto-js
 // export class CryptoAes {
 // 	static encrypt(text, key) {
@@ -15,8 +17,9 @@
 
 const encoder = new TextEncoder();
 
-class CryptoUtility {
-	static async checksum(input, algorithm) {
+class CryptoService extends Service {
+	// eslint-disable-next-line
+	async checksum(input, algorithm, encoding) {
 		// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#HMAC
 		const msgUint8 = encoder.encode(input); // encode as (utf-8) Uint8Array
 		const hashBuffer = await crypto.subtle.digest(algorithm || 'SHA-256', msgUint8); // hash the message
@@ -24,4 +27,4 @@ class CryptoUtility {
 	}
 }
 
-export default CryptoUtility;
+export default CryptoService;

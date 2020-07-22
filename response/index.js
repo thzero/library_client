@@ -1,4 +1,4 @@
-import SharedConstants from '@/common/constants';
+import LibraryConstants from '../constants';
 
 import ResponseParam from './responseParam';
 
@@ -13,27 +13,16 @@ class Response {
 	}
 
 	add(message, code, field, type, params, prefix, suffix) {
-		this.success = false;
-
-		if (!this.errors)
-			this.errors = [];
-
-		const error = {
-			code: code,
-			field: field,
-			message: message,
-			type: type,
-			params: params,
-			prefix: prefix,
-			suffix: suffix
-		};
-
-		this.errors.push(error);
-		return this;
+		return this._add(message, code, field, type, params, prefix, suffix);
 	}
 
 	addGeneric(message, code, params, prefix, suffix) {
-		return this.add(message, code, SharedConstants.ErrorFields.Generic, null, params, prefix, suffix);
+		return this._add(message, code, LibraryConstants.ErrorFields.Generic, null, params, prefix, suffix);
+	}
+
+	// eslint-disable-next-line
+	check(context) {
+		return this;
 	}
 
 	param(value) {
@@ -56,6 +45,31 @@ class Response {
 
 	static success() {
 		return new Response();
+	}
+
+	// eslint-disable-next-line
+	static throw(context, response) {
+		context.throw(500);
+	}
+
+	_add(message, code, field, type, params, prefix, suffix) {
+		this.success = false;
+
+		if (!this.errors)
+			this.errors = [];
+
+		const error = {
+			code: code,
+			field: field,
+			message: message,
+			type: type,
+			params: params,
+			prefix: prefix,
+			suffix: suffix
+		}
+
+		this.errors.push(error);
+		return this;
 	}
 }
 

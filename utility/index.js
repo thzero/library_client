@@ -5,18 +5,16 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _debounce from 'lodash/debounce';
 import _merge from 'lodash/merge';
 
-import CryptoUtility from '../utility/crypto';
-
 import Response from '../response/index';
 
 const uuidTranslator = shortUUID();
 
 class Utility {
-	static async checksumUpdateCheck(state, commit, name, params) {
+	static async checksumUpdateCheck(crypto, state, commit, name, params) {
 		const internal = {};
 		internal.name = name;
 		internal.params = params;
-		const checksum = await CryptoUtility.checksum(internal);
+		const checksum = await crypto.checksum(internal);
 
 		const temp = state.checksumLastUpdate[checksum];
 		if (!temp) {
@@ -37,11 +35,11 @@ class Utility {
 		return true;
 	}
 
-	static checksumUpdateComplete(state, commit, name, params) {
+	static checksumUpdateComplete(crypto, state, commit, name, params) {
 		const internal = {};
 		internal.name = name;
 		internal.params = params;
-		const checksum = CryptoUtility.checksum(internal);
+		const checksum = crypto.checksum(internal);
 		state.checksumLastUpdate[checksum] = Utility.getTimestamp();
 		commit('setCheckumLastUpdate', state.checksumLastUpdate);
 	}

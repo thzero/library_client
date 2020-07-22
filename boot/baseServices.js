@@ -9,6 +9,7 @@ import NotImplementedError from '../errors/notImplemented';
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
 import configService from '../service/config';
+import cryptoService from '../service/crypto';
 import featureService from '../service/features';
 import loggerService from '../service/logger';
 import markupParserService from '../service/markupParser';
@@ -31,6 +32,7 @@ class BaseServices {
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, this._initializeAuth());
+		this._inject(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, this._initializeCommunicationRest());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
@@ -74,6 +76,10 @@ class BaseServices {
 
 	_initializeAuth() {
 		throw new NotImplementedError();
+	}
+
+	_initServiceCrypto() {
+		return new cryptoService();
 	}
 
 	_initializeCommunicationRest() {
