@@ -1,4 +1,4 @@
-import Data from '../data/index';
+import Data from './index';
 
 import NotImplementedError from '../errors/notImplemented';
 

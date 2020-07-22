@@ -5,18 +5,16 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _debounce from 'lodash/debounce';
 import _merge from 'lodash/merge';
 
-import CryptoUtility from '../utility/crypto';
-
 import Response from '../response/index';
 
 const uuidTranslator = shortUUID();
 
 class Utility {
-	static async checksumUpdateCheck(state, commit, name, params) {
+	static async checksumUpdateCheck(crypto, state, commit, name, params) {
 		const internal = {};
 		internal.name = name;
 		internal.params = params;
-		const checksum = await CryptoUtility.checksum(internal);
+		const checksum = await crypto.checksum(internal);
 
 		const temp = state.checksumLastUpdate[checksum];
 		if (!temp) {
@@ -37,11 +35,11 @@ class Utility {
 		return true;
 	}
 
-	static checksumUpdateComplete(state, commit, name, params) {
+	static checksumUpdateComplete(crypto, state, commit, name, params) {
 		const internal = {};
 		internal.name = name;
 		internal.params = params;
-		const checksum = CryptoUtility.checksum(internal);
+		const checksum = crypto.checksum(internal);
 		state.checksumLastUpdate[checksum] = Utility.getTimestamp();
 		commit('setCheckumLastUpdate', state.checksumLastUpdate);
 	}
@@ -101,8 +99,12 @@ class Utility {
 	}
 
 	static generateId() {
-		//return uuidv4()
+		// return uuidv4();
 		return Utility.generateShortId();
+	}
+
+	static generateLongId() {
+		return uuidv4();
 	}
 
 	static generateShortId() {
@@ -177,11 +179,6 @@ class Utility {
 		return temp.valueOf();
 	}
 
-	static handleError(response, func) {
-		for (const error of response.errors)
-			func(error);
-	}
-
 	static instantiate(object) {
 		if (!object)
 			return null;
@@ -195,8 +192,26 @@ class Utility {
 	}
 
 	static get isDev() {
-		// return (window.location.href.indexOf('localhost') >= 0)
-		return process.env.NODE_ENV === 'development';
+		let value = process.env.NODE_ENV;
+		if (String.isNullOrEmpty(value))
+			return true;
+
+		value = value ? value.toLowerCase() : ''
+		return ((value === 'dev') || (value === 'development'));
+	}
+
+	static map(obj1, obj2, resetTimestamps) {
+		if (!obj1 || !obj2);
+			return obj1;
+
+		obj1.map(obj2);
+
+		if (resetTimestamps) {
+			obj1.createdTimestamp = obj2.createdTimestamp;
+			obj1.updatedTimestamp = obj2.updatedTimestamp;
+		}
+
+		return obj1;
 	}
 
 	static merge2(x, y) {
@@ -209,25 +224,13 @@ class Utility {
 		// return Object.assign(x, y, z)
 	}
 
-	static overlayImageWidth() {
-		let width = (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth);
-		if (width > 512)
-			return '512px';
-
-		return width *.75 + 'px';
-	}
-
-	static overlayProgressSize() {
-		return (window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth) * .25;
-	}
-
 	static promiseTimeout(executingPromise, ttl) {
 		let id;
 
 		// Create a promise that rejects in <ttl> milliseconds
 		const timeoutPromise = new Promise((resolve, reject) => {
 			id = setTimeout(() => {
-				reject(Response.error(`Timed out in ${ttl}ms.`))
+				reject(Response.error(`Timed out in ${ttl}ms.`));
 			}, ttl);
 		});
 
@@ -240,23 +243,6 @@ class Utility {
 			// Pass the result back
 			return result
 		});
-	}
-
-	static randomKeyGen() {
-		const high = 100000000000;
-		const low = 0;
-		return Math.floor(Math.random() * (high - low) + low);
-	}
-
-	static selectBlank(array, prompt) {
-		if (!array)
-			return array;
-
-		prompt = prompt ? '<' + prompt + '>' : '';
-
-		const temp = array.slice(0);
-		temp.unshift({ id: null, name: prompt });
-		return temp;
 	}
 
 	static sortByName(values, ascending) {
@@ -281,6 +267,16 @@ class Utility {
 			b = field(b);
 		}
 		return (b - a);
+	}
+
+	static sortByNumberEx(values, field, ascending) {
+		if (!values || !Array.isArray(values))
+			return values;
+
+		if (ascending)
+			return values.sort((a, b) => Utility.sortByNumber(a, b, field));
+
+		return values.sort((a, b) => Utility.sortByNumber(b, a, field));
 	}
 
 	static sortByOrder(values, ascending) {
