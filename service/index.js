@@ -1,7 +1,7 @@
 
 import LibraryConstants from '../constants';
 
-import Response from '../response';
+import Response from '@thzero/library_common/response';
 
 class Service {
 	constructor() {
