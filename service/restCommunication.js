@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryConstants from '/constants';
 
 import CommunicationService from './communication';
 

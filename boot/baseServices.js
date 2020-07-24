@@ -1,10 +1,10 @@
 import LibraryConstants from '../constants';
 
-import Utility from '../utility';
+import Utility from '@thzero/library_common/utility';
 
-import injector from '../utility/injector';
+import injector from '@thzero/library_common/utility/injector';
 
-import NotImplementedError from '../errors/notImplemented';
+import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
