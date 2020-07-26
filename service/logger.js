@@ -1,7 +1,6 @@
-import Constants from '@/constants';
 import LibraryConstants from '../constants';
 
-import Utility from '../utility';
+import Utility from '@thzero/library_common/utility';
 
 import Service from './index';
 
@@ -85,10 +84,6 @@ class LoggerService extends Service {
 				ex: ex
 			});
 		})();
-	}
-
-	get _repositoryUser() {
-		return this._injector.getService(Constants.InjectorKeys.REPOSITORY_USER);
 	}
 }
 
