@@ -34,7 +34,7 @@
     "remarkable": "^2.0.1"
   },
   "devDependencies": {
-    "@thzero/library_cli": "^0.6.16"
+    "@thzero/library_cli": "^0.7.2"
   },
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1.1.4",
