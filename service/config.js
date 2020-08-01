@@ -20,6 +20,9 @@ class ConfigService extends Service {
 		if (!this._config)
 			return null;
 
+		if (!Array.isArray(this._config))
+			return null;
+
 		key = key.toLowerCase();
 		for (const item of this._config) {
 			if (item.key.toLowerCase() === key)
