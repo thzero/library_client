@@ -7,8 +7,8 @@ class Service {
 	constructor() {
 		this._config = null;
 		this._logger = null;
-		this._security = null;
-		this._translateS = null;
+		this._serviceSecurity = null;
+		this._serviceTranslate = null;
 	}
 
 	async init(injector) {
@@ -16,8 +16,8 @@ class Service {
 
 		this._config = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_CONFIG);
 		this._logger = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER);
-		this._security = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_SECURITY);
-		this._translateS = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE);
+		this._serviceSecurity = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_SECURITY);
+		this._serviceTranslate = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE);
 	}
 
 	_enforceNotNull(value, name) {
@@ -68,7 +68,7 @@ class Service {
 	}
 
 	async _validate(key, sub, dom, obj, act) {
-		return await this._security.validate(key, sub, dom, obj, act);
+		return await this._serviceSecurity.validate(key, sub, dom, obj, act);
 	}
 
 	_initResponse() {
@@ -86,7 +86,7 @@ class Service {
 	}
 
 	_translate(id, opts) {
-		return this._translateS.translate(id, opts);
+		return this._serviceTranslate.translate(id, opts);
 	}
 
 	_translateLookup(list, subject, prefix) {
