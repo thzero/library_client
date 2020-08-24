@@ -2,51 +2,53 @@ import LibraryConstants from '../../constants';
 
 import Utility from '@thzero/library_common/utility';
 
+import NotImplementedError from '@thzero/library_common/errors/notImplemented';
+
 import RestExternalService from '../../service/externalRest';
 
 class AdminService extends RestExternalService {
 	async create(value) {
 		try {
 			if (!this._allowsCreate)
-				return this._error();
+				return this._error('AdminService', 'create');
 
 			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, Utility.update(value));
-			this._logger.debug('response', response);
+			this._logger.debug('AdminService', 'create', 'response', response);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('AdminService', 'create', err);
 		}
 
-		return this._error();
+		return this._error('AdminService', 'create');
 	}
 
 	async delete(id) {
 		try {
 			if (!this._allowsDelete)
-				return this._error();
+				return this._error('AdminService', 'delete');
 
 			const response = await this._serviceCommunicationRest.deleteById(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
-			this._logger.debug('response', response);
+			this._logger.debug('AdminService', 'delete', 'response', response);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('AdminService', 'delete', err);
 		}
 
-		return this._error();
+		return this._error('AdminService', 'delete');
 	}
 
 	async search(params) {
 		const date = Utility.getDate();
-		this._logger.debug('date', date);
+		this._logger.debug('AdminService', 'search', 'date', date);
 		try {
 			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
-			this._logger.debug('response', response);
+			this._logger.debug('AdminService', 'search', 'response', response);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('AdminService', 'search', err);
 		}
 
 		return this._error();
@@ -55,18 +57,18 @@ class AdminService extends RestExternalService {
 	async update(value) {
 		try {
 			if (!this._allowsUpdate)
-				return this._error();
+				return this._error('AdminService', 'update');
 
 			this._cleanse(value);
 			const response = await this._serviceCommunicationRest.postById(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, Utility.update(value));
-			this._logger.debug('response', response);
+			this._logger.debug('AdminService', 'update', 'response', response);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('AdminService', 'update', err);
 		}
 
-		return this._error();
+		return this._error('AdminService', 'update');
 	}
 
 	get _allowsCreate() {
@@ -91,7 +93,7 @@ class AdminService extends RestExternalService {
 	}
 
 	_urlFragment() {
-		throw Error('Not Implemented.');
+		throw new NotImplementedError();
 	}
 }
 
