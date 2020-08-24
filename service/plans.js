@@ -6,14 +6,14 @@ class PlansService extends RestExternalService {
 	async plans() {
 		try {
 			const response = await this._serviceCommunicationRest.get(LibraryConstants.ExternalKeys.BACKEND, 'plans');
-			this._logger.debug('response', response);
+			this._logger.debug('PlansService', 'plans', 'response', response);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('PlansService', 'plans', err);
 		}
 
-		return this._error();
+		return this._error('PlansService', 'plans');
 	}
 }
 
