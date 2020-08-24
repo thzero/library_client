@@ -17,42 +17,42 @@ class BaseUserService extends ExternalService {
 		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	}
 
-	async updateSettings(user, settings) {
-		if (!settings)
-			return this._error();
-		if (!user)
-			return this._error();
-
-		this._logger.debug('settings', settings);
-		try {
-			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, 'user/update/settings', { userId: user.id, settings: settings });
-			this._logger.debug('response', response);
-			if (response && response.success);
-				return response;
-		}
-		catch(err) {
-			this._logger.exception(err);
-		}
-
-		return this._error();
-	}
-
 	async updateExternal(user) {
 		if (!user)
-			return this._error();
+			return this._error('BaseUserService', 'updateExternal');
 
-		this._logger.debug('user', user);
+		this._logger.debug('BaseUserService', 'updateExternal', 'user', user);
 		try {
 			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, 'user/update', user);
-			this._logger.debug('response', response);
+			this._logger.debug('BaseUserService', 'updateExternal', 'response', response);
 			if (response && response.success)
 				return response;
 		}
 		catch(err) {
-			this._logger.exception(err);
+			this._logger.exception('BaseUserService', 'updateExternal', err);
 		}
 
-		return this._error();
+		return this._error('BaseUserService', 'updateExternal');
+	}
+
+	async updateSettings(user, settings) {
+		if (!settings)
+			return this._error('BaseUserService', 'updateSettings');
+		if (!user)
+			return this._error('BaseUserService', 'updateSettings');
+
+		this._logger.debug('BaseUserService', 'updateSettings', 'settings', settings);
+		try {
+			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, 'user/update/settings', { userId: user.id, settings: settings });
+			this._logger.debug('BaseUserService', 'updateSettings', 'response', response);
+			if (response && response.success);
+				return response;
+		}
+		catch(err) {
+			this._logger.exception('BaseUserService', 'updateSettings', err);
+		}
+
+		return this._error('BaseUserService', 'updateSettings');
 	}
 }
 
