@@ -17,104 +17,109 @@ class LoggerService extends Service {
 		this._serviceUtility = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
 	}
 
-	debug(clazz, method, message, data) {
+	debug(clazz, method, message, data, correlationId) {
 		if (!Utility.isDev)
 			return;
 
 		// eslint-disable-next-line
-		console.log('DEBUG', this._format(clazz, method, message), data);
-		// this._remoteLogger('DEBUG', message, data);
+		console.log('DEBUG', this._format(clazz, method, message, correlationId), data);
+		// this._remoteLogger('DEBUG', clazz, method, message, data, correlationId);
 	}
 
-	debug2(message, data) {
+	debug2(message, data, correlationId) {
 		if (!Utility.isDev)
 			return;
 
 		// eslint-disable-next-line
-		console.log('DEBUG', message, data);
-		// this._remoteLogger('DEBUG', message, data);
+		console.log('DEBUG', this._format(null, null, message, correlationId), data);
+		// this._remoteLogger('DEBUG', null, null, message, data, correlationId);
 	}
 
-	error(clazz, method, message, data) {
+	error(clazz, method, message, data, correlationId) {
 		// eslint-disable-next-line
-		console.error('ERROR', message, data);
-		this._remoteLogger('ERROR', this._format(clazz, method, message), data);
+		console.error('ERROR', this._format(clazz, method, message, correlationId), data);
+		this._remoteLogger('ERROR', clazz, method, message, data, correlationId);
 	}
 
-	error2(message, data) {
+	error2(message, data, correlationId) {
 		// eslint-disable-next-line
-		console.error('ERROR', message, data);
-		this._remoteLogger('ERROR', message, data);
+		console.error('ERROR', this._format(null, null, message, correlationId), data);
+		this._remoteLogger('ERROR', null, null, message, data, correlationId);
 	}
 
-	exception(clazz, method, ex) {
+	exception(clazz, method, ex, correlationId) {
 		ex = (ex === undefined ? null : ex);
-		console.error('ERROR', this._format(clazz, method), ex);
-		this._remoteLoggerException(ex);
+		console.error('ERROR', this._format(clazz, method, null, correlationId), ex);
+		this._remoteLoggerException(clazz, method, ex, correlationId);
 	}
 
-	exception2(ex) {
+	exception2(ex, correlationId) {
 		ex = (ex === undefined ? null : ex);
 		console.error('ERROR', ex);
-		this._remoteLoggerException(ex);
+		console.error('ERROR', this._format(null, null, null, correlationId), ex);
+		this._remoteLoggerException(null, null, ex, correlationId);
 	}
 
-	fatal(clazz, method, message, data) {
+	fatal(clazz, method, message, data, correlationId) {
 		// eslint-disable-next-line
-		console.error('FATAL', message, data);
-		this._remoteLogger('FATAL', this._format(clazz, method, message), data);
+		console.error('FATAL', this._format(clazz, method, message, correlationId), data);
+		this._remoteLogger('FATAL', clazz, method, message, data, correlationId);
 	}
 
-	fatal2(message, data) {
+	fatal2(message, data, correlationId) {
 		// eslint-disable-next-line
-		console.error('FATAL', message, data);
-		this._remoteLogger('FATAL', message, data);
+		console.error('FATAL', this._format(null, null, message, correlationId), data);
+		this._remoteLogger('FATAL', null, null, message, data, correlationId);
 	}
 
 	info(clazz, method, message, data) {
 		// eslint-disable-next-line
-		console.log('INFO', this._format(clazz, method, message), data);
-		// this._remoteLogger('INFO', message, data);
+		console.log('INFO', this._format(clazz, method, message, correlationId), data);
+		// this._remoteLogger('INFO', clazz, method, message, data, correlationId);
 	}
 
-	info2(message, data) {
+	info2(message, data, correlationId) {
 		// eslint-disable-next-line
-		console.log('INFO', message, data);
-		// this._remoteLogger('INFO', message, data);
+		console.log('INFO', this._format(null, null, message, correlationId), data);
+		// this._remoteLogger('INFO', null, null, message, data, correlationId);
 	}
 
-	trace(clazz, method, message, data) {
+	trace(clazz, method, message, data, correlationId) {
 		if (!Utility.isDev())
 			return
 
 		// eslint-disable-next-line
-		console.log('TRACE', this._format(clazz, method, message), data);
-		// this._remoteLogger('TRACE', message, data);
+		console.log('TRACE', this._format(clazz, method, message, correlationId), data);
+		// this._remoteLogger('TRACE', clazz, method, message, data, correlationId);
 	}
 
-	trace2(message, data) {
+	trace2(message, data, correlationId) {
 		if (!Utility.isDev())
 			return
 
 		// eslint-disable-next-line
-		console.log('TRACE', message, data);
-		// this._remoteLogger('TRACE', message, data);
+		console.log('TRACE', this._format(null, null, message, correlationId), data);
+		// this._remoteLogger('TRACE', null, null, message, data, correlationId);
 	}
 
-	warn(clazz, method, message, data) {
+	warn(clazz, method, message, data, correlationId) {
 		// eslint-disable-next-line
-		console.log('WARN', this._format(clazz, method, message), data);
-		this._remoteLogger('WARN', message, data);
+		console.log('WARN', this._format(clazz, method, message, correlationId), data);
+		this._remoteLogger('WARN', message, data, correlationId);
+		this._remoteLogger('WARN', clazz, method, message, data, correlationId);
 	}
 
-	warn2(message, data) {
+	warn2(message, data, correlationId) {
 		// eslint-disable-next-line
-		console.log('WARN', message, data);
-		this._remoteLogger('WARN', message, data);
+		console.log('WARN', this._format(null, null, message, correlationId), data);
+		this._remoteLogger('WARN', message, data, correlationId);
+		this._remoteLogger('WARN', null, null, message, data, correlationId);
 	}
 
-	_format(clazz, method, message) {
+	_format(clazz, method, message, correlationId) {
 		let output = '';
+		if (!String.isNullOrEmpty(correlationId))
+			output += `(${correlationId}) `;
 		if (!String.isNullOrEmpty(clazz))
 			output += clazz;
 		if (!String.isNullOrEmpty(output))
@@ -128,24 +133,32 @@ class LoggerService extends Service {
 		return output;
 	}
 
-	_remoteLogger(type, mmessage, data) {
+	_remoteLogger(clazz, method, type, message, data, correlationId) {
 		const self = this;
 		(async () => {
 			self._serviceUtility.logger({
+				clazz: clazz,
+				method: method,
 				type: type,
-				mmessage: mmessage,
-				data: data
-			});
+				message: message,
+				data: data,
+				correlationId: correlationId
+			},
+			correlationId);
 		})();
 	}
 
-	_remoteLoggerException(ex) {
+	_remoteLoggerException(clazz, method, ex, correlationId) {
 		const self = this;
 		(async () => {
 			self._serviceUtility.logger({
+				clazz: clazz,
+				method: method,
 				type: 'EXCEPTION',
-				ex: ex
-			});
+				ex: ex,
+				correlationId: correlationId
+			},
+			correlationId);
 		})();
 	}
 }
