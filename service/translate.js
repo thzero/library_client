@@ -2,7 +2,7 @@ import Service from './index';
 
 class TranslateService extends Service {
 	// eslint-disable-next-line
-	translate(id, opts) {
+	translate(correlationId, id, opts) {
 		return null;
 	}
 }

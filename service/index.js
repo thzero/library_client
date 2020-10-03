@@ -20,125 +20,118 @@ class Service {
 		this._serviceTranslate = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE);
 	}
 
-	_enforceNotNull(clazz, method, value, name) {
+	_enforceNotNull(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			throw Error(`Invalid ${name}`);
 		}
 	}
 
-	_enforceNotNullOrEmpty(clazz, method, value, name) {
+	_enforceNotNullOrEmpty(clazz, method, value, name, correlationId) {
 		if (!String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			throw Error(`Invalid ${name}`);
 		}
 	}
 
-	_enforceNotNullResponse(clazz, method, value, name) {
+	_enforceNotNullResponse(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
 
-		return this._success();
+		return this._success(correlationId);
 	}
 
-	_enforceNotNullOrEmptyResponse(clazz, method, value, name) {
+	_enforceNotNullOrEmptyResponse(clazz, method, value, name, correlationId) {
 		if (!String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
 
-		return this._success();
+		return this._success(correlationId);
 	}
 
-	_enforceNotNullAsResponse(clazz, method, value, name) {
+	_enforceNotNullAsResponse(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
 
-		const response = this._initResponse();
+		const response = this._initResponse(correlationId);
 		response.results = value;
 		return response;
 	}
 
-	_enforceNotNullOrEmptyAsResponse(clazz, method, value, name) {
+	_enforceNotNullOrEmptyAsResponse(clazz, method, value, name, correlationId) {
 		if (!String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
 
-		const response = this._initResponse();
+		const response = this._initResponse(correlationId);
 		response.results = value;
 		return response;
 	}
 
-	_enforceResponse(clazz, method, response, name) {
+	_enforceResponse(clazz, method, response, name, correlationId) {
 		if (!response && !response.success) {
-			this._logger.error(clazz, method, `Invalid ${name}`);
+			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			throw response;
 		}
 
 		return response;
 	}
 
-	_error(clazz, method, message, err, code, errors) {
+	_error(clazz, method, message, err, code, errors, correlationId) {
 		if (message)
-			this._logger.error(clazz, method, message);
+			this._logger.error(clazz, method, message, null, correlationId);
 		if (err)
-			this._logger.error(clazz, method, err.message);
+			this._logger.error(clazz, method, err.message, null, correlationId);
 		if (code)
-			this._logger.error(clazz, method, code);
+			this._logger.error(clazz, method, 'code', code, correlationId);
 		if (errors)
-			this._logger.error(clazz, method, errors);
-		return Response.error(message, err, code, errors);
+			this._logger.error(clazz, method, null, errors, correlationId);
+		return Response.error(message, err, code, errors, correlationId);
 	}
 
-	_errorResponse(clazz, method, response) {
-		if (!response)
-			return Response.error();
-
-		return Response.error(response.message, response.err);
+	async _validate(correlationId, key, sub, dom, obj, act) {
+		return await this._serviceSecurity.validate(correlationId, key, sub, dom, obj, act);
 	}
 
-	async _validate(key, sub, dom, obj, act) {
-		return await this._serviceSecurity.validate(key, sub, dom, obj, act);
+	_initResponse(correlationId) {
+		return new Response(correlationId);
 	}
 
-	_initResponse() {
-		return new Response();
+	_success(correlationId) {
+		return Response.success(correlationId);
 	}
 
-	_success() {
-		return Response.success();
-	}
-
-	_successResponse(value) {
-		let response = Response.success();
+	_successResponse(value, correlationId) {
+		let response = Response.success(correlationId);
 		response.results = value;
 		return response;
 	}
 
-	_translate(id, opts) {
-		return this._serviceTranslate.translate(id, opts);
+	_translate(correlationId, id, opts) {
+		return this._serviceTranslate.translate(correlationId, id, opts);
 	}
 
-	_translateLookup(list, subject, prefix) {
+	_translateLookup(correlationId, list, subject, prefix) {
 		const output = [];
 		for (const prop of list) {
-			prop.name = this._translate(`${subject}.${prefix}.${prop.id}`);
+			prop.name = this._translate(correlationId, `${subject}.${prefix}.${prop.id}`);
 			output.push(prop);
 		}
 		return output;
 	}
 
-	_translateName(list, subject, prefix) {
+	_translateName(correlationId, ist, subject, prefix) {
 		let temp;
 		const output = [];
 		for (const prop of Object.values(list)) {
 			temp = { id: prop };
-			temp.name = this._translate(`${subject}.${prefix}.${temp.id}`);
+			temp.name = this._translate(correlationId, `${subject}.${prefix}.${temp.id}`);
 			output.push(temp);
 		}
 		return output;

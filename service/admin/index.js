@@ -7,68 +7,68 @@ import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 import RestExternalService from '../../service/externalRest';
 
 class AdminService extends RestExternalService {
-	async create(value) {
+	async create(correlationId, value) {
 		try {
 			if (!this._allowsCreate)
-				return this._error('AdminService', 'create');
+				return this._error('AdminService', 'create', null, null, null, null, correlationId);
 
-			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, Utility.update(value));
-			this._logger.debug('AdminService', 'create', 'response', response);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, Utility.update(value));
+			this._logger.debug('AdminService', 'create', 'response', response, correlationId);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception('AdminService', 'create', err);
+			this._logger.exception('AdminService', 'create', err, correlationId);
 		}
 
-		return this._error('AdminService', 'create');
+		return this._error('AdminService', 'create', null, null, null, null, correlationId);
 	}
 
-	async delete(id) {
+	async delete(correlationId, id) {
 		try {
 			if (!this._allowsDelete)
-				return this._error('AdminService', 'delete');
+				return this._error('AdminService', 'delete', null, null, null, null, correlationId);
 
-			const response = await this._serviceCommunicationRest.deleteById(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
-			this._logger.debug('AdminService', 'delete', 'response', response);
+			const response = await this._serviceCommunicationRest.deleteById(correlationId, LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
+			this._logger.debug('AdminService', 'delete', 'response', response, correlationId);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception('AdminService', 'delete', err);
+			this._logger.exception('AdminService', 'delete', err, correlationId);
 		}
 
-		return this._error('AdminService', 'delete');
+		return this._error('AdminService', 'delete', null, null, null, null, correlationId);
 	}
 
-	async search(params) {
+	async search(correlationId, params) {
 		const date = Utility.getDate();
-		this._logger.debug('AdminService', 'search', 'date', date);
+		this._logger.debug('AdminService', 'search', 'date', date, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
-			this._logger.debug('AdminService', 'search', 'response', response);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
+			this._logger.debug('AdminService', 'search', 'response', response, correlationId);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception('AdminService', 'search', err);
+			this._logger.exception('AdminService', 'search', err, correlationId);
 		}
 
-		return this._error();
+		return this._error('AdminService', 'search', null, null, null, null, correlationId);
 	}
 
-	async update(value) {
+	async update(correlationId, value) {
 		try {
 			if (!this._allowsUpdate)
-				return this._error('AdminService', 'update');
+				return this._error('AdminService', 'update', null, null, null, null, correlationId);
 
-			this._cleanse(value);
-			const response = await this._serviceCommunicationRest.postById(LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, Utility.update(value));
-			this._logger.debug('AdminService', 'update', 'response', response);
+			this._cleanse(correlationId, value);
+			const response = await this._serviceCommunicationRest.postById(correlationId, LibraryConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, Utility.update(value));
+			this._logger.debug('AdminService', 'update', 'response', response, correlationId);
 			return response;
 		}
 		catch(err) {
-			this._logger.exception('AdminService', 'update', err);
+			this._logger.exception('AdminService', 'update', err, correlationId);
 		}
 
-		return this._error('AdminService', 'update');
+		return this._error('AdminService', 'update', null, null, null, null, correlationId);
 	}
 
 	get _allowsCreate() {
@@ -83,7 +83,7 @@ class AdminService extends RestExternalService {
 		return true;
 	}
 
-	_cleanse(value) {
+	_cleanse(correlationId, value) {
 		if (!value)
 			return;
 

@@ -73,12 +73,12 @@ class MarkupParserService extends Service {
 		marked.setOptions(markedOptions);
 	}
 
-	render(value) {
+	render(correlationId, value) {
 		//return this._parser.render(value)
 		return marked(value);
 	}
 
-	trimResults(value) {
+	trimResults(correlationId, value) {
 		const result1 = value.replace(regExpPrefix, '');
 		if (!result1)
 			return result1;

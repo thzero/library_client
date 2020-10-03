@@ -19,40 +19,40 @@ class BaseUserService extends ExternalService {
 
 	async updateExternal(user) {
 		if (!user)
-			return this._error('BaseUserService', 'updateExternal');
+			return this._error('BaseUserService', 'updateExternal', null, null, null, null, correlationId);
 
-		this._logger.debug('BaseUserService', 'updateExternal', 'user', user);
+		this._logger.debug('BaseUserService', 'updateExternal', 'user', user, correlationId);
 		try {
 			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, 'user/update', user);
-			this._logger.debug('BaseUserService', 'updateExternal', 'response', response);
+			this._logger.debug('BaseUserService', 'updateExternal', 'response', response, correlationId);
 			if (response && response.success)
 				return response;
 		}
 		catch(err) {
-			this._logger.exception('BaseUserService', 'updateExternal', err);
+			this._logger.exception('BaseUserService', 'updateExternal', err, correlationId);
 		}
 
-		return this._error('BaseUserService', 'updateExternal');
+		return this._error('BaseUserService', 'updateExternal', null, null, null, null, correlationId);
 	}
 
 	async updateSettings(user, settings) {
 		if (!settings)
-			return this._error('BaseUserService', 'updateSettings');
+			return this._error('BaseUserService', 'updateSettings', null, null, null, null, correlationId);
 		if (!user)
-			return this._error('BaseUserService', 'updateSettings');
+			return this._error('BaseUserService', 'updateSettings', null, null, null, null, correlationId);
 
-		this._logger.debug('BaseUserService', 'updateSettings', 'settings', settings);
+		this._logger.debug('BaseUserService', 'updateSettings', 'settings', settings, correlationId);
 		try {
 			const response = await this._serviceCommunicationRest.post(LibraryConstants.ExternalKeys.BACKEND, 'user/update/settings', { userId: user.id, settings: settings });
-			this._logger.debug('BaseUserService', 'updateSettings', 'response', response);
+			this._logger.debug('BaseUserService', 'updateSettings', 'response', response, correlationId);
 			if (response && response.success);
 				return response;
 		}
 		catch(err) {
-			this._logger.exception('BaseUserService', 'updateSettings', err);
+			this._logger.exception('BaseUserService', 'updateSettings', err, correlationId);
 		}
 
-		return this._error('BaseUserService', 'updateSettings');
+		return this._error('BaseUserService', 'updateSettings', null, null, null, null, correlationId);
 	}
 }
 

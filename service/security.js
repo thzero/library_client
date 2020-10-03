@@ -21,7 +21,7 @@ class SecurityService extends Service {
 	}
 
 	// eslint-disable-next-line
-	async validate(key, sub, dom, obj, act) {
+	async validate(correlationId, key, sub, dom, obj, act) {
 		if (String.isNullOrEmpty(key))
 			throw Error('Invalid key');
 

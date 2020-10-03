@@ -3,21 +3,21 @@ import Utility from '@thzero/library_common/utility';
 import Service from './index';
 
 class BaseSettings extends Service {
-	clearUser(store, user, func) {
+	clearUser(correlationId, store, user, func) {
 		if (!store)
 			return;
 
-		const settings = user.settings ? user.settings : this.initializeUser();
-		func(settings);
-		store.dispatcher.user.setUserSettings(settings);
+		const settings = user.settings ? user.settings : this.initializeUser(correlationId);
+		func(correlationId, settings);
+		store.dispatcher.user.setUserSettings(correlationId, settings);
 	}
 
-	initializeUser() {
+	initializeUser(correlationId) {
 		return {};
 	}
 
-	mergeUser(settings) {
-		return Utility.merge2(this.initializeUser(), settings);
+	mergeUser(correlationId, settings) {
+		return Utility.merge2(this.initializeUser(correlationId), settings);
 	}
 }
 
