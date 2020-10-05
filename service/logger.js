@@ -136,22 +136,21 @@ class LoggerService extends Service {
 	_remoteLogger(clazz, method, type, message, data, correlationId) {
 		const self = this;
 		(async () => {
-			self._serviceUtility.logger({
+			self._serviceUtility.logger(correlationId, {
 				clazz: clazz,
 				method: method,
 				type: type,
 				message: message,
 				data: data,
 				correlationId: correlationId
-			},
-			correlationId);
+			});
 		})();
 	}
 
 	_remoteLoggerException(clazz, method, ex, correlationId) {
 		const self = this;
 		(async () => {
-			self._serviceUtility.logger({
+			self._serviceUtility.logger(correlationId, {
 				clazz: clazz,
 				method: method,
 				type: 'EXCEPTION',
