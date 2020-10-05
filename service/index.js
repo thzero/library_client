@@ -126,7 +126,7 @@ class Service {
 		return output;
 	}
 
-	_translateName(correlationId, ist, subject, prefix) {
+	_translateName(correlationId, list, subject, prefix) {
 		let temp;
 		const output = [];
 		for (const prop of Object.values(list)) {
