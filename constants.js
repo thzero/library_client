@@ -40,11 +40,11 @@ const LibraryConstants = {
 	Headers: {
 		AuthKeys: {
 			API: 'x-api-key',
-			AUTH: 'Authorization',
-			AUTH_BEARER: 'Bearer'
+			AUTH: 'authorization',
+			AUTH_BEARER: 'bearer'
 		},
-		CorrelationId: 'CorrelationId'
-	}
+		CorrelationId: 'correlation-id'
+	},
 };
 
 export default LibraryConstants;
