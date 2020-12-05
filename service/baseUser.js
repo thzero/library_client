@@ -17,6 +17,23 @@ class BaseUserService extends ExternalService {
 		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	}
 
+	async refreshSettings(correlationId, user) {
+		if (!user)
+			return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
+
+		try {
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'user/refresh/settings', { userId: user.id });
+			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
+			if (response && response.success);
+				return response;
+		}
+		catch(err) {
+			this._logger.exception('BaseUserService', 'refreshSettings', err, correlationId);
+		}
+
+		return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
+	}
+
 	async updateExternal(correlationId, user) {
 		if (!user)
 			return this._error('BaseUserService', 'updateExternal', null, null, null, null, correlationId);
