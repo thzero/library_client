@@ -41,7 +41,11 @@ class BaseServices {
 		}
 
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, this._initializeCommunicationRest());
+
+		const serviceCommunicationRest = this._initializeCommunicationRest();
+		if (serviceCommunicationRest)
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, serviceCommunicationRest);
+
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
@@ -86,7 +90,7 @@ class BaseServices {
 	}
 
 	_initializeAuth() {
-		throw new NotImplementedError();
+		return null;
 	}
 
 	_initServiceCrypto() {
@@ -94,7 +98,7 @@ class BaseServices {
 	}
 
 	_initializeCommunicationRest() {
-		throw new NotImplementedError();
+		return null;
 	}
 
 	_initializeConfig() {
@@ -134,7 +138,7 @@ class BaseServices {
 	}
 
 	_initializeSettings() {
-		throw new NotImplementedError();
+		return null;
 	}
 
 	_initializeStore() {
@@ -146,6 +150,7 @@ class BaseServices {
 	}
 
 	_initializeUser() {
+		return null;
 	}
 
 	_initializeUtility() {
