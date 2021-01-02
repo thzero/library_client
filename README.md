@@ -10,6 +10,10 @@ An opinionated library of common functionality to bootstrap a VueJs based SPA ap
 
 [![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
 
+The following dependencies must be installed as devDependencies:
+
+* babel-plugin-lodash
+
 ### Requirements
 
 #### Firebase
