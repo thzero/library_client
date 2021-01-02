@@ -1,9 +1,9 @@
 {
   "name": "@thzero/library_client",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "version_major": 0,
   "version_minor": 12,
-  "version_patch": 3,
+  "version_patch": 4,
   "version_date": "01/01/2021",
   "description": "An opinionated library of common functionality to bootstrap a Koa based API application using MongoDb and Firebase.",
   "author": "thZero",
@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@thzero/library_common": "^0.12.3",
+    "@thzero/library_common": "^0.12.4",
     "dayjs": "^1.9.8",
     "dayjs-plugin-utc": "^0.1.2",
     "easy-rbac": "^3.1.1",
@@ -45,7 +45,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "cross-env": "^7.0.3",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
