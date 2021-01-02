@@ -11,9 +11,12 @@ class ApiVersionService extends RestExternalService {
 			let response = await this._version(correlationId);
 			if (response && response.success)
 				version.client = response.results;
-			response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'version');
-			if (response && response.success)
-				version.server = response.results;
+
+			if (this._serviceCommunicationRest) {
+				response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'version');
+				if (response && response.success)
+					version.server = response.results;
+			}
 		}
 		catch (err) {
 			this._logger.exception('ApiVersionService', 'version', err, correlationId);

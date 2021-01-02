@@ -34,6 +34,7 @@ These dependencies must be installed as 'devDependencies'.
 * babel-plugin-lodash
 * material-design-icons-iconfont
 * vuetify-loader
+* vue-cli-plugin-vuetify
 
 #### Vue
 
