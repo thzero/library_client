@@ -29,7 +29,11 @@ The following dependencies are required.
 
 These dependencies must be installed as 'devDependencies'.
 
+* @alienfast/i18next-loader
+* @mdi/font
 * babel-plugin-lodash
+* material-design-icons-iconfont
+* vuetify-loader
 
 #### Vue
 
@@ -92,9 +96,14 @@ To use the backend APIs feature, install a REST communication dependency, i.e.
 
 ![@thzero/library_client_service_rest_axios](https://www.npmjs.com/package/@thzero/library_client_service_rest_axios).
 
-### Development Tool Configuration
+### Development
 
-* Copy the /tools/babel.config.js and /tools/vue.config.js to the root folder of the application.
+* Copy the files in the '_config' folder to the root folder of the application.
+
+  * .browserslistrc
+  * .eslintrc
+  * babel.config.js
+  * vue.config.js
 
 ### Package.json
 
@@ -110,47 +119,11 @@ To use the backend APIs feature, install a REST communication dependency, i.e.
 * Include the following at the end of the 'package.json' for the application.
 ```
   ,
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/recommended",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {
-      "vue/html-indent": [
-        "error",
-        "tab"
-      ],
-      "semi": [
-        "error",
-        "always"
-      ]
-    }
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
   }
-```
-
-### .browserslistrc
-
-Update the '.browserslistrc' to contain the following rules.
-
-```
-> 4%,
-last 2 Chrome versions,
-last 2 Firefox versions,
-last 2 Safari versions,
-last 2 FirefoxAndroid versions,
-not Edge <= 18
 ```
 
 ## Application Setup
