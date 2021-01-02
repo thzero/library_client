@@ -31,7 +31,15 @@ class BaseServices {
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, this._initializeAuth());
+		const serviceAuth = this._initializeAuth();
+		if (serviceAuth) {
+			const serviceUser = this._initializeUser();
+			if (!serviceUser)
+				throw new NotImplementedError();
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, serviceAuth);
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, serviceUser);
+		}
+
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, this._initializeCommunicationRest());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
@@ -43,10 +51,13 @@ class BaseServices {
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, this._initializeSettings());
+
+		const serviceSettings = this._initializeSettings();
+		if (serviceSettings)
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
+
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, this._initializeTranslate());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, this._initializeUser());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 		this._initialize();
@@ -135,7 +146,6 @@ class BaseServices {
 	}
 
 	_initializeUser() {
-		throw new NotImplementedError();
 	}
 
 	_initializeUtility() {
