@@ -602,3 +602,79 @@ router.beforeResolve((to, from, next) => {
 
 export default router;
 ```
+
+### Index.html
+
+Replace the contents of the 'public/index.html' with the following code.
+
+```
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0"/>
+
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="-1" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+		<link rel="manifest" href="<%= BASE_URL %>manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<link rel="shortcut icon" href="<%= BASE_URL %>icons/favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="<%= BASE_URL %>apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="<%= BASE_URL %>apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<%= BASE_URL %>apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<%= BASE_URL %>apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="<%= BASE_URL %>apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<%= BASE_URL %>apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="<%= BASE_URL %>apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<%= BASE_URL %>apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>apple-icon-180x180.png">
+		<link rel="shortcut icon" type="image/png" sizes="192x192"	href="<%= BASE_URL %>android-icon-192x192.png">
+		<link rel="shortcut icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon-32x32.png">
+		<link rel="shortcut icon" type="image/png" sizes="96x96" href="<%= BASE_URL %>favicon-96x96.png">
+		<link rel="shortcut icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon-16x16.png">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+		<!-- <link rel='preload' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"></noscript> -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-icons-iconfont@5.0.1/dist/material-design-icons.min.css">
+		<!-- <link rel='preload' href='https://cdn.jsdelivr.net/npm/material-design-icons-iconfont@5.0.1/dist/material-design-icons.min.css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-icons-iconfont@5.0.1/dist/material-design-icons.min.css"></noscript> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.9.95/css/materialdesignicons.min.css">
+		<!-- <link rel='preload' href='https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.9.95/css/materialdesignicons.min.css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.9.95/css/materialdesignicons.min.css"></noscript> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+		<!-- <link rel='preload' href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css"></noscript> -->
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"> -->
+		<title><name of your app goes here></title>
+		<style>
+.bg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: black url( '/images/background.png') no-repeat center center;
+	background-attachment: fixed;
+}
+		</style>
+	</head>
+	<body class="bg">
+		<noscript>
+			<strong>We're sorry but test doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+		</noscript>
+		<div id="app"></div>
+		<!-- built files will be auto injected -->
+	</body>
+</html>
+
+```
