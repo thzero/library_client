@@ -45,7 +45,6 @@
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1.1.4",
     "@mdi/font": "^5.9.55",
-    "core-js": "^3.8.3",
     "@vue/cli-plugin-babel": "~4.5.10",
     "@vue/cli-plugin-eslint": "~4.5.10",
     "@vue/cli-plugin-router": "~4.5.10",
@@ -54,6 +53,7 @@
     "@vue/eslint-config-standard": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-lodash": "^3.3.4",
+    "core-js": "^3.8.3",
     "eslint": "^7.18.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
