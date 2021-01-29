@@ -75,6 +75,8 @@ class BaseServices {
 		store.$logger = logger;
 
 		this._initializInjector(framework, injector);
+
+		Utility.initDateTime();
 	}
 
 	_initialize() {
