@@ -36,15 +36,11 @@ jobs:
     - name: NCU Upgrade Check
       if: github.event.client_payload.action == 'npm'
       id: ncu-upgrade
-      uses: thzero/ncu-upgrade@v0.13-beta
+      uses: thzero/ncu-upgrade@v0.14-beta
     - name: NCU Updated Check Output
-      if: github.event.client_payload.action == 'npm'
       run: |
         echo upgraded: ${{ steps.ncu-upgrade.outputs.upgraded }}
-        echo npm_and_upgrade? ${{ (github.event.client_payload.action == 'npm' && steps.ncu-upgrade.outputs.upgraded) }}
-    - name: Output
-      run: |
-        echo upgraded: ${{ steps.ncu-upgrade.outputs.upgraded }}
+        echo upgrades: ${{ steps.ncu-upgrade.outputs.upgrades }}
         echo action: ${{ github.event.action }}
         echo action_is_npm? ${{ (github.event.client_payload.action == 'npm') }}
         echo npm_and_upgrade? ${{ (github.event.client_payload.action == 'npm' && steps.ncu-upgrade.outputs.upgraded == true) }}
