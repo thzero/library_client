@@ -4,7 +4,8 @@ on:
     workflow_dispatch:
       inputs:
         label:
-          description: 'Npm Publish - Version Update'
+          description: 'Label'
+          default: 'Npm Publish - Version Update'
         logLevel:
           description: 'Log level'
           required: true
