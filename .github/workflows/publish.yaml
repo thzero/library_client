@@ -3,6 +3,8 @@ name: Publish CI
 on:
     workflow_dispatch:
       inputs:
+        label:
+          description: 'Npm Publish - Version Update'
         logLevel:
           description: 'Log level'
           required: true
@@ -32,7 +34,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
     - name: Update Package Version
-      if: ((github.event.client_payload.action == 'npm' && steps.ncu-upgrade.outputs.upgraded == true) || github.event.action == 'version')
       run: |
         npm run cli-update -- --silent
     - name: Git Check
@@ -42,8 +43,6 @@ jobs:
     - name: Git Check Output
       run: |
         echo changed? ${{ steps.git-changes.outputs.changed }}
-        echo npm commit? ${{ github.event.client_payload.action == 'npm' && steps.git-changes.outputs.changed == true }}
-        echo !npm commit? ${{ github.event.action != 'npm' && steps.git-changes.outputs.changed == true && github.event.client_payload.label != '' }}
     - name: Git Commit NPM
       if: github.event.client_payload.action == 'npm' && steps.git-changes.outputs.changed == true
       run: |
@@ -53,12 +52,11 @@ jobs:
         git commit -m "npm updates"
         git push
     - name: Git Commit Version
-      if: github.event.action == 'version' && steps.git-changes.outputs.changed == true && github.event.client_payload.label != ''
       run: |
         git config --global user.name '${{ github.repository_owner }}'
         git config --global user.email '${{ github.repository_owner }}@users.noreply.github.com'
         git add .
-        git commit -m "version updates"
+        git commit -m "${{ github.event.inputs.label }}"
         git push
     - name: Requires Pull Request?
       run: |
