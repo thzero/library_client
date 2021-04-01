@@ -50,15 +50,7 @@ jobs:
     - name: Git Check Output
       run: |
         echo changed? ${{ steps.git-changes.outputs.changed }}
-    - name: Git Commit NPM
-      if: github.event.client_payload.action == 'npm' && steps.git-changes.outputs.changed == true
-      run: |
-        git config --global user.name '${{ github.repository_owner }}'
-        git config --global user.email '${{ github.repository_owner }}@users.noreply.github.com'
-        git add .
-        git commit -m "npm updates"
-        git push
-    - name: Git Commit Version
+    - name: Git Commit
       run: |
         git config --global user.name '${{ github.repository_owner }}'
         git config --global user.email '${{ github.repository_owner }}@users.noreply.github.com'
