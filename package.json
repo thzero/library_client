@@ -43,24 +43,6 @@
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1.1.4",
     "@mdi/font": "^5.9.55",
-    "@vue/cli-plugin-babel": "~4.5.13",
-    "@vue/cli-plugin-router": "~4.5.13",
-    "@vue/cli-plugin-vuex": "~4.5.13",
-    "@vue/cli-service": "~4.5.13",
-    "@vue/eslint-config-standard": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-lodash": "^3.3.4",
-    "core-js": "^3.15.2",
-    "eslint": "^7.30.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^4.1.0",
-    "eslint-plugin-vue": "^7.13.0",
-    "material-design-icons-iconfont": "^6.1.0",
-    "sass": "^1.35.2",
-    "sass-loader": "12.1.0",
-    "vue-cli-plugin-vuetify": "^2.4.1",
-    "vue-template-compiler": "^2.6.14"
+    "material-design-icons-iconfont": "^6.1.0"
   }
 }
