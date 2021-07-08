@@ -43,7 +43,7 @@ jobs:
     - name: Git Diff Check
       id: git-diff-changes
       run: |
-        git diff dev...master'
+        git diff dev...master
     - name: Git Check Output
       run: |
         echo changed? ${{ steps.git-changes.outputs.changed }}
