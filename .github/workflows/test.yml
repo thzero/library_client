@@ -44,9 +44,9 @@ jobs:
     - name: Git Diff Check
       id: git-diff-changes
       run: |
-        git diff master...dev --shortstat
-        ${git diff master...dev --shortstat}
-        echo ("git-diff-changes=" + ${git diff master...dev --shortstat}) >> $env:GITHUB_ENV
+        git diff origin/master origin/dev --shortstat
+        ${git diff origin/master origin/dev --shortstat}
+        echo ("git-diff-changes=" + ${git diff origin/master origin/dev --shortstat}) >> $env:GITHUB_ENV
     - name: Git Check Output
       run: |
         echo changed? ${{ env.git-diff-changes }}
