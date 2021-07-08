@@ -41,13 +41,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
     - name: Git Diff Check
-      uses: technote-space/get-diff-action@v4
-      with:
-       PATTERNS: |
-         +(src|__tests__)/**/*.(js|vue)
-       FILES: |
-         package-lock.json
-         .eslintrc
+      id: git-diff-changes
+      run: |
+        git diff --name-only origin/master origin/dev
     - name: Git Check Output
       run: |
         echo changed? ${{ steps.git-changes.outputs.changed }}
