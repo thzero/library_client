@@ -52,4 +52,4 @@ jobs:
         echo ::set-output name=diff_check_length::$diff_check_length
     - name: Git Check Output
       run: |
-        echo ${{ steps.git-diff-changes.outputs.new_value }}
+        echo ${{ steps.git-diff-changes.outputs.diff_check_length }}
