@@ -48,6 +48,8 @@ jobs:
         diff_check=$(git diff origin/master origin/dev --shortstat)
         echo $diff_check
         echo ${#diff_check}
+        diff_check_length=${#diff_check}
+        echo ("git-diff-changes=" + $diff_check_length) >> $env:GITHUB_ENV
     - name: Git Check Output
       run: |
         echo changed? ${{ env.git-diff-changes }}
