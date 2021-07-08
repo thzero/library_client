@@ -44,7 +44,7 @@ jobs:
     - name: Git Diff Check
       id: git-diff-changes
       run: |
-        git diff --name-only origin/master origin/dev
+        git diff origin/master origin/dev
     - name: Git Check Output
       run: |
         echo changed? ${{ steps.git-changes.outputs.changed }}
