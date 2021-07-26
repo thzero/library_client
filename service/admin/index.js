@@ -16,7 +16,7 @@ class AdminService extends RestExternalService {
 			this._logger.debug('AdminService', 'create', 'response', response, correlationId);
 			return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('AdminService', 'create', err, correlationId);
 		}
 
@@ -32,7 +32,7 @@ class AdminService extends RestExternalService {
 			this._logger.debug('AdminService', 'delete', 'response', response, correlationId);
 			return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('AdminService', 'delete', err, correlationId);
 		}
 
@@ -47,7 +47,7 @@ class AdminService extends RestExternalService {
 			this._logger.debug('AdminService', 'search', 'response', response, correlationId);
 			return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('AdminService', 'search', err, correlationId);
 		}
 
@@ -64,7 +64,7 @@ class AdminService extends RestExternalService {
 			this._logger.debug('AdminService', 'update', 'response', response, correlationId);
 			return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('AdminService', 'update', err, correlationId);
 		}
 

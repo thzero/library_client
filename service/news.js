@@ -13,7 +13,7 @@ class NewsService extends RestExternalService {
 			this._logger.debug('NewsService', 'latest', 'response', response, correlationId);
 			return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('NewsService', 'latest', err, correlationId);
 		}
 

@@ -22,7 +22,7 @@ class BaseUserService extends ExternalService {
 			return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
 
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'user/refresh/settings', { userId: user.id });
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
 			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
 			if (response && response.success);
 				return response;
@@ -40,7 +40,7 @@ class BaseUserService extends ExternalService {
 
 		this._logger.debug('BaseUserService', 'updateExternal', 'user', user, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'user/update', user);
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update', user);
 			this._logger.debug('BaseUserService', 'updateExternal', 'response', response, correlationId);
 			if (response && response.success)
 				return response;
@@ -60,12 +60,12 @@ class BaseUserService extends ExternalService {
 
 		this._logger.debug('BaseUserService', 'updateSettings', 'settings', settings, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'user/update/settings', { userId: user.id, settings: settings });
+			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update/settings', { userId: user.id, settings: settings });
 			this._logger.debug('BaseUserService', 'updateSettings', 'response', response, correlationId);
 			if (response && response.success);
 				return response;
 		}
-		catch(err) {
+		catch (err) {
 			this._logger.exception('BaseUserService', 'updateSettings', err, correlationId);
 		}
 

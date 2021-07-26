@@ -6,7 +6,7 @@ import RestExternalService from './externalRest';
 
 class ApiVersionService extends RestExternalService {
 	async version(correlationId) {
-		let version = {};
+		const version = {};
 		try {
 			let response = await this._version(correlationId);
 			if (response && response.success)
@@ -29,13 +29,13 @@ class ApiVersionService extends RestExternalService {
 		throw new NotImplementedError();
 	}
 
-	_generate(correlationId, version_major, version_minor, version_patch, version_date) {
+	_generate(correlationId, versionMajor, versionMinor, versionPatch, versionDate) {
 		const response = this._initResponse(correlationId);
 		response.results = {
-			major: version_major,
-			minor: version_minor,
-			patch: version_patch,
-			date: version_date
+			major: versionMajor,
+			minor: versionMinor,
+			patch: versionPatch,
+			date: versionDate
 		};
 		return response;
 	}

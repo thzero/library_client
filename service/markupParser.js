@@ -16,7 +16,9 @@ import Service from './index';
 // 	hljs.registerLanguage(langName, langModule);
 // });
 
+// eslint-disable-next-line
 const regExpPrefix = new RegExp(/^<p>/g);
+// eslint-disable-next-line
 const regExpSuffix = new RegExp(/<\/p>$/g);
 
 class MarkupParserService extends Service {
@@ -74,7 +76,7 @@ class MarkupParserService extends Service {
 	}
 
 	render(correlationId, value) {
-		//return this._parser.render(value)
+		// return this._parser.render(value)
 		return marked(value);
 	}
 

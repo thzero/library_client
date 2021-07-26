@@ -432,7 +432,7 @@ class AppStore extends BaseStore {
 			},
 			actions: {
 				async getVersion({ commit }, correlationId) {
-					const service = this._vm.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_VERSION);
+					const service = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_VERSION);
 					const version = await service.version(correlationId);
 					this.$logger.debug('store', 'getVersion', 'version', version, correlationId);
 					commit('setVersion', { correlationId : correlationId, version: version });
@@ -454,10 +454,10 @@ class AppStore extends BaseStore {
 			},
 			dispatcher: {
 				async getVersion(correlationId) {
-					await Vue.prototype.$store.dispatch('getVersion', correlationId);
+					await GlobalUtility.$store.dispatch('getVersion', correlationId);
 				},
 				async initialize(correlationId) {
-					await Vue.prototype.$store.dispatch('initialize', correlationId);
+					await GlobalUtility.$store.dispatch('initialize', correlationId);
 				}
 			}
 		};
@@ -592,7 +592,7 @@ const router = new VueRouter({
 // eslint-disable-next-line
 router.beforeResolve((to, from, next) => {
 	if (to.matched.some(record => record.meta.notFound)) {
-		Vue.prototype.$navRouter.push('/notFound');
+		GlobalUtility.$navRouter.push('/notFound');
 		return;
 	}
 

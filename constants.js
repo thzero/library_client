@@ -44,7 +44,7 @@ const LibraryConstants = {
 			AUTH_BEARER: 'bearer'
 		},
 		CorrelationId: 'correlation-id'
-	},
+	}
 };
 
 export default LibraryConstants;
