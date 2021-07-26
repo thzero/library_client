@@ -108,7 +108,7 @@ class Service {
 	}
 
 	_successResponse(value, correlationId) {
-		let response = Response.success(correlationId);
+		const response = Response.success(correlationId);
 		response.results = value;
 		return response;
 	}

@@ -2,7 +2,7 @@
 
 import Service from './index';
 
-//crypto-js
+// crypto-js
 // export class CryptoAes {
 // 	static encrypt(text, key) {
 // 		return cryptoJS.AES.encrypt(text, key).toString()

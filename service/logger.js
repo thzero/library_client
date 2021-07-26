@@ -86,7 +86,7 @@ class LoggerService extends Service {
 
 	trace(clazz, method, message, data, correlationId) {
 		if (!Utility.isDev())
-			return
+			return;
 
 		// eslint-disable-next-line
 		console.log('TRACE', this._format(clazz, method, message, correlationId), data);
@@ -95,7 +95,7 @@ class LoggerService extends Service {
 
 	trace2(message, data, correlationId) {
 		if (!Utility.isDev())
-			return
+			return;
 
 		// eslint-disable-next-line
 		console.log('TRACE', this._format(null, null, message, correlationId), data);

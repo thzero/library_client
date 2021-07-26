@@ -6,7 +6,7 @@ class GeolocationUtility {
 				return;
 			}
 			reject(null);
-		})
+		});
 	}
 }
 
