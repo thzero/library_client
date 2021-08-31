@@ -30,7 +30,7 @@
   "devDependencies": {
     "@thzero/library_cli": "^0.13"
   },
-  "peerDependencies": {,
+  "peerDependencies": {
     "@alienfast/i18next-loader": "^1.1.4",
     "@mdi/font": "^5.9.55",
     "@thzero/library_common": "^0.13",
