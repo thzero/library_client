@@ -6,8 +6,6 @@ import injector from '@thzero/library_common/utility/injector';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import adminNewsService from '../service/admin/news';
-import adminUsersService from '../service/admin/users';
 import configService from '../service/config';
 import cryptoService from '../service/crypto';
 import featureService from '../service/features';
