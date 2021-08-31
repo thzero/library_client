@@ -27,8 +27,8 @@ class Service {
 		}
 	}
 
-	_enforceNotNullOrEmpty(clazz, method, value, name, correlationId) {
-		if (!String.isNullOrEmpty(value)) {
+	_enforceNotEmpty(clazz, method, value, name, correlationId) {
+		if (String.isNullOrEmpty(value)) {
 			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			throw Error(`Invalid ${name}`);
 		}
@@ -43,8 +43,8 @@ class Service {
 		return this._success(correlationId);
 	}
 
-	_enforceNotNullOrEmptyResponse(clazz, method, value, name, correlationId) {
-		if (!String.isNullOrEmpty(value)) {
+	_enforceNotEmptyResponse(clazz, method, value, name, correlationId) {
+		if (String.isNullOrEmpty(value)) {
 			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
@@ -63,8 +63,8 @@ class Service {
 		return response;
 	}
 
-	_enforceNotNullOrEmptyAsResponse(clazz, method, value, name, correlationId) {
-		if (!String.isNullOrEmpty(value)) {
+	_enforceNotEmptyAsResponse(clazz, method, value, name, correlationId) {
+		if (String.isNullOrEmpty(value)) {
 			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
 			return Response.error(`Invalid ${name}`, null);
 		}
@@ -108,7 +108,7 @@ class Service {
 	}
 
 	_successResponse(value, correlationId) {
-		const response = Response.success(correlationId);
+		let response = Response.success(correlationId);
 		response.results = value;
 		return response;
 	}
