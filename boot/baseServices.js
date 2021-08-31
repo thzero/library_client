@@ -28,9 +28,6 @@ class BaseServices {
 		if (!logger)
 			throw Error('No logger defined after initialization of services.');
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
-
 		const serviceAuth = this._initializeAuth();
 		if (serviceAuth) {
 			const serviceUser = this._initializeUser();
@@ -61,9 +58,14 @@ class BaseServices {
 			this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
 
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, this._initializeTranslate());
+
+		const translateService = this._initializeTranslate();
+		if (translateService)
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
+
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
+		
 		this._initialize();
 
 		for (const [key, value] of this._services) {
@@ -74,21 +76,13 @@ class BaseServices {
 		}
 		store.$logger = logger;
 
-		this._initializInjector(framework, injector);
+		this._initializeInjector(framework, injector);
 
 		Utility.initDateTime();
 	}
 
 	_initialize() {
 		throw new NotImplementedError();
-	}
-
-	_initializeAdminNews() {
-		return new adminNewsService();
-	}
-
-	_initializeAdminUsers() {
-		return new adminUsersService();
 	}
 
 	_initializeAuth() {
@@ -113,6 +107,9 @@ class BaseServices {
 
 	_initializeFeatures() {
 		return new featureService();
+	}
+
+	_initializeInjector(framework, injector) {
 	}
 
 	_initializeLogger() {
@@ -148,7 +145,7 @@ class BaseServices {
 	}
 
 	_initializeTranslate() {
-		throw new NotImplementedError();
+		return null;
 	}
 
 	_initializeUser() {
