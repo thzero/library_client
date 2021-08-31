@@ -55,7 +55,9 @@ class BaseServices {
 		if (serviceSettings)
 			this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, this._initializeStore());
+		const storeService = this._initializeStore();
+		if (storeService)
+			this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, storeService);
 
 		const translateService = this._initializeTranslate();
 		if (translateService)
@@ -72,7 +74,8 @@ class BaseServices {
 				console.log(`services.init - ${key} = ${value}`);
 			await value.init(injector);
 		}
-		store.$logger = logger;
+		if (store)
+			store.$logger = logger;
 
 		this._initializeInjector(framework, injector);
 
@@ -139,7 +142,7 @@ class BaseServices {
 	}
 
 	_initializeStore() {
-		throw new NotImplementedError();
+		return null;
 	}
 
 	_initializeTranslate() {
