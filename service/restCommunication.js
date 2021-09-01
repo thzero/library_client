@@ -12,7 +12,7 @@ class RestCommunicationService extends CommunicationService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceAuth = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
 	}
 
 	// eslint-disable-next-line
@@ -32,7 +32,11 @@ class RestCommunicationService extends CommunicationService {
 	}
 
 	async _addTokenHeader() {
-		return this._serviceStore.state.user.token;
+		return this._serviceAuth.token;
+	}
+
+	_refreshToken(correlationId, force) {
+		return this._serviceAuth.refreshToken(correlationId, null, force);
 	}
 }
 

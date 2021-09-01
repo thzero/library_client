@@ -44,6 +44,12 @@ const LibraryConstants = {
 			AUTH_BEARER: 'bearer'
 		},
 		CorrelationId: 'correlation-id'
+	},
+	EventKeys: {
+		Auth: {
+			Refresh: 'auth-refresh',
+			TokenRefresh: 'auth-token-refresh'
+		}
 	}
 };
 
