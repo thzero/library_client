@@ -1,5 +1,7 @@
 import LibraryConstants from '../constants';
 
+import NotImplementedError from '@thzero/library_common/errors/notImplemented';
+
 import ExternalService from './external';
 
 class BaseUserService extends ExternalService {
@@ -32,6 +34,34 @@ class BaseUserService extends ExternalService {
 		}
 
 		return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
+	}
+
+	async resetUser(correlationId) {
+		throw new NotImplementedError();
+	}
+
+	async setAuthCompleted(correlationId) {
+		throw new NotImplementedError();
+	}
+
+	async setClaims(correlationId, claims) {
+		throw new NotImplementedError();
+	}
+
+	async setLoggedIn(correlationId, value) {
+		throw new NotImplementedError();
+	}
+	
+	async setTokenResult(correlationId, tokenResult) {
+		throw new NotImplementedError();
+	}
+
+	async setUser(correlationId, user) {
+		throw new NotImplementedError();
+	}
+
+	get token() {
+		throw new NotImplementedError();
 	}
 
 	async updateExternal(correlationId, user) {
