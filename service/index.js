@@ -108,9 +108,7 @@ class Service {
 	}
 
 	_successResponse(value, correlationId) {
-		let response = Response.success(correlationId);
-		response.results = value;
-		return response;
+		return Response.success(correlationId, value);
 	}
 
 	_translate(correlationId, id, opts) {
