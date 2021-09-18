@@ -33,6 +33,13 @@ class Service {
 			throw Error(`Invalid ${name}`);
 		}
 	}
+	
+	_enforceNotEmptyEither(clazz, method, value1, value2, name1, name2, correlationId) {
+		if (String.isNullOrEmpty(value1) && String.isNullOrEmpty(value2)) {
+			this._logger.error(clazz, method, `Invalid ${name1} or ${name2}`, null, correlationId);
+			throw Error(`Invalid ${name1} or ${name2}`);
+		}
+	}
 
 	_enforceNotNullResponse(clazz, method, value, name, correlationId) {
 		if (!value) {
