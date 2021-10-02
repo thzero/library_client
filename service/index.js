@@ -102,8 +102,12 @@ class Service {
 		return Response.error(message, err, code, errors, correlationId);
 	}
 
-	async _validate(correlationId, key, sub, dom, obj, act) {
-		return await this._serviceSecurity.validate(correlationId, key, sub, dom, obj, act);
+	_hasFailed(response) {
+		return Response.hasFailed(response);
+	}
+
+	_hasSucceeded(response) {
+		return Response.hasSucceeded(response);
 	}
 
 	_initResponse(correlationId) {
@@ -140,6 +144,10 @@ class Service {
 			output.push(temp);
 		}
 		return output;
+	}
+
+	async _validate(correlationId, key, sub, dom, obj, act) {
+		return await this._serviceSecurity.validate(correlationId, key, sub, dom, obj, act);
 	}
 }
 
