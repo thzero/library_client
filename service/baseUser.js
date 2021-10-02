@@ -26,7 +26,7 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
 			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
-			if (this._hasFailed(response))
+			if (this._hasSucceeded(response))
 				return response;
 		}
 		catch(err) {
@@ -72,7 +72,7 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update', user);
 			this._logger.debug('BaseUserService', 'updateExternal', 'response', response, correlationId);
-			if (this._hasFailed(response))
+			if (this._hasSucceeded(response))
 				return response;
 		}
 		catch(err) {
@@ -92,7 +92,7 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update/settings', { userId: user.id, settings: settings });
 			this._logger.debug('BaseUserService', 'updateSettings', 'response', response, correlationId);
-			if (this._hasFailed(response))
+			if (this._hasSucceeded(response))
 				return response;
 		}
 		catch (err) {
