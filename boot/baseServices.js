@@ -31,40 +31,40 @@ class BaseServices {
 			const serviceUser = this._initializeUser();
 			if (!serviceUser)
 				throw new NotImplementedError();
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_AUTH, serviceAuth);
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_USER, serviceUser);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_AUTH, serviceAuth);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_USER, serviceUser);
 		}
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
 
 		const serviceCommunicationRest = this._initializeCommunicationRest();
 		if (serviceCommunicationRest)
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, serviceCommunicationRest);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, serviceCommunicationRest);
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_LOGGER, logger);
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_LOGGER, logger);
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
 
 		const serviceSettings = this._initializeSettings();
 		if (serviceSettings)
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
 
 		const storeService = this._initializeStore();
 		if (storeService)
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_STORE, storeService);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_STORE, storeService);
 
 		const translateService = this._initializeTranslate();
 		if (translateService)
-			this._inject(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
+			this._injectService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
 
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 		
 		this._initialize();
 
@@ -161,7 +161,7 @@ class BaseServices {
 		throw new NotImplementedError();
 	}
 
-	_inject(key, service) {
+	_injectService(key, service) {
 		if (Utility.isDev)
 			// eslint-disable-next-line
 			console.log(`services.inject - ${key}`);

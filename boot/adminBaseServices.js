@@ -11,8 +11,8 @@ class AdminBaseServices extends BaseServices {
 	}
 	
 	async _initialize() {
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
-		this._inject(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
+		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 	}
 
 	_initializeAdminNews() {
