@@ -31,7 +31,7 @@ class Service {
 	}
 
 	_enforceNotNull(clazz, method, value, name, correlationId) {
-		if (!value) {
+		if (!value || value === undefined) {
 			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
 			throw Error(`${name} is null.`);
 		}
@@ -70,7 +70,7 @@ class Service {
 	}
 
 	_enforceNotNullAsResponse(clazz, method, value, name, correlationId) {
-		if (!value) {
+		if (!value || value === undefined) {
 			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
 			return Response.error(`${name} is null.`, null);
 		}
