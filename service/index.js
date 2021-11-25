@@ -20,31 +20,41 @@ class Service {
 		this._serviceTranslate = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE);
 	}
 
+	_enforce(clazz, method, value, name, correlationId, message) {
+		if (!value) {
+			if (!String.isNullOrEmpty(message))
+				message = `Invalid ${name}.`;
+
+			this._logger.error(clazz, method, message, null, correlationId);
+			throw Error(message);
+		}
+	}
+
 	_enforceNotNull(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			throw Error(`Invalid ${name}`);
+			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
+			throw Error(`${name} is null.`);
 		}
 	}
 
 	_enforceNotEmpty(clazz, method, value, name, correlationId) {
 		if (String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			throw Error(`Invalid ${name}`);
+			this._logger.error(clazz, method, `${name} is empty.`, null, correlationId);
+			throw Error(`${name} is empty.`);
 		}
 	}
 	
 	_enforceNotEmptyEither(clazz, method, value1, value2, name1, name2, correlationId) {
 		if (String.isNullOrEmpty(value1) && String.isNullOrEmpty(value2)) {
-			this._logger.error(clazz, method, `Invalid ${name1} or ${name2}`, null, correlationId);
-			throw Error(`Invalid ${name1} or ${name2}`);
+			this._logger.error(clazz, method, `Either ${name1} or ${name2} is empty.`, null, correlationId);
+			throw Error(`Either ${name1} or ${name2} is empty.`);
 		}
 	}
 
 	_enforceNotNullResponse(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			return Response.error(`Invalid ${name}`, null);
+			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
+			return Response.error(`${name} is null.`, null);
 		}
 
 		return this._success(correlationId);
@@ -52,8 +62,8 @@ class Service {
 
 	_enforceNotEmptyResponse(clazz, method, value, name, correlationId) {
 		if (String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			return Response.error(`Invalid ${name}`, null);
+			this._logger.error(clazz, method, `${name} is empty.`, null, correlationId);
+			return Response.error(`${name} is empty.`, null);
 		}
 
 		return this._success(correlationId);
@@ -61,8 +71,8 @@ class Service {
 
 	_enforceNotNullAsResponse(clazz, method, value, name, correlationId) {
 		if (!value) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			return Response.error(`Invalid ${name}`, null);
+			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
+			return Response.error(`${name} is null.`, null);
 		}
 
 		const response = this._initResponse(correlationId);
@@ -72,8 +82,8 @@ class Service {
 
 	_enforceNotEmptyAsResponse(clazz, method, value, name, correlationId) {
 		if (String.isNullOrEmpty(value)) {
-			this._logger.error(clazz, method, `Invalid ${name}`, null, correlationId);
-			return Response.error(`Invalid ${name}`, null);
+			this._logger.error(clazz, method, `${name} is empty.`, null, correlationId);
+			return Response.error(`${name} is empty.`, null);
 		}
 
 		const response = this._initResponse(correlationId);
