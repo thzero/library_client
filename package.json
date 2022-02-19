@@ -29,7 +29,7 @@
     "mitt": "^3.0.0"
   },
   "devDependencies": {
-    "@thzero/library_cli": "^0.15.4"
+    "@thzero/library_cli": "^0.15"
   },
   "peerDependencies": {
     "@alienfast/i18next-loader": "^1",
