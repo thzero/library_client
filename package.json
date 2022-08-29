@@ -25,7 +25,7 @@
     "easy-rbac": "^3.2.0",
     "esm": "^3.2.25",
     "highlight.js": "^11.6.0",
-    "marked": "^4.0.18",
+    "marked": "^4.0.19",
     "mitt": "^3.0.0"
   },
   "peerDependencies": {
