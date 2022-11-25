@@ -4,16 +4,12 @@
 
 An opinionated library for UI client applications.
 
-## Installation
+## Requirements
 
-[![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
-
-### Requirements
-
-#### NodeJs
+### NodeJs
 
 [NodeJs](https://nodejs.org) version 18+
 
-#### Packages
+## Installation
 
-[![NPM](https://nodei.co/npm/@thzero/library_common.png?compact=true)](https://npmjs.org/package/@thzero/library_common)
+[![NPM](https://nodei.co/npm/@thzero/library_client.png?compact=true)](https://npmjs.org/package/@thzero/library_client)
