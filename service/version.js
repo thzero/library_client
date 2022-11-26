@@ -29,13 +29,16 @@ class ApiVersionService extends RestExternalService {
 		throw new NotImplementedError();
 	}
 
-	_generate(correlationId, versionMajor, versionMinor, versionPatch, versionDate) {
+	_generate(correlationId, versionMajor, versionMinor, versionPatch, versionDate, copyright, author, author_url) {
 		const response = this._initResponse(correlationId);
 		response.results = {
 			major: versionMajor,
 			minor: versionMinor,
 			patch: versionPatch,
-			date: versionDate
+			date: versionDate,
+			copyright: copyright,
+			author: author,
+			author_url: author_url
 		};
 		return response;
 	}
