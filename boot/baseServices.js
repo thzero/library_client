@@ -71,7 +71,8 @@ class BaseServices {
 		for (const [key, value] of this._services) {
 			if (Utility.isDev)
 				// eslint-disable-next-line
-				console.log(`services.init - ${key} = ${value}`);
+				console.log(`services.init - ${key}`);
+				console.dir(value);
 			await value.init(injector);
 		}
 		if (store)
