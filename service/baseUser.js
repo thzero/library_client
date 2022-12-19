@@ -19,6 +19,10 @@ class BaseUserService extends ExternalService {
 		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
 	}
 
+	initializeSettings(correlationId) {
+		return {};
+	}
+
 	async refreshSettings(correlationId, user) {
 		if (!user)
 			return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
