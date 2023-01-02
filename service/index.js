@@ -30,13 +30,6 @@ class Service {
 		}
 	}
 
-	_enforceNotNull(clazz, method, value, name, correlationId) {
-		if (!value || value === undefined) {
-			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
-			throw Error(`${name} is null.`);
-		}
-	}
-
 	_enforceNotEmpty(clazz, method, value, name, correlationId) {
 		if (String.isNullOrEmpty(value)) {
 			this._logger.error(clazz, method, `${name} is empty.`, null, correlationId);
@@ -48,6 +41,42 @@ class Service {
 		if (String.isNullOrEmpty(value1) && String.isNullOrEmpty(value2)) {
 			this._logger.error(clazz, method, `Either ${name1} or ${name2} is empty.`, null, correlationId);
 			throw Error(`Either ${name1} or ${name2} is empty.`);
+		}
+	}
+
+	_enforceNotNullMultiple(clazz, method, values, names, correlationId) {
+		const valid  = true;
+		for (const value of values)
+			valid &= String.isNullOrEmpty(value);
+		if (!valid) {
+			names = names.join(', ');
+			this._logger.error(clazz, method, `None of the fields are not null: ${names}`, null, correlationId);
+			throw Error(`None of the fields are not null: ${names}`);
+		}
+	}
+
+	_enforceNotNull(clazz, method, value, name, correlationId) {
+		if (!value || value === undefined) {
+			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
+			throw Error(`${name} is null.`);
+		}
+	}
+
+	_enforceNotNullEither(clazz, method, value1, value2, name1, name2, correlationId) {
+		if ((!value1 || value1 === undefined) && (!value2 || value2 == undefined)) {
+			this._logger.error(clazz, method, `Either ${name1} or ${name2} is null.`, null, correlationId);
+			throw Error(`Either ${name1} or ${name2} is null.`);
+		}
+	}
+
+	_enforceNotNullMultiple(clazz, method, values, names, correlationId) {
+		const valid  = true;
+		for (const value of values)
+			valid &= values;
+		if (!valid) {
+			names = names.join(', ');
+			this._logger.error(clazz, method, `None of the fields are not null: ${names}`, null, correlationId);
+			throw Error(`None of the fields are not null: ${names}`);
 		}
 	}
 
