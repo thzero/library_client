@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import ClientConstants from '../constants';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
@@ -15,8 +15,8 @@ class BaseUserService extends ExternalService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceCommunicationRest = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceCommunicationRest = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
+		this._serviceStore = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_STORE);
 	}
 
 	initializeSettings(correlationId) {
@@ -28,7 +28,7 @@ class BaseUserService extends ExternalService {
 			return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
 
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
+			const response = await this._serviceCommunicationRest.post(correlationId, ClientConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
 			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;
@@ -74,7 +74,7 @@ class BaseUserService extends ExternalService {
 
 		this._logger.debug('BaseUserService', 'updateExternal', 'user', user, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update', user);
+			const response = await this._serviceCommunicationRest.post(correlationId, ClientConstants.ExternalKeys.BACKEND, 'users/update', user);
 			this._logger.debug('BaseUserService', 'updateExternal', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;
@@ -94,7 +94,7 @@ class BaseUserService extends ExternalService {
 
 		this._logger.debug('BaseUserService', 'updateSettings', 'settings', settings, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update/settings', { userId: user.id, settings: settings });
+			const response = await this._serviceCommunicationRest.post(correlationId, ClientConstants.ExternalKeys.BACKEND, 'users/update/settings', { userId: user.id, settings: settings });
 			this._logger.debug('BaseUserService', 'updateSettings', 'response', response, correlationId);
 			if (this._hasSucceeded(response))
 				return response;

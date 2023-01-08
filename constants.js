@@ -1,4 +1,4 @@
-const LibraryConstants = {
+const ClientConstants = {
 	InjectorKeys: {
 		CONFIG: 'config',
 		SERVICE_ADMIN_NEWS: 'serviceAdminNews',
@@ -22,18 +22,6 @@ const LibraryConstants = {
 		SERVICE_UTILITY: 'serviceUtility',
 		SERVICE_VERSION: 'serviceVersion'
 	},
-	ErrorCodes: {
-		InvalidObject: 'invalidObject',
-		InvalidPermissions: 'invalidPermissions',
-		ObjectChanged: 'objectChanged',
-		QuotaReached: 'quotaExceeded'
-	},
-	ErrorFields: {
-		Generic: 'generic',
-		Name: 'name',
-		Number: 'number',
-		Order: 'order'
-	},
 	ExternalKeys: {
 		BACKEND: 'backend'
 	},
@@ -53,4 +41,4 @@ const LibraryConstants = {
 	}
 };
 
-export default LibraryConstants;
+export default ClientConstants;

@@ -1,4 +1,4 @@
-import LibraryConstants from '@thzero/library_client/constants';
+import ClientConstants from '@thzero/library_client/constants';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
@@ -15,12 +15,12 @@ class BaseAuthService extends Service {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceEvent = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_EVENT);
-		this._serviceUser = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_USER);
+		this._serviceEvent = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_EVENT);
+		this._serviceUser = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_USER);
 	}
 
 	async announceToken(correlationId, user, token) {
-		this._serviceEvent.emit(LibraryConstants.EventKeys.Auth.TokenRefresh, { user: user, token: token});
+		this._serviceEvent.emit(ClientConstants.EventKeys.Auth.TokenRefresh, { user: user, token: token});
 	}
 
 	async refreshToken(correlationId, user, forceRefresh) {

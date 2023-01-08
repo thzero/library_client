@@ -1,6 +1,6 @@
-class GlobalUtility {
+class ClientUtility {
 	static dateFormat(locale) {
-		locale = !String.isNullOrEmpty(locale) ? locale : GlobalUtility.getLocale();
+		locale = !String.isNullOrEmpty(locale) ? locale : ClientUtility.getLocale();
 		const formatObj = new Intl.DateTimeFormat(locale).formatToParts(new Date());
 		return formatObj.map(obj => {
 			switch (obj.type) {
@@ -21,4 +21,4 @@ class GlobalUtility {
 	}
 }
 
-export default GlobalUtility;
+export default ClientUtility;

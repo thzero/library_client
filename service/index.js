@@ -1,5 +1,5 @@
 
-import LibraryConstants from '../constants';
+import ClientConstants from '../constants';
 
 import Response from '@thzero/library_common/response';
 
@@ -14,10 +14,10 @@ class Service {
 	async init(injector) {
 		this._injector = injector;
 
-		this._config = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_CONFIG);
-		this._logger = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_LOGGER);
-		this._serviceSecurity = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_SECURITY);
-		this._serviceTranslate = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE);
+		this._config = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_CONFIG);
+		this._logger = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_LOGGER);
+		this._serviceSecurity = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_SECURITY);
+		this._serviceTranslate = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_TRANSLATE);
 	}
 
 	_enforce(clazz, method, value, name, correlationId, message) {
@@ -135,7 +135,7 @@ class Service {
 			for (const error of errors)
 				this._logger.exception(clazz, method, error, correlationId);
 		}
-		return Response.error(message, err, code, errors, correlationId);
+		return Response.error(clazz, method, message, err, code, errors, correlationId);
 	}
 
 	_hasFailed(response) {

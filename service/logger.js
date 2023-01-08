@@ -1,6 +1,6 @@
-import LibraryConstants from '../constants';
+import ClientConstants from '../constants';
 
-import Utility from '@thzero/library_common/utility';
+import CommonUtility from '@thzero/library_common/utility';
 
 import Service from './index';
 
@@ -14,11 +14,11 @@ class LoggerService extends Service {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceUtility = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_UTILITY);
+		this._serviceUtility = this._injector.getService(ClientConstants.InjectorKeys.SERVICE_UTILITY);
 	}
 
 	debug(clazz, method, message, data, correlationId) {
-		if (!Utility.isDev)
+		if (!CommonUtility.isDev)
 			return;
 
 		// eslint-disable-next-line
@@ -27,7 +27,7 @@ class LoggerService extends Service {
 	}
 
 	debug2(message, data, correlationId) {
-		if (!Utility.isDev)
+		if (!CommonUtility.isDev)
 			return;
 
 		// eslint-disable-next-line
@@ -85,7 +85,7 @@ class LoggerService extends Service {
 	}
 
 	trace(clazz, method, message, data, correlationId) {
-		if (!Utility.isDev())
+		if (!CommonUtility.isDev())
 			return;
 
 		// eslint-disable-next-line
@@ -94,7 +94,7 @@ class LoggerService extends Service {
 	}
 
 	trace2(message, data, correlationId) {
-		if (!Utility.isDev())
+		if (!CommonUtility.isDev())
 			return;
 
 		// eslint-disable-next-line
