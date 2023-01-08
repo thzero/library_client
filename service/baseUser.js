@@ -30,14 +30,12 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
 			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
-			if (this._hasSucceeded(response))
-				return response;
+			return response;
 		}
 		catch(err) {
 			this._logger.exception('BaseUserService', 'refreshSettings', err, correlationId);
+			return this._error('BaseUserService', 'refreshSettings', null, err, null, null, correlationId);
 		}
-
-		return this._error('BaseUserService', 'refreshSettings', null, null, null, null, correlationId);
 	}
 
 	async resetUser(correlationId) {
@@ -76,14 +74,12 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update', user);
 			this._logger.debug('BaseUserService', 'updateExternal', 'response', response, correlationId);
-			if (this._hasSucceeded(response))
-				return response;
+			return response;
 		}
 		catch(err) {
 			this._logger.exception('BaseUserService', 'updateExternal', err, correlationId);
+			return this._error('BaseUserService', 'updateExternal', null, err, null, null, correlationId);
 		}
-
-		return this._error('BaseUserService', 'updateExternal', null, null, null, null, correlationId);
 	}
 
 	async updateSettings(correlationId, user, settings) {
@@ -96,14 +92,12 @@ class BaseUserService extends ExternalService {
 		try {
 			const response = await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'users/update/settings', { userId: user.id, settings: settings });
 			this._logger.debug('BaseUserService', 'updateSettings', 'response', response, correlationId);
-			if (this._hasSucceeded(response))
-				return response;
+			return response;
 		}
 		catch (err) {
 			this._logger.exception('BaseUserService', 'updateSettings', err, correlationId);
+			return this._error('BaseUserService', 'updateSettings', null, err, null, null, correlationId);
 		}
-
-		return this._error('BaseUserService', 'updateSettings', null, null, null, null, correlationId);
 	}
 }
 
