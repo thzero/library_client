@@ -1,11 +1,11 @@
-import ClientConstants from '../constants';
+import LibraryConstants from '../constants';
 
 import RestExternalService from './externalRest';
 
 class PlansService extends RestExternalService {
 	async plans(correlationId) {
 		try {
-			const response = await this._serviceCommunicationRest.get(correlationId, ClientConstants.ExternalKeys.BACKEND, 'plans');
+			const response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'plans');
 			this._logger.debug('PlansService', 'plans', 'response', response, correlationId);
 			return response;
 		}
