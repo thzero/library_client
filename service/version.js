@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
@@ -13,7 +13,7 @@ class ApiVersionService extends RestExternalService {
 				version.client = response.results;
 
 			if (this._serviceCommunicationRest) {
-				response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'version');
+				response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'version');
 				if (this._hasSucceeded(response))
 					version.server = response.results;
 			}

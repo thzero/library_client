@@ -1,6 +1,6 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
-import Utility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import injector from '@thzero/library_common/utility/injector';
 
@@ -31,45 +31,45 @@ class BaseServices {
 			const serviceUser = this._initializeUser();
 			if (!serviceUser)
 				throw new NotImplementedError();
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_AUTH, serviceAuth);
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_USER, serviceUser);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_AUTH, serviceAuth);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_USER, serviceUser);
 		}
 
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_CRYPTO, this._initServiceCrypto());
 
 		const serviceCommunicationRest = this._initializeCommunicationRest();
 		if (serviceCommunicationRest)
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, serviceCommunicationRest);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST, serviceCommunicationRest);
 
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_LOGGER, logger);
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_LOGGER, logger);
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_PLANS, this._initializePlans());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ROUTER, this._initializeRouter());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_SECURITY, this._initializeSecurity());
 
 		const serviceSettings = this._initializeSettings();
 		if (serviceSettings)
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_SETTINGS, serviceSettings);
 
 		const storeService = this._initializeStore();
 		if (storeService)
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_STORE, storeService);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_STORE, storeService);
 
 		const translateService = this._initializeTranslate();
 		if (translateService)
-			this._injectService(LibraryConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
 
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 		
 		this._initialize();
 
 		for (const [key, value] of this._services) {
-			if (Utility.isDev)
+			if (LibraryCommonUtility.isDev)
 				// eslint-disable-next-line
 				console.log(`services.init - ${key}`);
 				console.dir(value);
@@ -80,7 +80,7 @@ class BaseServices {
 
 		this._initializeInjector(framework, injector);
 
-		Utility.initDateTime();
+		LibraryCommonUtility.initDateTime();
 	}
 
 	_initialize() {
@@ -163,7 +163,7 @@ class BaseServices {
 	}
 
 	_injectService(key, service) {
-		if (Utility.isDev)
+		if (LibraryCommonUtility.isDev)
 			// eslint-disable-next-line
 			console.log(`services.inject - ${key}`);
 		this._services.set(key, service);

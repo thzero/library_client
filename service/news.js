@@ -1,15 +1,15 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
-import Utility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import RestExternalService from './externalRest';
 
 class NewsService extends RestExternalService {
 	async latest(correlationId) {
-		const timestamp = Utility.getTimestamp();
+		const timestamp = LibraryCommonUtility.getTimestamp();
 		this._logger.debug('NewsService', 'latest', 'timestamp', timestamp, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, { url: 'news/latest', params: [ timestamp ] });
+			const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'news/latest', params: [ timestamp ] });
 			this._logger.debug('NewsService', 'latest', 'response', response, correlationId);
 			return response;
 		}

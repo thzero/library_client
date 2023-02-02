@@ -1,4 +1,4 @@
-import Utility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import Service from './index';
 
@@ -17,7 +17,7 @@ class BaseSettings extends Service {
 	}
 
 	mergeUser(correlationId, settings) {
-		return Utility.merge2(this.initializeUser(correlationId), settings);
+		return LibraryCommonUtility.merge2(this.initializeUser(correlationId), settings);
 	}
 }
 

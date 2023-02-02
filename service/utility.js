@@ -1,11 +1,11 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import RestExternalService from './externalRest';
 
 class UtilityService extends RestExternalService {
 	async initialize(correlationId) {
 		try {
-			const response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'utility/initialize');
+			const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/initialize');
 			this._logger.debug('ApiService', 'initialize', 'response', response, correlationId);
 			if (this._hasSucceeded(response)) {
 				response.results.version = {
@@ -26,12 +26,12 @@ class UtilityService extends RestExternalService {
 		if (!this._serviceCommunicationRest)
 			return this._success(correlationId);
 
-		return await this._serviceCommunicationRest.post(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'utility/logger', content);
+		return await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/logger', content);
 	}
 
 	async openSource(correlationId) {
 		try {
-			const response = await this._serviceCommunicationRest.get(correlationId, LibraryConstants.ExternalKeys.BACKEND, 'utility/openSource');
+			const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/openSource');
 			this._logger.debug('ApiService', 'initialize', 'response', response, correlationId);
 			return response;
 		}

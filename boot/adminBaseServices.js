@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
@@ -11,8 +11,8 @@ class AdminBaseServices extends BaseServices {
 	}
 	
 	async _initialize() {
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
-		this._injectService(LibraryConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 	}
 
 	_initializeAdminNews() {

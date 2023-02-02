@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import Service from './index';
 
@@ -13,8 +13,8 @@ class ExternalService extends Service {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceRouter = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_ROUTER);
-		this._serviceStore = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this._serviceRouter = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_ROUTER);
+		this._serviceStore = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	}
 }
 
