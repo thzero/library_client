@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import CommunicationService from './communication';
 
@@ -12,7 +12,7 @@ class RestCommunicationService extends CommunicationService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceAuth = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
+		this._serviceAuth = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_AUTH);
 	}
 
 	// eslint-disable-next-line

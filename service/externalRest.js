@@ -1,4 +1,4 @@
-import LibraryConstants from '../constants';
+import LibraryClientConstants from '../constants';
 
 import ExternalService from './external';
 
@@ -12,7 +12,7 @@ class RestExternalService extends ExternalService {
 	async init(injector) {
 		await super.init(injector);
 
-		this._serviceCommunicationRest = this._injector.getService(LibraryConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
+		this._serviceCommunicationRest = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_COMMUNICATION_REST);
 	}
 }
 

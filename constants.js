@@ -1,4 +1,4 @@
-const LibraryConstants = {
+const LibraryClientConstants = {
 	InjectorKeys: {
 		CONFIG: 'config',
 		SERVICE_ADMIN_NEWS: 'serviceAdminNews',
@@ -41,4 +41,4 @@ const LibraryConstants = {
 	}
 };
 
-export default LibraryConstants;
+export default LibraryClientConstants;
