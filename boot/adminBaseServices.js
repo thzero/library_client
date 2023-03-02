@@ -3,13 +3,13 @@ import LibraryClientConstants from '../constants';
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
 
-import BaseServices from './baseServices';
+import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
 
-class AdminBaseServices extends BaseServices {
+class AdminServicesBaseBoot extends ServicesBaseBoot {
 	constructor() {
 		super();
 	}
-	
+
 	async _initialize() {
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
@@ -24,4 +24,4 @@ class AdminBaseServices extends BaseServices {
 	}
 }
 
-export default AdminBaseServices;
+export default AdminServicesBaseBoot;
