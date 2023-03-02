@@ -19,6 +19,16 @@ class LibraryClientUtility {
 	static getLocale() {
 		return (navigator.languages && navigator.languages.length) ? navigator.languages[0] : navigator.language;
 	}
+
+	static get online() {
+		return LibraryClientUtility._online;
+	}
+
+	static set online(value) {
+		LibraryClientUtility._online = value;
+	}
+	
+	static _online = false;
 }
 
 export default LibraryClientUtility;

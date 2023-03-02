@@ -6,6 +6,8 @@ import injector from '@thzero/library_common/utility/injector';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
+import BaseBoot from '@thzero/library_client/boot/base';
+
 import configService from '../service/config';
 import cryptoService from '../service/crypto';
 import featureService from '../service/features';
@@ -16,8 +18,10 @@ import plansService from '../service/plans';
 import securityService from '../service/security';
 import utilityService from '../service/utility';
 
-class BaseServices {
+class BaseServicesBoot extends BaseBoot {
 	constructor() {
+		super();
+
 		this._services = new Map();
 	}
 
@@ -65,7 +69,7 @@ class BaseServices {
 
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
-		
+
 		this._initialize();
 
 		for (const [key, value] of this._services) {
@@ -171,4 +175,4 @@ class BaseServices {
 	}
 }
 
-export default BaseServices;
+export default BaseServicesBoot;
