@@ -25,7 +25,7 @@ class BaseServicesBoot extends BaseBoot {
 		this._services = new Map();
 	}
 
-	async execute(framework, app, router, store) {
+	async execute(framework) {
 		const logger = this._initializeLogger();
 		if (!logger)
 			throw Error('No logger defined after initialization of services.');
@@ -79,8 +79,6 @@ class BaseServicesBoot extends BaseBoot {
 				console.dir(value);
 			await value.init(injector);
 		}
-		if (store)
-			store.$logger = logger;
 
 		this._initializeInjector(framework, injector);
 
