@@ -10,7 +10,7 @@ import BaseBoot from '@thzero/library_client/boot/base';
 
 import configService from '../service/config';
 import cryptoService from '../service/crypto';
-import featureService from '../service/features';
+import featuresService from '../service/features';
 import loggerService from '../service/logger';
 import markupParserService from '../service/markupParser';
 import newsService from '../service/news';
@@ -47,7 +47,11 @@ class BaseServicesBoot extends BaseBoot {
 
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_CONFIG, this._initializeConfig());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_EVENT, this._initializeEvent());
-		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_FEATURES, this._initializeFeatures());
+
+		const serviceFeatures = this._initializeFeatures();
+		if (serviceFeatures)
+			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_FEATURES, serviceFeatures);
+
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_LOGGER, logger);
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_MARKUP_PARSER, this._initializeMarkupParser());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_NEWS, this._initializeNews());
@@ -110,7 +114,7 @@ class BaseServicesBoot extends BaseBoot {
 	}
 
 	_initializeFeatures() {
-		return new featureService();
+		return new featuresService();
 	}
 
 	_initializeInjector(framework, injector) {
