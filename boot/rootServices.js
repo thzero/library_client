@@ -30,6 +30,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 		if (!logger)
 			throw Error('No logger defined after initialization of services.');
 
+		const serviceAuth = this._initializeAuth();
 		if (serviceAuth) {
 			const serviceUser = this._initializeUser();
 			if (!serviceUser)
@@ -165,14 +166,6 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 
 	_initializeVersion() {
 		throw new NotImplementedError();
-	}
-
-	_injectService(key, service) {
-		if (LibraryCommonUtility.isDev)
-			// eslint-disable-next-line
-			console.log(`services.inject - ${key}`);
-		this._services.set(key, service);
-		injector.addSingleton(key, service);
 	}
 }
 
