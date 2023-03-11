@@ -13,7 +13,8 @@ class ApiVersionService extends RestExternalService {
 				version.client = response.results;
 
 			if (this._serviceCommunicationRest) {
-				response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'version');
+				// response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'version');
+				response = await this._versionCommunication(correlationId);
 				if (this._hasSucceeded(response))
 					version.server = response.results;
 			}
@@ -27,6 +28,12 @@ class ApiVersionService extends RestExternalService {
 
 	async _version(correlationId) {
 		throw new NotImplementedError();
+	}
+
+	async _versionCommunication(correlationId) {
+		const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'version');
+		this._logger.debug('ApiVersionService', '_versionCommunication', 'response', response, correlationId);
+		return response;
 	}
 
 	_generate(correlationId, versionMajor, versionMinor, versionPatch, versionDate, copyright, author, author_url) {

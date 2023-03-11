@@ -12,7 +12,8 @@ class AdminService extends RestExternalService {
 			if (!this._allowsCreate)
 				return this._error('AdminService', 'create', null, null, null, null, correlationId);
 
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, LibraryCommonUtility.update(value));
+			// const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, LibraryCommonUtility.update(value));
+			const response = await this._createCommunication(correlationId, value);
 			this._logger.debug('AdminService', 'create', 'response', response, correlationId);
 			return response;
 		}
@@ -28,7 +29,8 @@ class AdminService extends RestExternalService {
 			if (!this._allowsDelete)
 				return this._error('AdminService', 'delete', null, null, null, null, correlationId);
 
-			const response = await this._serviceCommunicationRest.deleteById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
+			// const response = await this._serviceCommunicationRest.deleteById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
+			const response = await this._deleteCommunication(correlationId, id);
 			this._logger.debug('AdminService', 'delete', 'response', response, correlationId);
 			return response;
 		}
@@ -43,7 +45,8 @@ class AdminService extends RestExternalService {
 		const date = LibraryCommonUtility.getDate();
 		this._logger.debug('AdminService', 'search', 'date', date, correlationId);
 		try {
-			const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
+			// const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
+			const response = await this._searchCommunication.post(correlationId, params);
 			this._logger.debug('AdminService', 'search', 'response', response, correlationId);
 			return response;
 		}
@@ -60,7 +63,8 @@ class AdminService extends RestExternalService {
 				return this._error('AdminService', 'update', null, null, null, null, correlationId);
 
 			this._cleanse(correlationId, value);
-			const response = await this._serviceCommunicationRest.postById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, LibraryCommonUtility.update(value));
+			// const response = await this._serviceCommunicationRest.postById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, LibraryCommonUtility.update(value));
+			const response = await this._updateCommunication.post(correlationId, value);
 			this._logger.debug('AdminService', 'update', 'response', response, correlationId);
 			return response;
 		}
@@ -90,6 +94,30 @@ class AdminService extends RestExternalService {
 		delete value.createdUserId;
 		delete value.createdTimestamp;
 		delete value.updatedUserId;
+	}
+
+	async _createCommunication(correlationId, value) {
+		const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, LibraryCommonUtility.update(value));
+		this._logger.debug('AdminService', '_createCommunication', 'response', response, correlationId);
+		return response;
+	}
+
+	async _deleteCommunication(correlationId, id) {
+		const response = await this._serviceCommunicationRest.deleteById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, id);
+		this._logger.debug('AdminService', '_deleteCommunication', 'response', response, correlationId);
+		return response;
+	}
+
+	async _searchCommunication(correlationId, id) {
+		const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
+		this._logger.debug('AdminService', '_searchCommunication', 'response', response, correlationId);
+		return response;
+	}
+
+	async _updateCommunication(correlationId, value) {
+		const response = await this._serviceCommunicationRest.postById(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}`, value.id, LibraryCommonUtility.update(value));
+		this._logger.debug('AdminService', '_updateCommunication', 'response', response, correlationId);
+		return response;
 	}
 
 	_urlFragment() {
