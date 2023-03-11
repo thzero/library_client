@@ -1,6 +1,6 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import ExternalService from '@thzero/library_client/external';
+import ExternalService from '@thzero/library_client/service/external';
 
 class RestExternalService extends ExternalService {
 	constructor() {

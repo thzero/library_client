@@ -2,7 +2,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import RestExternalService from '@thzero/library_client/externalRest';
+import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class NewsService extends RestExternalService {
 	async latest(correlationId) {

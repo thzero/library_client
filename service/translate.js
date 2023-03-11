@@ -1,4 +1,4 @@
-import Service from '@thzero/library_client/index';
+import Service from '@thzero/library_client/service/index';
 
 class TranslateService extends Service {
 	// eslint-disable-next-line

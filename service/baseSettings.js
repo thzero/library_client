@@ -1,6 +1,6 @@
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import Service from '@thzero/library_client/index';
+import Service from '@thzero/library_client/service/index';
 
 class BaseSettings extends Service {
 	clearUser(correlationId, store, user, func) {

@@ -2,7 +2,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import Service from '@thzero/library_client/index';
+import Service from '@thzero/library_client/service/index';
 
 class LoggerService extends Service {
 	constructor() {

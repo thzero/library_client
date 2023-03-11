@@ -2,7 +2,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import RestExternalService from '@thzero/library_client/externalRest';
+import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class ApiVersionService extends RestExternalService {
 	async version(correlationId) {

@@ -1,4 +1,4 @@
-import AdminService from '@thzero/library_client/@thzero/library_client/service/admin';
+import AdminService from '@thzero/library_client/service/admin';
 
 class AdminUsersService extends AdminService {
 	get _allowsCreate() {

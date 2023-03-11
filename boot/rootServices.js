@@ -16,7 +16,7 @@ import plansService from '@thzero/library_client/service/plans';
 import securityService from '@thzero/library_client/service/security';
 import utilityService from '@thzero/library_client/service/utility';
 
-import ServicesBaseBoot from '@thzero/library_client/baseServices';
+import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
 
 class RootServicesBaseBoot extends ServicesBaseBoot {
 	constructor() {

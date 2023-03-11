@@ -1,6 +1,6 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import RestExternalService from '@thzero/library_client/externalRest';
+import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class PlansService extends RestExternalService {
 	async plans(correlationId) {

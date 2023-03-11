@@ -1,6 +1,6 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import CommunicationService from '@thzero/library_client/communication';
+import CommunicationService from '@thzero/library_client/service/communication';
 
 class RestCommunicationService extends CommunicationService {
 	constructor() {
