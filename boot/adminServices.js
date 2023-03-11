@@ -3,7 +3,7 @@ import LibraryClientConstants from '../constants';
 import adminNewsService from '../service/admin/news';
 import adminUsersService from '../service/admin/users';
 
-import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
+import ServicesBaseBoot from './baseServices';
 
 class AdminServicesBaseBoot extends ServicesBaseBoot {
 	constructor() {
@@ -21,6 +21,14 @@ class AdminServicesBaseBoot extends ServicesBaseBoot {
 
 	_initializeAdminUsers() {
 		return new adminUsersService();
+	}
+
+	_injectService(key, service) {
+		if (LibraryCommonUtility.isDev)
+			// eslint-disable-next-line
+			console.log(`services.inject - ${key}`);
+		this._services.set(key, service);
+		injector.addSingleton(key, service);
 	}
 }
 

@@ -29,7 +29,7 @@ class BaseUserService extends ExternalService {
 
 		try {
 			// const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'users/refresh/settings', { userId: user.id });
-			const response = await this._refreshSettingsCommunication(correlationId, user);
+			const response = await this._refreshSettingsUpdate(correlationId, user);
 			this._logger.debug('BaseUserService', 'refreshSettings', 'response', response, correlationId);
 			return response;
 		}
