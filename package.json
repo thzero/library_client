@@ -1,7 +1,7 @@
 {
   "name": "@thzero/library_client",
   "type": "module",
-  "version": "0.17.7-alpha",
+  "version": "0.17.7.alpha",
   "version_major": 0,
   "version_minor": 17,
   "version_patch": 7,
