@@ -1,4 +1,4 @@
-import Service from './index';
+import Service from '@thzero/library_client/index';
 
 import config from 'local-config';
 

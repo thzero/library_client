@@ -1,4 +1,4 @@
-import LibraryClientConstants from '../constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -6,17 +6,17 @@ import injector from '@thzero/library_common/utility/injector';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import configService from '../service/config';
-import cryptoService from '../service/crypto';
-import featuresService from '../service/features';
-import loggerService from '../service/logger';
-import markupParserService from '../service/markupParser';
-import newsService from '../service/news';
-import plansService from '../service/plans';
-import securityService from '../service/security';
-import utilityService from '../service/utility';
+import configService from '@thzero/library_client/service/config';
+import cryptoService from '@thzero/library_client/service/crypto';
+import featuresService from '@thzero/library_client/service/features';
+import loggerService from '@thzero/library_client/service/logger';
+import markupParserService from '@thzero/library_client/service/markupParser';
+import newsService from '@thzero/library_client/service/news';
+import plansService from '@thzero/library_client/service/plans';
+import securityService from '@thzero/library_client/service/security';
+import utilityService from '@thzero/library_client/service/utility';
 
-import ServicesBaseBoot from './baseServices';
+import ServicesBaseBoot from '@thzero/library_client/baseServices';
 
 class RootServicesBaseBoot extends ServicesBaseBoot {
 	constructor() {

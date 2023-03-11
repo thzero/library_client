@@ -1,8 +1,8 @@
-import LibraryClientConstants from '../constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import ExternalService from './external';
+import ExternalService from '@thzero/library_client/external';
 
 class BaseUserService extends ExternalService {
 	constructor() {

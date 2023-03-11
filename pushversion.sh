@@ -1,4 +1,4 @@
 #!/bin/bash
 
 library-cli --updateversion --pi --silent
-source ./push.sh "%1"
+source @thzero/library_client/push.sh "%1"

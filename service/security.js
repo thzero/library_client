@@ -1,6 +1,6 @@
 import rbac from 'easy-rbac';
 
-import Service from './index';
+import Service from '@thzero/library_client/index';
 
 class SecurityService extends Service {
 	constructor() {

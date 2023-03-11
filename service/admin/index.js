@@ -1,10 +1,10 @@
-import LibraryClientConstants from '../../constants';
+import LibraryClientConstants from '@thzero/library_client/@thzero/library_client/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import RestExternalService from '../../service/externalRest';
+import RestExternalService from '@thzero/library_client/@thzero/library_client/service/externalRest';
 
 class AdminService extends RestExternalService {
 	async create(correlationId, value) {

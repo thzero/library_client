@@ -1,6 +1,6 @@
 // import cryptoJS from 'crypto-js'
 
-import Service from './index';
+import Service from '@thzero/library_client/index';
 
 // crypto-js
 // export class CryptoAes {

@@ -1,8 +1,8 @@
-import LibraryClientConstants from '../constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import Service from './index';
+import Service from '@thzero/library_client/index';
 
 class LoggerService extends Service {
 	constructor() {
