@@ -1,6 +1,6 @@
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
-import BaseAuthService from './index';
+import BaseAuthService from '@thzero/library_client/service/auth/index';
 
 class UserAuthService extends BaseAuthService {
 	constructor() {

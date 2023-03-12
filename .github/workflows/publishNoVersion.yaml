@@ -1,0 +1,36 @@
+name: Publish CI No Version
+
+on:
+    workflow_dispatch:
+      inputs:
+        logLevel:
+          description: 'Log level'
+          required: true
+          default: 'warning'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    if: github.actor == github.event.repository.owner.login
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: master
+    - name: Node Dependencies
+      run: |
+        npm install --no-package-lock
+    - name: Initialize Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm publish --access public
+      if: success()
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

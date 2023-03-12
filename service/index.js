@@ -1,5 +1,5 @@
 
-import LibraryClientConstants from '../constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import Response from '@thzero/library_common/response';
 
