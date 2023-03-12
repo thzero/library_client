@@ -74,7 +74,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 
-		this._initialize();
+		await this._initialize();
 
 		for (const [key, value] of this._services) {
 			if (LibraryCommonUtility.isDev)
@@ -89,8 +89,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 		LibraryCommonUtility.initDateTime();
 	}
 
-	_initialize() {
-		throw new NotImplementedError();
+	async _initialize() {
 	}
 
 	_initializeAuth() {

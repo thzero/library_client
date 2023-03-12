@@ -11,6 +11,8 @@ class AdminServicesBaseBoot extends ServicesBaseBoot {
 	}
 
 	async _initialize() {
+		await super._initialize();
+
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 	}
