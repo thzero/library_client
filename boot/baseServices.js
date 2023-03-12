@@ -7,6 +7,12 @@ import injector from '@thzero/library_common/utility/injector';
 import BaseBoot from '@thzero/library_client/boot/base';
 
 class ServicesBaseBoot extends BaseBoot {
+	constructor() {
+		super();
+
+		this._services = new Map();
+	}
+
 	_injectService(key, service) {
 		if (LibraryCommonUtility.isDev)
 			// eslint-disable-next-line
