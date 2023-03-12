@@ -1,9 +1,9 @@
-import LibraryClientConstants from '@thzero/library_clientconstants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import adminNewsService from '@thzero/library_clientservice/admin/news';
-import adminUsersService from '@thzero/library_clientservice/admin/users';
+import adminNewsService from '@thzero/library_client/service/admin/news';
+import adminUsersService from '@thzero/library_client/service/admin/users';
 
-import ServicesBaseBoot from '@thzero/library_clientbaseServices';
+import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
 
 class AdminServicesBaseBoot extends ServicesBaseBoot {
 	constructor() {
