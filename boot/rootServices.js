@@ -19,12 +19,6 @@ import utilityService from '@thzero/library_client/service/utility';
 import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
 
 class RootServicesBaseBoot extends ServicesBaseBoot {
-	constructor() {
-		super();
-
-		this._services = new Map();
-	}
-
 	async execute(framework) {
 		const logger = this._initializeLogger();
 		if (!logger)

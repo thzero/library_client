@@ -1,5 +1,9 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
+import LibraryCommonUtility from '@thzero/library_common/utility';
+
+import injector from '@thzero/library_common/utility/injector';
+
 import adminNewsService from '@thzero/library_client/service/admin/news';
 import adminUsersService from '@thzero/library_client/service/admin/users';
 
@@ -10,9 +14,19 @@ class AdminServicesBaseBoot extends ServicesBaseBoot {
 		super();
 	}
 
-	async _initialize() {
-		await super._initialize();
+	async execute(framework) {
+		await this._initialize();
 
+		for (const [key, value] of this._services) {
+			if (LibraryCommonUtility.isDev)
+				// eslint-disable-next-line
+				console.log(`services.init - ${key}`);
+				console.dir(value);
+			await value.init(injector);
+		}
+	}
+
+	async _initialize() {
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_NEWS, this._initializeAdminNews());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_ADMIN_USERS, this._initializeAdminUsers());
 	}
