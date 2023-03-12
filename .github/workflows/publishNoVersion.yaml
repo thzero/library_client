@@ -1,4 +1,4 @@
-name: Publish CI Alpha
+name: Publish CI No Version
 
 on:
     workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: alpha
+        ref: master
     - name: Node Dependencies
       run: |
         npm install --no-package-lock
@@ -30,8 +30,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
-    - run: npm publish --access public --tag alpha
+    - run: npm publish --access public
       if: success()
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

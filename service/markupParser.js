@@ -8,7 +8,7 @@
 // import { Remarkable } from 'remarkable'
 import { marked } from 'marked';
 
-import Service from './index';
+import Service from '@thzero/library_client/service/index';
 
 // ['javascript'].forEach((langName) => {
 // 	// Using require() here because import() support hasn't landed in Webpack yet
