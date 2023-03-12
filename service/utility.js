@@ -6,7 +6,7 @@ class UtilityService extends RestExternalService {
 	async initialize(correlationId) {
 		try {
 			// const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/initialize');
-			const response = await this._initializeCommunication.get(correlationId);
+			const response = await this._initializeCommunication(correlationId);
 			this._logger.debug('UtilityService', 'initialize', 'response', response, correlationId);
 			if (this._hasSucceeded(response)) {
 				response.results.version = {
