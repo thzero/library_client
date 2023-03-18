@@ -138,6 +138,22 @@ class Service {
 		return Response.error(message, err, code, errors, correlationId);
 	}
 
+	_errorW(clazz, method, message, code, errors, correlationId) {
+		if (message)
+			this._logger.warn(clazz, method, message, null, correlationId);
+		if (code)
+			this._logger.warn(clazz, method, 'code', code, correlationId);
+		if (errors) {
+			for (const error of errors)
+				this._logger.exception(clazz, method, error, correlationId);
+		}
+		return Response.error(message, null, code, errors, correlationId);
+	}
+
+	_failed(message, code, errors, correlationId) {
+		return Response.error(message, null, code, errors, correlationId);
+	}
+
 	_hasFailed(response) {
 		return Response.hasFailed(response);
 	}
