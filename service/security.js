@@ -1,6 +1,10 @@
 import rbac from 'easy-rbac';
 
+import LibraryCommonUtility from '@thzero/library_common/utility';
+
 import Service from '@thzero/library_client/service/index';
+
+const KeyEnforcerDefault = 'default';
 
 class SecurityService extends Service {
 	constructor() {
@@ -9,8 +13,14 @@ class SecurityService extends Service {
 		this._enforcers = new Map();
 	}
 
+	async init(injector) {
+		await super.init(injector);
+
+		this.initSecurity(LibraryCommonUtility.correlationId(), KeyEnforcerDefault, this._initModel());
+	}
+
 	// eslint-disable-next-line
-	async initSecurity(key, model, policies) {
+	async initSecurity(correlationId, key, model, policies) {
 		if (String.isNullOrEmpty(key))
 			throw Error('Invalid key');
 		if (!model)
@@ -20,8 +30,12 @@ class SecurityService extends Service {
 		this._enforcers.set(key, enforcer);
 	}
 
+	async validate(correlationId, sub, dom, obj, act) {
+		return this.validateEx(correlationId, KeyEnforcerDefault, sub, dom, obj, act);
+	}
+
 	// eslint-disable-next-line
-	async validate(correlationId, key, sub, dom, obj, act) {
+	async validateEx(correlationId, key, sub, dom, obj, act) {
 		if (String.isNullOrEmpty(key))
 			throw Error('Invalid key');
 
@@ -39,6 +53,10 @@ class SecurityService extends Service {
 		const role = array.join(':');
 		const results = await enforcer.can(sub, role);
 		return results;
+	}
+
+	_initModel() {
+		return null;
 	}
 }
 
