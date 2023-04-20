@@ -11,6 +11,7 @@ class ConfigService extends Service {
 
 	async init() {
 		this._config = config['backend'];
+		this._configExternal = config['external'];
 	}
 
 	getBackend(key) {
@@ -30,6 +31,10 @@ class ConfigService extends Service {
 		}
 
 		return null;
+	}
+
+	getExternal() {
+		return this._configExternal;
 	}
 }
 
