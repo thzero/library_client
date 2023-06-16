@@ -21,7 +21,7 @@ class NewsService extends RestExternalService {
 		return this._error('NewsService', 'latest', null, null, null, null, correlationId);
 	}
 
-	async _latestCommunication(correlationId) {
+	async _latestCommunication(correlationId, timestamp) {
 		const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'news/latest', params: [ timestamp ] });
 		this._logger.debug('NewsService', '_latestCommunication', 'response', response, correlationId);
 		return response;
