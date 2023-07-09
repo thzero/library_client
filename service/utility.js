@@ -24,11 +24,13 @@ class UtilityService extends RestExternalService {
 	}
 
 	async logger(correlationId, content) {
-		if (!this._serviceCommunicationRest)
-			return this._success(correlationId);
-
-		// return await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/logger', content);
-		return await this._loggerCommunication(correlationId, content);
+		try {
+			if (!this._serviceCommunicationRest)
+				return;
+	
+			await this._loggerCommunication(correlationId, content);
+		}
+		catch (ignored) {}
 	}
 
 	async openSource(correlationId) {
