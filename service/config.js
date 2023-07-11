@@ -7,25 +7,39 @@ class ConfigService extends Service {
 		super();
 
 		this._config = null;
+		this._configBackend = null;
+		this._configExternal = null;
 	}
 
 	async init() {
-		this._config = config['backend'];
+		this._config = config;
+		this._configBackend = config['backend'];
 		this._configExternal = config['external'];
 	}
 
-	getBackend(key) {
+	get(key) {
 		if (String.isNullOrEmpty(key))
 			return null;
 
 		if (!this._config)
 			return null;
 
-		if (!Array.isArray(this._config))
+		key = key.toLowerCase();
+		return this._config[key];
+	}
+
+	getBackend(key) {
+		if (String.isNullOrEmpty(key))
+			return null;
+
+		if (!this._configBackend)
+			return null;
+
+		if (!Array.isArray(this._configBackend))
 			return null;
 
 		key = key.toLowerCase();
-		for (const item of this._config) {
+		for (const item of this._configBackend) {
 			if (item.key.toLowerCase() === key)
 				return item;
 		}
