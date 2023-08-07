@@ -1,11 +1,11 @@
 {
   "name": "@thzero/library_client",
   "type": "module",
-  "version": "0.17.27",
+  "version": "0.17.28",
   "version_major": 0,
   "version_minor": 17,
-  "version_patch": 27,
-  "version_date": "07/11/2023",
+  "version_patch": 28,
+  "version_date": "08/07/2023",
   "description": "An opinionated library of common functionality to bootstrap a VueJs based SPA application.",
   "author": "thZero",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@thzero/library_common": "^0.17",
     "easy-rbac": "^3.2.0",
     "highlight.js": "^11.8.0",
-    "marked": "^5.1.1",
+    "marked": "^7.0.0",
     "mitt": "^3.0.1"
   },
   "peerDependencies": {
