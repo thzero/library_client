@@ -71,10 +71,11 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 		await this._initialize();
 
 		for (const [key, value] of this._services) {
-			if (LibraryCommonUtility.isDev)
+			if (LibraryCommonUtility.isDev) {
 				// eslint-disable-next-line
 				console.log(`services.init - ${key}`);
 				console.dir(value);
+			}
 			await value.init(injector);
 		}
 
