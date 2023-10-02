@@ -1,5 +1,7 @@
 import rbac from 'easy-rbac';
 
+import LibraryCommonnConstants from '@thzero/library_common/constants';
+
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import Service from '@thzero/library_client/service/index';
@@ -38,10 +40,10 @@ class SecurityService extends Service {
 		if (!roles)
 			return true;
 
-		if (String.isNullOrEmpty(logical) || (logical !== SecurityService.logicalAnd) || (logical !== SecurityService.logicalOr))
-			logical = SecurityService.logicalOr;
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd) || (logical !== LibraryCommonnConstants.Security.logicalOr))
+			logical = LibraryCommonnConstants.Security.logicalOr;
 
-		let success = (logical === SecurityService.logicalOr ? false : true);
+		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
 
 		let result;
 		let roleAct;
@@ -62,7 +64,7 @@ class SecurityService extends Service {
 
 				result = await this._serviceSecurity.validate(claim, null, roleObj, roleAct);
 				this._serviceLogger.debug('SecurityService', 'authorizationCheckClaims', 'result', result, correlationId);
-				if (logical === SecurityService.logicalOr)
+				if (logical === LibraryCommonnConstants.Security.logicalOr)
 					success = success || result;
 				else
 					success = success && result;
@@ -82,10 +84,10 @@ class SecurityService extends Service {
 		if (!(user && user.roles && Array.isArray(user.roles)))
 			return false;
 
-		if (String.isNullOrEmpty(logical) || (logical !== SecurityService.logicalAnd) || (logical !== SecurityService.logicalOr))
-			logical = SecurityService.logicalOr;
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd) || (logical !== LibraryCommonnConstants.Security.logicalOr))
+			logical = LibraryCommonnConstants.Security.logicalOr;
 
-		let success = (logical === SecurityService.logicalOr ? false : true);
+		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
 
 		this._logger.debug('SecurityService', 'authorizationCheckRoles', 'logical', logical, correlationId);
 
@@ -108,7 +110,7 @@ class SecurityService extends Service {
 
 				result = await this.validate(correlationId, userRole, null, roleObj, roleAct);
 				this._logger.debug('SecurityService', 'authorizationCheckRoles', 'result', result, correlationId);
-				if (logical === SecurityService.logicalOr) {
+				if (logical === LibraryCommonnConstants.Security.logicalOr) {
 					if (result)
 						return result;
 
@@ -150,9 +152,6 @@ class SecurityService extends Service {
 	_initModel() {
 		return null;
 	}
-
-	static logicalAnd = 'and';
-	static logicalOr = 'or';
 }
 
 export default SecurityService;
