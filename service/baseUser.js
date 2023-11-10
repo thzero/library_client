@@ -67,6 +67,10 @@ class BaseUserService extends ExternalService {
 		throw new NotImplementedError();
 	}
 
+	get user() {
+		throw new NotImplementedError();
+	}
+
 	async updateExternal(correlationId, user) {
 		if (!user)
 			return this._error('BaseUserService', 'updateExternal', null, null, null, null, correlationId);
