@@ -30,6 +30,10 @@ class BaseAuthService extends Service {
 	get token() {
 		return this._serviceUser.token;
 	}
+
+	get user() {
+		return this._serviceUser.user;
+	}
 }
 
 export default BaseAuthService;
