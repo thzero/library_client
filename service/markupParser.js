@@ -17,6 +17,8 @@ import Service from '@thzero/library_client/service/index';
 // });
 
 // eslint-disable-next-line
+const regExpNewLine = new RegExp(/\n.*$/g);
+// eslint-disable-next-line
 const regExpPrefix = new RegExp(/^<p>/g);
 // eslint-disable-next-line
 const regExpSuffix = new RegExp(/<\/p>$/g);
@@ -81,7 +83,16 @@ class MarkupParserService extends Service {
 	}
 
 	trimResults(correlationId, value) {
-		const result1 = value.replace(regExpPrefix, '');
+		if (!value)
+			return value;
+
+		value = value.trim();
+		
+		const result0 = value.replace(regExpNewLine, '');
+		if (!result0)
+			return result0;
+		
+		const result1 = result0.replace(regExpPrefix, '');
 		if (!result1)
 			return result1;
 
