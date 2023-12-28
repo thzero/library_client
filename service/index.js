@@ -1,6 +1,8 @@
 
 import LibraryClientConstants from '@thzero/library_client/constants';
 
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
+
 import Response from '@thzero/library_common/response';
 
 class Service {
