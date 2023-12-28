@@ -13,7 +13,6 @@ import loggerService from '@thzero/library_client/service/logger';
 import markupParserService from '@thzero/library_client/service/markupParser';
 import newsService from '@thzero/library_client/service/news';
 import plansService from '@thzero/library_client/service/plans';
-import securityService from '@thzero/library_client/service/security';
 import utilityService from '@thzero/library_client/service/utility';
 
 import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
@@ -135,7 +134,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 	}
 
 	_initializeSecurity() {
-		return new securityService();
+		throw new NotImplementedError();
 	}
 
 	_initializeSettings() {
