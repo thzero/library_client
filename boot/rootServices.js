@@ -1,6 +1,7 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import LibraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
+import LibraryMomentUtility from '@thzero/library_common/utility/moment';
 
 import injector from '@thzero/library_common/utility/injector';
 
@@ -80,7 +81,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 
 		this._initializeInjector(framework, injector);
 
-		LibraryCommonUtility.initDateTime();
+		LibraryMomentUtility.initDateTime();
 	}
 
 	async _initialize() {

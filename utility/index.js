@@ -1,4 +1,4 @@
-import LibraryCommonUtility from '@thzero/library_common/utility';
+import LibraryMomentUtility from '@thzero/library_common/utility/moment';
 
 class LibraryClientUtility {
 	static isDebug = false;
@@ -70,7 +70,7 @@ class LibraryClientUtility {
 	}
 
 	static ttlDelta(ttl) {
-		const now = LibraryCommonUtility.getTimestamp();
+		const now = LibraryMomentUtility.getTimestamp();
 		const delta = ttl - now;
 		return delta > 0;
 	}
