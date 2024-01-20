@@ -1,6 +1,7 @@
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import LibraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility/index';
+import LibraryMomentUtility from '@thzero/library_common/utility/moment';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
@@ -42,7 +43,7 @@ class AdminService extends RestExternalService {
 	}
 
 	async search(correlationId, params) {
-		const date = LibraryCommonUtility.getDate();
+		const date = LibraryMomentUtility.getDate();
 		this._logger.debug('AdminService', 'search', 'date', date, correlationId);
 		try {
 			// const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, `admin/${this._urlFragment()}/search`, params);
