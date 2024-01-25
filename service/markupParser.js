@@ -17,7 +17,7 @@ import Service from '@thzero/library_client/service/index';
 // });
 
 // eslint-disable-next-line
-const regExpNewLine = new RegExp(/\n.*$/g);
+const regExpNewLine = new RegExp(/\n*$/g);
 // eslint-disable-next-line
 const regExpPrefix = new RegExp(/^<p>/g);
 // eslint-disable-next-line
