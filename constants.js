@@ -19,6 +19,7 @@ const LibraryClientConstants = {
 		SERVICE_STORE: 'serviceStore',
 		SERVICE_TRANSLATE: 'serviceTranslate',
 		SERVICE_USER: 'serviceUser',
+		SERVICE_USAGE_METRICS: 'serviceUsageMetrics',
 		SERVICE_UTILITY: 'serviceUtility',
 		SERVICE_VERSION: 'serviceVersion'
 	},

@@ -14,6 +14,7 @@ import loggerService from '@thzero/library_client/service/logger';
 import markupParserService from '@thzero/library_client/service/markupParser';
 import newsService from '@thzero/library_client/service/news';
 import plansService from '@thzero/library_client/service/plans';
+import usageMetrics from '@thzero/library_client/service/usageMetrics';
 import utilityService from '@thzero/library_client/service/utility';
 
 import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
@@ -65,6 +66,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 		if (translateService)
 			this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_TRANSLATE, translateService);
 
+		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_USAGE_METRICS, this._initializeUsageMetrics());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_UTILITY, this._initializeUtility());
 		this._injectService(LibraryClientConstants.InjectorKeys.SERVICE_VERSION, this._initializeVersion());
 
@@ -152,6 +154,10 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 
 	_initializeUser() {
 		return null;
+	}
+
+	_initializeUsageMetrics() {
+		return new usageMetrics();
 	}
 
 	_initializeUtility() {

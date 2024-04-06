@@ -1,5 +1,3 @@
-import LibraryClientConstants from '@thzero/library_client/constants';
-
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import injector from '@thzero/library_common/utility/injector';
