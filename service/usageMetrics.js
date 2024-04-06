@@ -3,6 +3,17 @@ import LibraryClientConstants from '@thzero/library_client/constants.js';
 import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class UsageMetricsService extends RestExternalService {
+	async listing(correlationId) {
+		try {
+			const response = await this._listingCommunication(correlationId);
+			this._logger.debug('MeasurementsService', 'listing', 'response', response, correlationId);
+			return response;
+		}
+		catch (err) {
+			return this._error('MeasurementsService', 'listing', null, err, null, null, correlationId);
+		}
+	}
+
 	async tag(correlationId, type, value) {
 		this._enforceNotEmpty('UsageMetricsService', 'tag', type, 'type', correlationId);
 
@@ -19,9 +30,15 @@ class UsageMetricsService extends RestExternalService {
 		}
 	}
 
+	async _listingCommunication(correlationId, tag) {
+		const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'usageMetrics/listing' }, tag);
+		this._logger.debug('UsageMetricsService', '_listingCommunication', 'response', response, correlationId);
+		return response;
+	}
+
 	async _tagCommunication(correlationId, tag) {
 		const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'usageMetrics/tag' }, tag);
-		this._logger.debug('MeasurementsService', '_listingCommunication', 'response', response, correlationId);
+		this._logger.debug('UsageMetricsService', '_tagCommunication', 'response', response, correlationId);
 		return response;
 	}
 }
