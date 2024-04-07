@@ -3,9 +3,9 @@ import LibraryClientConstants from '@thzero/library_client/constants.js';
 import RestExternalService from '@thzero/library_client/service/externalRest';
 
 class UsageMetricsService extends RestExternalService {
-	async listing(correlationId) {
+	async listing(correlationId, params) {
 		try {
-			const response = await this._listingCommunication(correlationId);
+			const response = await this._listingCommunication(correlationId, params);
 			this._logger.debug('MeasurementsService', 'listing', 'response', response, correlationId);
 			return response;
 		}
@@ -30,8 +30,8 @@ class UsageMetricsService extends RestExternalService {
 		}
 	}
 
-	async _listingCommunication(correlationId, tag) {
-		const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'usageMetrics/listing' }, tag);
+	async _listingCommunication(correlationId, params) {
+		const response = await this._serviceCommunicationRest.post(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, { url: 'usageMetrics/listing' }, params);
 		this._logger.debug('UsageMetricsService', '_listingCommunication', 'response', response, correlationId);
 		return response;
 	}
