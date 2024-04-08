@@ -14,7 +14,7 @@ import loggerService from '@thzero/library_client/service/logger';
 import markupParserService from '@thzero/library_client/service/markupParser';
 import newsService from '@thzero/library_client/service/news';
 import plansService from '@thzero/library_client/service/plans';
-import usageMetrics from '@thzero/library_client/service/usageMetrics';
+import usageMetricsService from '@thzero/library_client/service/usageMetrics';
 import utilityService from '@thzero/library_client/service/utility';
 
 import ServicesBaseBoot from '@thzero/library_client/boot/baseServices';
@@ -157,7 +157,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 	}
 
 	_initializeUsageMetrics() {
-		return new usageMetrics();
+		return new usageMetricsService();
 	}
 
 	_initializeUtility() {
