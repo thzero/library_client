@@ -1,8 +1,6 @@
 
 import LibraryClientConstants from '@thzero/library_client/constants';
 
-import LibraryCommonUtility from '@thzero/library_common/utility/index';
-
 import Response from '@thzero/library_common/response';
 
 class Service {
@@ -137,7 +135,7 @@ class Service {
 			for (const error of errors)
 				this._logger.exception(clazz, method, error, correlationId);
 		}
-		return Response.error(message, err, code, errors, correlationId);
+		return Response.error(clazz, method, message, err, code, errors, correlationId);
 	}
 
 	_errorW(clazz, method, message, code, errors, correlationId) {
@@ -149,11 +147,11 @@ class Service {
 			for (const error of errors)
 				this._logger.exception(clazz, method, error, correlationId);
 		}
-		return Response.error(message, null, code, errors, correlationId);
+		return Response.error(clazz, method, message, null, code, errors, correlationId);
 	}
 
 	_failed(message, code, errors, correlationId) {
-		return Response.error(message, null, code, errors, correlationId);
+		return Response.error(null, null, message, null, code, errors, correlationId);
 	}
 
 	_hasFailed(response) {
