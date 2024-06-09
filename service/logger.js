@@ -84,6 +84,12 @@ class LoggerService extends Service {
 		// this._remoteLogger('INFO', null, null, message, data, correlationId);
 	}
 
+	raw(message, data, correlationId) {
+		// eslint-disable-next-line
+		console.log(message, data);
+		// this._remoteLogger('INFO', null, null, message, data, correlationId);
+	}
+
 	trace(clazz, method, message, data, correlationId) {
 		if (!LibraryCommonUtility.isDev())
 			return;
