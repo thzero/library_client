@@ -65,7 +65,12 @@ class LibraryClientUtility {
 			return '';
 
 		const settings = user.settings ? user.settings : null;
-		const userName = settings && settings.gamerTag ? settings.gamerTag : user.external && user.external.name ? user.external.name : '******';
+		// const userName = settings && settings.gamerTag ? settings.gamerTag : user.external && user.external.name ? user.external.name : '******';
+		let userName = settings && settings.gamerTagDisplay ? settings.gamerTagDisplay : null;
+		if (!userName)
+			userName = settings && settings.gamerTag ? settings.gamerTag : null;
+		if (!userName)
+			userName = user.external && user.external.name ? user.external.name : '******';
 		return userName;
 	}
 
