@@ -40,7 +40,7 @@ class SecurityService extends Service {
 		if (!roles)
 			return true;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd) || (logical !== LibraryCommonnConstants.Security.logicalOr))
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
 			logical = LibraryCommonnConstants.Security.logicalOr;
 
 		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
@@ -84,7 +84,7 @@ class SecurityService extends Service {
 		if (!(user && user.roles && Array.isArray(user.roles)))
 			return false;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd) || (logical !== LibraryCommonnConstants.Security.logicalOr))
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
 			logical = LibraryCommonnConstants.Security.logicalOr;
 
 		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
