@@ -22,7 +22,7 @@ class Service {
 
 	_enforce(clazz, method, value, name, correlationId, message) {
 		if (!value) {
-			if (!String.isNullOrEmpty(message))
+			if (String.isNullOrEmpty(message))
 				message = `${name} is invalid.`;
 
 			this._logger.error(clazz, method, message, null, correlationId);
@@ -52,8 +52,12 @@ class Service {
 
 	_enforceNotEmptyMultiple(clazz, method, values, names, correlationId) {
 		let valid = true;
-		for (const value of values)
-			valid &= String.isNullOrEmpty(value);
+		for (const value of values) {
+			if (String.isNullOrEmpty(value)) {
+				valid = false;
+				break;
+			}
+		}
 		if (!valid) {
 			names = names.join(', ');
 			this._logger.error(clazz, method, `None of the fields are not null: ${names}`, null, correlationId);
@@ -73,7 +77,7 @@ class Service {
 	}
 
 	_enforceNotNull(clazz, method, value, name, correlationId) {
-		if (!value || value === undefined) {
+		if (!value) {
 			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
 			const error = Error(`${name} is null.`, true);
 			error.correlationId = correlationId;
@@ -82,7 +86,7 @@ class Service {
 	}
 
 	_enforceNotNullEither(clazz, method, value1, value2, name1, name2, correlationId) {
-		if ((!value1 || value1 === undefined) && (!value2 || value2 == undefined)) {
+		if (!value1 && !value2) {
 			this._logger.error(clazz, method, `Either ${name1} or ${name2} is null.`, null, correlationId);
 			const error = Error(`Either ${name1} or ${name2} is null.`, true);
 			error.correlationId = correlationId;
@@ -92,8 +96,12 @@ class Service {
 
 	_enforceNotNullMultiple(clazz, method, values, names, correlationId) {
 		let valid = true;
-		for (const value of values)
-			valid &= values;
+		for (const value of values) {
+			if ((value === null) || (value === undefined)) {
+				valid = false;
+				break;
+			}
+		}
 		if (!valid) {
 			names = names.join(', ');
 			this._logger.error(clazz, method, `None of the fields are not null: ${names}`, null, correlationId);
@@ -104,7 +112,7 @@ class Service {
 	}
 
 	_enforceNotNullResponse(clazz, method, value, name, correlationId) {
-		if (!value || value === undefined) {
+		if (!value) {
 			this._logger.error(clazz, method, `${name} is null.`, null, correlationId);
 			return Response.error(clazz, method, `${name} is null.`, null, null, null, correlationId);
 		}
@@ -114,7 +122,7 @@ class Service {
 
 	_enforceResponse(clazz, method, response, name, correlationId, message) {
 		if (!response || (response && !response.success)) {
-			if (!String.isNullOrEmpty(message))
+			if (String.isNullOrEmpty(message))
 				message = `Unsuccessful response for ${name}.`;
 
 			this._logger.error(clazz, method, message, null, correlationId);
