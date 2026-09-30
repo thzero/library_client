@@ -72,7 +72,7 @@ class LoggerService extends Service {
 		this._remoteLogger('FATAL', null, null, message, data, correlationId);
 	}
 
-	info(clazz, method, message, data) {
+	info(clazz, method, message, data, correlationId) {
 		// eslint-disable-next-line
 		console.log('INFO', this._format(clazz, method, message, correlationId), data);
 		// this._remoteLogger('INFO', clazz, method, message, data, correlationId);
