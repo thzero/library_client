@@ -91,7 +91,7 @@ class LoggerService extends Service {
 	}
 
 	trace(clazz, method, message, data, correlationId) {
-		if (!LibraryCommonUtility.isDev())
+		if (!LibraryCommonUtility.isDev)
 			return;
 
 		// eslint-disable-next-line
@@ -100,7 +100,7 @@ class LoggerService extends Service {
 	}
 
 	trace2(message, data, correlationId) {
-		if (!LibraryCommonUtility.isDev())
+		if (!LibraryCommonUtility.isDev)
 			return;
 
 		// eslint-disable-next-line
@@ -111,14 +111,12 @@ class LoggerService extends Service {
 	warn(clazz, method, message, data, correlationId) {
 		// eslint-disable-next-line
 		console.log('WARN', this._format(clazz, method, message, correlationId), data);
-		this._remoteLogger('WARN', message, data, correlationId);
 		this._remoteLogger('WARN', clazz, method, message, data, correlationId);
 	}
 
 	warn2(message, data, correlationId) {
 		// eslint-disable-next-line
 		console.log('WARN', this._format(null, null, message, correlationId), data);
-		this._remoteLogger('WARN', message, data, correlationId);
 		this._remoteLogger('WARN', null, null, message, data, correlationId);
 	}
 
@@ -139,7 +137,10 @@ class LoggerService extends Service {
 		return output;
 	}
 
-	_remoteLogger(clazz, method, type, message, data, correlationId) {
+	// type first, as every caller passes it. It was declared (clazz, method, type,
+	// ...), so each entry reached the server with the caller's method name as its
+	// type; the server switches on type, matched nothing, and dropped the entry.
+	_remoteLogger(type, clazz, method, message, data, correlationId) {
 		const self = this;
 		(async () => {
 			self._serviceUtility.logger(correlationId, {
