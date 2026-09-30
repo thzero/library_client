@@ -23,7 +23,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 	async execute(framework) {
 		const logger = this._initializeLogger();
 		if (!logger)
-			throw Error('No logger defined after initialization of services.');
+			throw new Error('No logger defined after initialization of services.');
 
 		const serviceAuth = this._initializeAuth();
 		if (serviceAuth) {

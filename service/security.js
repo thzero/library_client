@@ -1,6 +1,6 @@
 import rbac from 'easy-rbac';
 
-import LibraryCommonnConstants from '@thzero/library_common/constants';
+import LibraryCommonConstants from '@thzero/library_common/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -24,9 +24,9 @@ class SecurityService extends Service {
 	// eslint-disable-next-line
 	async initSecurity(correlationId, key, model, policies) {
 		if (String.isNullOrEmpty(key))
-			throw Error('Invalid key');
+			throw new Error('Invalid key');
 		if (!model)
-			throw Error('Invalid model');
+			throw new Error('Invalid model');
 
 		const enforcer = new rbac(model);
 		this._enforcers.set(key, enforcer);
@@ -40,10 +40,10 @@ class SecurityService extends Service {
 		if (!roles)
 			return true;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
-			logical = LibraryCommonnConstants.Security.logicalOr;
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonConstants.Security.logicalAnd && logical !== LibraryCommonConstants.Security.logicalOr))
+			logical = LibraryCommonConstants.Security.logicalOr;
 
-		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
+		let success = (logical === LibraryCommonConstants.Security.logicalOr ? false : true);
 
 		let result;
 		let roleAct;
@@ -64,7 +64,7 @@ class SecurityService extends Service {
 
 				result = await this._serviceSecurity.validate(claim, null, roleObj, roleAct);
 				this._serviceLogger.debug('SecurityService', 'authorizationCheckClaims', 'result', result, correlationId);
-				if (logical === LibraryCommonnConstants.Security.logicalOr)
+				if (logical === LibraryCommonConstants.Security.logicalOr)
 					success = success || result;
 				else
 					success = success && result;
@@ -84,10 +84,10 @@ class SecurityService extends Service {
 		if (!(user && user.roles && Array.isArray(user.roles)))
 			return false;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
-			logical = LibraryCommonnConstants.Security.logicalOr;
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonConstants.Security.logicalAnd && logical !== LibraryCommonConstants.Security.logicalOr))
+			logical = LibraryCommonConstants.Security.logicalOr;
 
-		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
+		let success = (logical === LibraryCommonConstants.Security.logicalOr ? false : true);
 
 		this._logger.debug('SecurityService', 'authorizationCheckRoles', 'logical', logical, correlationId);
 
@@ -110,7 +110,7 @@ class SecurityService extends Service {
 
 				result = await this.validate(correlationId, userRole, null, roleObj, roleAct);
 				this._logger.debug('SecurityService', 'authorizationCheckRoles', 'result', result, correlationId);
-				if (logical === LibraryCommonnConstants.Security.logicalOr) {
+				if (logical === LibraryCommonConstants.Security.logicalOr) {
 					if (result)
 						return result;
 
@@ -131,11 +131,11 @@ class SecurityService extends Service {
 	// eslint-disable-next-line
 	async validateEx(correlationId, key, sub, dom, obj, act) {
 		if (String.isNullOrEmpty(key))
-			throw Error('Invalid key');
+			throw new Error('Invalid key');
 
 		const enforcer = this._enforcers.get(key);
 		if (!enforcer)
-			throw Error('No enforcer found');
+			throw new Error('No enforcer found');
 
 		const array = [];
 		if (dom)

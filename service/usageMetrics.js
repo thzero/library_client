@@ -1,4 +1,4 @@
-import LibraryClientConstants from '@thzero/library_client/constants.js';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
 import RestExternalService from '@thzero/library_client/service/externalRest';
 
@@ -6,11 +6,11 @@ class UsageMetricsService extends RestExternalService {
 	async listing(correlationId, params) {
 		try {
 			const response = await this._listingCommunication(correlationId, params);
-			this._logger.debug('MeasurementsService', 'listing', 'response', response, correlationId);
+			this._logger.debug('UsageMetricsService', 'listing', 'response', response, correlationId);
 			return response;
 		}
 		catch (err) {
-			return this._error('MeasurementsService', 'listing', null, err, null, null, correlationId);
+			return this._error('UsageMetricsService', 'listing', null, err, null, null, correlationId);
 		}
 	}
 
@@ -22,11 +22,11 @@ class UsageMetricsService extends RestExternalService {
 				type: type,
 				value: value
 			});
-			this._logger.debug('MeasurementsService', 'tag', 'response', response, correlationId);
+			this._logger.debug('UsageMetricsService', 'tag', 'response', response, correlationId);
 			return response;
 		}
 		catch (err) {
-			return this._error('MeasurementsService', 'tag', null, err, null, null, correlationId);
+			return this._error('UsageMetricsService', 'tag', null, err, null, null, correlationId);
 		}
 	}
 
