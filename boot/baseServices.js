@@ -13,7 +13,6 @@ class ServicesBaseBoot extends BaseBoot {
 
 	_injectService(key, service) {
 		if (LibraryCommonUtility.isDev)
-			// eslint-disable-next-line
 			console.log(`services.inject - ${key}`);
 		this._services.set(key, service);
 		injector.addSingleton(key, service);

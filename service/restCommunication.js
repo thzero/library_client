@@ -15,19 +15,15 @@ class RestCommunicationService extends CommunicationService {
 		this._serviceAuth = this._injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_AUTH);
 	}
 
-	// eslint-disable-next-line
 	async get(correlationId, key, url, options) {
 	}
 
-	// eslint-disable-next-line
 	async getAuth(correlationId, key, url, auth, options) {
 	}
 
-	// eslint-disable-next-line
 	async post(correlationId, key, url, body, options) {
 	}
 
-	// eslint-disable-next-line
 	async postAuth(correlationId, key, url, body, auth, options) {
 	}
 

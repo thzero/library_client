@@ -74,7 +74,6 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 
 		for (const [key, value] of this._services) {
 			if (LibraryCommonUtility.isDev) {
-				// eslint-disable-next-line
 				console.log(`services.init - ${key}`);
 				console.dir(value);
 			}

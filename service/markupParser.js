@@ -16,11 +16,8 @@ import Service from '@thzero/library_client/service/index';
 // 	hljs.registerLanguage(langName, langModule);
 // });
 
-// eslint-disable-next-line
 const regExpNewLine = new RegExp(/\n*$/g);
-// eslint-disable-next-line
 const regExpPrefix = new RegExp(/^<p>/g);
-// eslint-disable-next-line
 const regExpSuffix = new RegExp(/<\/p>$/g);
 
 class MarkupParserService extends Service {

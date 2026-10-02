@@ -21,7 +21,6 @@ class SecurityService extends Service {
 		this.initSecurity(LibraryCommonUtility.correlationId(), KeyEnforcerDefault, this._initModel());
 	}
 
-	// eslint-disable-next-line
 	async initSecurity(correlationId, key, model, policies) {
 		if (String.isNullOrEmpty(key))
 			throw new Error('Invalid key');
@@ -135,7 +134,6 @@ class SecurityService extends Service {
 		return this.validateEx(correlationId, KeyEnforcerDefault, sub, dom, obj, act);
 	}
 
-	// eslint-disable-next-line
 	async validateEx(correlationId, key, sub, dom, obj, act) {
 		if (String.isNullOrEmpty(key))
 			throw new Error('Invalid key');
