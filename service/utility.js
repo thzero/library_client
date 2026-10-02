@@ -30,7 +30,9 @@ class UtilityService extends RestExternalService {
 	
 			await this._loggerCommunication(correlationId, content);
 		}
-		catch (ignored) {}
+		catch {
+			// logging must never fail the caller
+		}
 	}
 
 	async openSource(correlationId) {
