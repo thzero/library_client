@@ -39,7 +39,6 @@ class LibraryClientUtility {
 		if (!LibraryClientUtility.isDebug)
 			return;
 
-		// eslint-disable-next-line no-unneeded-ternary
 		const output = name + ': ' + (value ? value : 'null');
 		console.debug(output);
 	}

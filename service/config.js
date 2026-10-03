@@ -28,7 +28,7 @@ class ConfigService extends Service {
 		return this._config[key];
 	}
 
-	getBackend(key) {
+	getBackend(correlationId, key) {
 		if (String.isNullOrEmpty(key))
 			return null;
 

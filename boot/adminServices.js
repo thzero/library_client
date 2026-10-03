@@ -19,7 +19,6 @@ class AdminServicesBaseBoot extends ServicesBaseBoot {
 
 		for (const [key, value] of this._services) {
 			if (LibraryCommonUtility.isDev) {
-				// eslint-disable-next-line
 				console.log(`services.init - ${key}`);
 				console.dir(value);
 			}
@@ -42,7 +41,6 @@ class AdminServicesBaseBoot extends ServicesBaseBoot {
 
 	_injectService(key, service) {
 		if (LibraryCommonUtility.isDev)
-			// eslint-disable-next-line
 			console.log(`services.inject - ${key}`);
 		this._services.set(key, service);
 		injector.addSingleton(key, service);

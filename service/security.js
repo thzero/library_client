@@ -1,6 +1,6 @@
 import rbac from 'easy-rbac';
 
-import LibraryCommonnConstants from '@thzero/library_common/constants';
+import LibraryCommonConstants from '@thzero/library_common/constants';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
@@ -21,12 +21,11 @@ class SecurityService extends Service {
 		this.initSecurity(LibraryCommonUtility.correlationId(), KeyEnforcerDefault, this._initModel());
 	}
 
-	// eslint-disable-next-line
 	async initSecurity(correlationId, key, model, policies) {
 		if (String.isNullOrEmpty(key))
-			throw Error('Invalid key');
+			throw new Error('Invalid key');
 		if (!model)
-			throw Error('Invalid model');
+			throw new Error('Invalid model');
 
 		const enforcer = new rbac(model);
 		this._enforcers.set(key, enforcer);
@@ -37,41 +36,46 @@ class SecurityService extends Service {
 			return false;
 		if (!(claims && Array.isArray(claims)))
 			return false;
-		if (!roles)
+		if (!roles || !Array.isArray(roles) || (roles.length === 0))
 			return true;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
-			logical = LibraryCommonnConstants.Security.logicalOr;
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonConstants.Security.logicalAnd && logical !== LibraryCommonConstants.Security.logicalOr))
+			logical = LibraryCommonConstants.Security.logicalOr;
 
-		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
+		// The same shape as authorizationCheckRoles, and as the server's
+		// BaseSecurityService: outer loop over the REQUIRED roles, inner over the
+		// claims. A required role is satisfied when ANY claim validates against it.
+		let satisfied;
+		for (const role of roles) {
+			this._logger.debug('SecurityService', 'authorizationCheckClaims', 'role', role, correlationId);
 
-		let result;
-		let roleAct;
-		let roleObj;
-		let roleParts;
-		for (const claim of claims) {
-			this._serviceLogger.debug('SecurityService', 'authorizationCheckClaims', 'authorization.claim', claim, correlationId);
+			const { obj, act } = this._roleSplit(role);
 
-			for (const role of roles) {
-				this._serviceLogger.debug('SecurityService', 'authorizationCheckClaims', 'role', role, correlationId);
+			satisfied = false;
+			for (const claim of claims) {
+				this._logger.debug('SecurityService', 'authorizationCheckClaims', 'authorization.claim', claim, correlationId);
 
-				roleParts = role.split('.');
-				if (roleParts && roleParts.length < 1)
-					success = false;
-
-				roleObj = roleParts[0];
-				roleAct = roleParts.length >= 2 ? roleParts[1] : null
-
-				result = await this._serviceSecurity.validate(claim, null, roleObj, roleAct);
-				this._serviceLogger.debug('SecurityService', 'authorizationCheckClaims', 'result', result, correlationId);
-				if (logical === LibraryCommonnConstants.Security.logicalOr)
-					success = success || result;
-				else
-					success = success && result;
+				// validate(correlationId, sub, dom, obj, act): this was called on a
+				// _serviceSecurity that does not exist, with four arguments, so the
+				// claim arrived as the correlationId and the subject as null
+				if (await this.validate(correlationId, claim, null, obj, act)) {
+					satisfied = true;
+					break;
+				}
 			}
+
+			this._logger.debug('SecurityService', 'authorizationCheckClaims', 'satisfied', satisfied, correlationId);
+			// or  - any one required role is enough
+			// and - every required role must be satisfied
+			if (logical === LibraryCommonConstants.Security.logicalOr) {
+				if (satisfied)
+					return true;
+			}
+			else if (!satisfied)
+				return false;
 		}
 
-		return success;
+		return (logical === LibraryCommonConstants.Security.logicalAnd);
 	}
 
 	async authorizationCheckRoles(correlationId, user, roles, logical) {
@@ -84,58 +88,59 @@ class SecurityService extends Service {
 		if (!(user && user.roles && Array.isArray(user.roles)))
 			return false;
 
-		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonnConstants.Security.logicalAnd && logical !== LibraryCommonnConstants.Security.logicalOr))
-			logical = LibraryCommonnConstants.Security.logicalOr;
-
-		let success = (logical === LibraryCommonnConstants.Security.logicalOr ? false : true);
+		if (String.isNullOrEmpty(logical) || (logical !== LibraryCommonConstants.Security.logicalAnd && logical !== LibraryCommonConstants.Security.logicalOr))
+			logical = LibraryCommonConstants.Security.logicalOr;
 
 		this._logger.debug('SecurityService', 'authorizationCheckRoles', 'logical', logical, correlationId);
 
-		let result;
-		let roleAct;
-		let roleObj;
-		let roleParts;
-		for (const userRole of user.roles) {
-			this._logger.debug('SecurityService', 'authorizationCheckRoles', 'userRole', userRole, correlationId);
+		// The outer loop is over the REQUIRED roles, the inner over the user's. A
+		// required role is satisfied when ANY of the user's roles validates against
+		// it. The loops used to run the other way round with the result
+		// accumulated across every pair, so under logicalAnd every user role had
+		// to satisfy every required role: a user holding ['admin', 'user'] was
+		// denied a route requiring ['user']. The server fixed the same code in
+		// BaseSecurityService.
+		let satisfied;
+		for (const role of roles) {
+			this._logger.debug('SecurityService', 'authorizationCheckRoles', 'role', role, correlationId);
 
-			for (const role of roles) {
-				this._logger.debug('SecurityService', 'authorizationCheckRoles', 'role', role, correlationId);
+			const { obj, act } = this._roleSplit(role);
 
-				roleParts = role.split('.');
-				if (roleParts && roleParts.length < 1)
-					success = false;
+			satisfied = false;
+			for (const userRole of user.roles) {
+				this._logger.debug('SecurityService', 'authorizationCheckRoles', 'userRole', userRole, correlationId);
 
-				roleObj = roleParts[0];
-				roleAct = roleParts.length >= 2 ? roleParts[1] : null
-
-				result = await this.validate(correlationId, userRole, null, roleObj, roleAct);
-				this._logger.debug('SecurityService', 'authorizationCheckRoles', 'result', result, correlationId);
-				if (logical === LibraryCommonnConstants.Security.logicalOr) {
-					if (result)
-						return result;
-
-					success = false;
+				if (await this.validate(correlationId, userRole, null, obj, act)) {
+					satisfied = true;
+					break;
 				}
-				else
-					success = success && result;
 			}
+
+			this._logger.debug('SecurityService', 'authorizationCheckRoles', 'satisfied', satisfied, correlationId);
+			// or  - any one required role is enough
+			// and - every required role must be satisfied
+			if (logical === LibraryCommonConstants.Security.logicalOr) {
+				if (satisfied)
+					return true;
+			}
+			else if (!satisfied)
+				return false;
 		}
 
-		return success;
+		return (logical === LibraryCommonConstants.Security.logicalAnd);
 	}
 
 	async validate(correlationId, sub, dom, obj, act) {
 		return this.validateEx(correlationId, KeyEnforcerDefault, sub, dom, obj, act);
 	}
 
-	// eslint-disable-next-line
 	async validateEx(correlationId, key, sub, dom, obj, act) {
 		if (String.isNullOrEmpty(key))
-			throw Error('Invalid key');
+			throw new Error('Invalid key');
 
 		const enforcer = this._enforcers.get(key);
 		if (!enforcer)
-			throw Error('No enforcer found');
+			throw new Error('No enforcer found');
 
 		const array = [];
 		if (dom)
@@ -151,6 +156,15 @@ class SecurityService extends Service {
 
 	_initModel() {
 		return null;
+	}
+
+	_roleSplit(role) {
+		// 'object.action'; the action is optional
+		const parts = (role ?? '').split('.');
+		return {
+			obj: parts[0],
+			act: parts.length >= 2 ? parts[1] : null
+		};
 	}
 }
 

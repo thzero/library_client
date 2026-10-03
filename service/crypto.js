@@ -18,7 +18,6 @@ import Service from '@thzero/library_client/service/index';
 const encoder = new TextEncoder();
 
 class CryptoService extends Service {
-	// eslint-disable-next-line
 	async checksum(input, algorithm, encoding) {
 		// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#HMAC
 		const msgUint8 = encoder.encode(input); // encode as (utf-8) Uint8Array

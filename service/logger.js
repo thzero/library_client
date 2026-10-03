@@ -21,7 +21,6 @@ class LoggerService extends Service {
 		if (!LibraryCommonUtility.isDev)
 			return;
 
-		// eslint-disable-next-line
 		console.log('DEBUG', this._format(clazz, method, message, correlationId), data);
 		// this._remoteLogger('DEBUG', clazz, method, message, data, correlationId);
 	}
@@ -30,19 +29,16 @@ class LoggerService extends Service {
 		if (!LibraryCommonUtility.isDev)
 			return;
 
-		// eslint-disable-next-line
 		console.log('DEBUG', this._format(null, null, message, correlationId), data);
 		// this._remoteLogger('DEBUG', null, null, message, data, correlationId);
 	}
 
 	error(clazz, method, message, data, correlationId) {
-		// eslint-disable-next-line
 		console.error('ERROR', this._format(clazz, method, message, correlationId), data);
 		this._remoteLogger('ERROR', clazz, method, message, data, correlationId);
 	}
 
 	error2(message, data, correlationId) {
-		// eslint-disable-next-line
 		console.error('ERROR', this._format(null, null, message, correlationId), data);
 		this._remoteLogger('ERROR', null, null, message, data, correlationId);
 	}
@@ -61,64 +57,53 @@ class LoggerService extends Service {
 	}
 
 	fatal(clazz, method, message, data, correlationId) {
-		// eslint-disable-next-line
 		console.error('FATAL', this._format(clazz, method, message, correlationId), data);
 		this._remoteLogger('FATAL', clazz, method, message, data, correlationId);
 	}
 
 	fatal2(message, data, correlationId) {
-		// eslint-disable-next-line
 		console.error('FATAL', this._format(null, null, message, correlationId), data);
 		this._remoteLogger('FATAL', null, null, message, data, correlationId);
 	}
 
-	info(clazz, method, message, data) {
-		// eslint-disable-next-line
+	info(clazz, method, message, data, correlationId) {
 		console.log('INFO', this._format(clazz, method, message, correlationId), data);
 		// this._remoteLogger('INFO', clazz, method, message, data, correlationId);
 	}
 
 	info2(message, data, correlationId) {
-		// eslint-disable-next-line
 		console.log('INFO', this._format(null, null, message, correlationId), data);
 		// this._remoteLogger('INFO', null, null, message, data, correlationId);
 	}
 
 	raw(message, data, correlationId) {
-		// eslint-disable-next-line
 		console.log(message, data);
 		// this._remoteLogger('INFO', null, null, message, data, correlationId);
 	}
 
 	trace(clazz, method, message, data, correlationId) {
-		if (!LibraryCommonUtility.isDev())
+		if (!LibraryCommonUtility.isDev)
 			return;
 
-		// eslint-disable-next-line
 		console.log('TRACE', this._format(clazz, method, message, correlationId), data);
 		// this._remoteLogger('TRACE', clazz, method, message, data, correlationId);
 	}
 
 	trace2(message, data, correlationId) {
-		if (!LibraryCommonUtility.isDev())
+		if (!LibraryCommonUtility.isDev)
 			return;
 
-		// eslint-disable-next-line
 		console.log('TRACE', this._format(null, null, message, correlationId), data);
 		// this._remoteLogger('TRACE', null, null, message, data, correlationId);
 	}
 
 	warn(clazz, method, message, data, correlationId) {
-		// eslint-disable-next-line
 		console.log('WARN', this._format(clazz, method, message, correlationId), data);
-		this._remoteLogger('WARN', message, data, correlationId);
 		this._remoteLogger('WARN', clazz, method, message, data, correlationId);
 	}
 
 	warn2(message, data, correlationId) {
-		// eslint-disable-next-line
 		console.log('WARN', this._format(null, null, message, correlationId), data);
-		this._remoteLogger('WARN', message, data, correlationId);
 		this._remoteLogger('WARN', null, null, message, data, correlationId);
 	}
 
@@ -139,7 +124,10 @@ class LoggerService extends Service {
 		return output;
 	}
 
-	_remoteLogger(clazz, method, type, message, data, correlationId) {
+	// type first, as every caller passes it. It was declared (clazz, method, type,
+	// ...), so each entry reached the server with the caller's method name as its
+	// type; the server switches on type, matched nothing, and dropped the entry.
+	_remoteLogger(type, clazz, method, message, data, correlationId) {
 		const self = this;
 		(async () => {
 			self._serviceUtility.logger(correlationId, {

@@ -23,7 +23,7 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 	async execute(framework) {
 		const logger = this._initializeLogger();
 		if (!logger)
-			throw Error('No logger defined after initialization of services.');
+			throw new Error('No logger defined after initialization of services.');
 
 		const serviceAuth = this._initializeAuth();
 		if (serviceAuth) {
@@ -74,7 +74,6 @@ class RootServicesBaseBoot extends ServicesBaseBoot {
 
 		for (const [key, value] of this._services) {
 			if (LibraryCommonUtility.isDev) {
-				// eslint-disable-next-line
 				console.log(`services.init - ${key}`);
 				console.dir(value);
 			}

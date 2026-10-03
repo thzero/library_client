@@ -30,18 +30,20 @@ class UtilityService extends RestExternalService {
 	
 			await this._loggerCommunication(correlationId, content);
 		}
-		catch (ignored) {}
+		catch {
+			// logging must never fail the caller
+		}
 	}
 
 	async openSource(correlationId) {
 		try {
 			// const response = await this._serviceCommunicationRest.get(correlationId, LibraryClientConstants.ExternalKeys.BACKEND, 'utility/openSource');
 			const response = await this._openSourceCommunication(correlationId);
-			this._logger.debug('UtilityService', 'initialize', 'response', response, correlationId);
+			this._logger.debug('UtilityService', 'openSource', 'response', response, correlationId);
 			return response;
 		}
 		catch (err) {
-			this._logger.exception('UtilityService', 'initialize', err, correlationId);
+			this._logger.exception('UtilityService', 'openSource', err, correlationId);
 		}
 
 		return this._error('UtilityService', 'openSource', null, null, null, null, correlationId);
