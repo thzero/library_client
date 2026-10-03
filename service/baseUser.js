@@ -43,7 +43,7 @@ class BaseUserService extends ExternalService {
 		throw new NotImplementedError();
 	}
 
-	async setAuthCompleted(correlationId) {
+	async setAuthCompleted(correlationId, value = true) {
 		throw new NotImplementedError();
 	}
 
