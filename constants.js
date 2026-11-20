@@ -36,6 +36,8 @@ const LibraryClientConstants = {
 	},
 	EventKeys: {
 		Auth: {
+			// signed in (true) or out (false); the auth service emits it, useBaseAuthComponent listens
+			Auth: 'auth',
 			Refresh: 'auth-refresh',
 			TokenRefresh: 'auth-token-refresh'
 		}
